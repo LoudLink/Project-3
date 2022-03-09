@@ -238,3 +238,106 @@ PAGES
 .        .
 .        ...<divs>
 ```
+
+
+Background Routes
+
+##### Auth routes
+
+| HTTP verb | URL            | Request Headers                 | Request Body              |
+| --------- | -------------- | ------------------------------- | ------------------------- |
+| POST      | `/auth/signup` | --                              | { email, password, name } |
+| POST      | `/auth/login`  | --                              | { email, password }       |
+| GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                        |
+
+
+##### Profile
+
+| HTTP verb | URL                  | Request body | Action                     |
+| --------- | -------------------- | ------------ | -------------------------- |
+| GET       | `/api/users`         | (empty)      | Return All Users           |
+| GET       | `/api/users/:userId` | (empty)      | Returns the specified User |
+| PUT       | `/api/users/:userId` | JSON         | Edit the specified User   |
+| DELETE    | `/api/users/:userId` | (empty)      | Delete the specified User |
+
+
+##### Announcements
+
+| HTTP verb | URL                                       | Request body           | Action                             |
+| --------- | ------------------------------------------| ---------------------- | -----------------------------------|
+| GET       | `/api/annoucements`                       | (empty)                | Return All Announcements           |
+| POST      | `/api/annoucements`                       | JSON                   | Create an Announcement             |
+| GET       | `/api/annoucements/:annoucementId`        | (empty)                | Returns the specified Announcement |
+| PUT       | `/api/annoucements/:annoucementId/edit`   | JSON                   | Edit the specified Announcement    |
+| DELETE    | `/api/annoucements/:annoucementId`        | (empty)                | Delete the specified Announcement  |
+
+
+##### Events
+
+| HTTP verb | URL                                 | Request body  | Action                      |
+| --------- | ------------------------------------| ------------- | ----------------------------|
+| GET       | `/api/events`                       | (empty)       | Return All Events           |
+| POST      | `/api/events`                       | JSON          | Create an Event             |
+| GET       | `/api/annoucements/:eventId`        | (empty)       | Returns the specified Event |
+| PUT       | `/api/annoucements/:eventId/edit`   | JSON          | Edit the specified Event    |
+| DELETE    | `/api/annoucements/:eventId`        | (empty)       | Delete the specified Event  |
+
+
+Models
+
+```
+User model
+
+{
+  category: {type: String, required: true, unique: true}
+  username: {type: String, required: true, unique: true},
+  email: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  image: {type: String},
+  description: {type: String, maxlength: 400},
+  tags:[String],
+  location: {type: String},
+  videos: {type: String},
+  ownAnnouncements: [],
+  announcements: [],
+  ownEvents:[]
+}
+```
+
+```
+Annoucements
+
+ {
+   category: {type: String, required: true, unique: true}
+   title: {type: String, required: true},
+   img: [type: Schema.ObjectId, ref: "User"],
+   description: {type: String, maxlength: 400},
+   owner: [{type: Schema.Types.ObjectId,ref:''}],
+   participants: [{type: Schema.Types.ObjectId,ref:''}],
+   event date: {type: Date},
+   expiracy date: {type: Date},
+   active: {type: Boolean},
+   tags:[String]
+ }
+```
+
+```
+Events
+
+{
+  category: {type: String, required: true, unique: true}
+  owner: [{type: Schema.Types.ObjectId,ref:''}],
+  title: {type: String, required: true},
+  description: {type: String, maxlength: 400},
+  img: [String],
+  date: {type: Date},
+  schedule: {type: Date},
+  artists: [{type: Schema.Types.ObjectId,ref:''}],
+  location: {type: String},
+  price: {type: Number},
+  tags:[String]
+}
+```
+
+#### Deploy Link
+
