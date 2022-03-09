@@ -289,7 +289,6 @@ Models
 User model
 
 {
-  category: {type: String, required: true, unique: true}
   username: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
@@ -298,24 +297,23 @@ User model
   tags:[String],
   location: {type: String},
   videos: {type: String},
-  ownAnnouncements: [],
-  announcements: [],
-  ownEvents:[]
+  ownAnnouncements: [{type: Schema.ObjectId, ref: "Announcement"}],
+  announcements: [{type: Schema.ObjectId, ref: "Announcement"}],
+  ownEvents:[{type: Schema.ObjectId, ref: "Event"}]
 }
 ```
 
 ```
-Annoucements
+Announcement
 
  {
-   category: {type: String, required: true, unique: true}
    title: {type: String, required: true},
-   img: [type: Schema.ObjectId, ref: "User"],
+   image: [{type: Schema.ObjectId, ref: "User"}],
    description: {type: String, maxlength: 400},
-   owner: [{type: Schema.Types.ObjectId,ref:''}],
-   participants: [{type: Schema.Types.ObjectId,ref:''}],
-   event date: {type: Date},
-   expiracy date: {type: Date},
+   owner: [{type: Schema.Types.ObjectId,ref:'User'}],
+   participants: [{type: Schema.Types.ObjectId, ref:'User'}],
+   eventDate: {type: Date},
+   expirationDate: {type: Date},
    active: {type: Boolean},
    tags:[String]
  }
@@ -325,14 +323,13 @@ Annoucements
 Events
 
 {
-  category: {type: String, required: true, unique: true}
-  owner: [{type: Schema.Types.ObjectId,ref:''}],
+  owner: [{type: Schema.Types.ObjectId, ref:'User'}],
   title: {type: String, required: true},
   description: {type: String, maxlength: 400},
-  img: [String],
+  image: [String],
   date: {type: Date},
   schedule: {type: Date},
-  artists: [{type: Schema.Types.ObjectId,ref:''}],
+  artists: [{type: Schema.Types.ObjectId, ref:'User'}],
   location: {type: String},
   price: {type: Number},
   tags:[String]
