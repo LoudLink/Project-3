@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Events = () => {
+function Events() {
     return (
         <div>
             
