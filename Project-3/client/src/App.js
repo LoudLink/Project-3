@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import routes from "./config/routes";
 import HomePage from "./pages/HomePage";
-import LogIn from "./pages/LogIn";
-import Signup from "./pages/Signup";
+import LogIn from "./pages/LoginPage";
+import Signup from "./pages/SignupPage";
 import MainPage from "./pages/MainPage";
+import ProfilePage from "./pages/ProfilePage";
 import * as USER_HELPERS from "./utils/userToken";
 import Banner from "./components/Banner/Banner";
 
@@ -59,10 +60,11 @@ export default function App() {
     <Banner />
       
       <Routes>
-        <Route exact path="/" element={<HomePage/>}/>
+        <Route exact path="/profile" element={<ProfilePage/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/logIn" element={<LogIn/>}/>
         <Route exact path="/main" element={<MainPage/>}/>
+        <Route exact path="/" element={<HomePage/>}/>
     
       </Routes>
     </div>

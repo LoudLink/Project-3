@@ -37,6 +37,8 @@
   }
 }
 
+
+
 .homePageLanding {
   display: flex;
   flex-direction: column;
@@ -76,7 +78,6 @@
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-top:2rem;
-  
 }
 
 .goBackBtn {
@@ -101,12 +102,15 @@ a:hover {
 .flex-column {
   display: flex;
   flex-direction: column;
-
 }
 
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex-center {
+  justify-content: space-evenly;
 }
 
 .flex-row>div{
@@ -118,5 +122,11 @@ a:hover {
 
 .dividersMain {
   height: 200px;
+  overflow-x: hidden;
+}
 
+.dividersMain>div::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+  overflow: hidden;
+  width: 0;
 }
