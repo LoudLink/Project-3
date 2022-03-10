@@ -70,8 +70,14 @@
 }
 
 .users{
-  padding-top:2rem;
   padding-left: 2rem;
+}
+.columns{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top:2rem;
+  
+}
 
 .goBackBtn {
   width: 32px;
