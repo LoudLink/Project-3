@@ -9,6 +9,7 @@ import Events from "../components/Events/Events"
 function HomePage() {
   return (
     <div className="App">
+
       <div className="HomePageLanding">
         <Link exact to={"/signup"}>SIGNUP</Link>
         <Link exact to={"/login"}>LOGIN</Link>
@@ -17,6 +18,7 @@ function HomePage() {
         <Announcements />
         <Events />
       </div>
+
     </div>
   );
 }

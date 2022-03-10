@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import routes from "./config/routes";
+import HomePage from "./pages/HomePage";
+import LogIn from "./pages/LogIn";
+import Signup from "./pages/Signup";
 import * as USER_HELPERS from "./utils/userToken";
 
 export default function App() {
 
-  /*
   const [user, setUser] = useState(null);
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -47,12 +50,20 @@ export default function App() {
 
   if (isLoading) {
     return <LoadingComponent />;
-  }
-  */
+
+  }*/
   return (
     <div className="App">
-     
+      
+      <Routes>
+        <Route exact path="/" element={<HomePage/>}/>
+        <Route exact path="./auth/signup" element={<Signup/>}/>
+        <Route exact path="./auth/logIn" element={<LogIn/>}/>
+    
+      </Routes>
     </div>
   );
+  
+
 }
  
