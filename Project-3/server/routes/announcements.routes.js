@@ -15,11 +15,20 @@ router.get("/", (req, res) => {
 });
 
 //---------------------------------------------------------------------------
-//--------------------------CREATE SPECIFIED ANNOUNCEMENT--------------------
+//--------------------------CREATE A NEW ANNOUNCEMENT--------------------
 //---------------------------------------------------------------------------
 
 router.post("/", (req, res) => {
-  Announcement.create(req.body)
+const {title, description, eventDate, expirationDate, tags} = req.body;
+let titleToLowerCase = title.toLowerCase();
+
+  Announcement.create({
+    title: titleToLowerCase, 
+    description, 
+    eventDate,
+    expirationDate, 
+    tags
+  })
     .then((newAnnoun) => res.json(newAnnoun))
     .catch((error) => res.json(error));
 });
@@ -49,15 +58,17 @@ router.get("/:announcementId", (req, res) => {
 
 
 router.put("/:announcementId", (req, res) => {
-  const { announId } = req.params;
-
+const { announcementId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  Announcement.findByIdAndUpdate(announcementId, req.body, { new: true })
+  const {title, description, eventDate, expirationDate, tags} = req.body;
+  let titleToLowerCase = title.toLowerCase();
+  
+  Announcement.findByIdAndUpdate(announcementId, { title: titleToLowerCase, description, eventDate, expirationDate, tags }, { new: true })
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
