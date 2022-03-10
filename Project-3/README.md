@@ -284,9 +284,9 @@ Background Routes
 | --------- | -----------------------------| ------------- | ----------------------------|
 | GET       | `/api/events`                | (empty)       | Return All Events           |
 | POST      | `/api/events`                | JSON          | Create an Event             |
-| GET       | `/api/event/:eventId`        | (empty)       | Returns the specified Event |
-| PUT       | `/api/event/:eventId/edit`   | JSON          | Edit the specified Event    |
-| DELETE    | `/api/event/:eventId`        | (empty)       | Delete the specified Event  |
+| GET       | `/api/events/:eventId`        | (empty)       | Returns the specified Event |
+| PUT       | `/api/events/:eventId/edit`   | JSON          | Edit the specified Event    |
+| DELETE    | `/api/events/:eventId`        | (empty)       | Delete the specified Event  |
 
 
 Models

@@ -28,9 +28,13 @@ function HomePage() {
       <div className="homePageBottom">
 
         <Searchbar />
-        <Users />
-        <Announcements />
-        <Events />
+        <div className="columns">
+          <div className="users">
+            <Users />
+          </div>
+          <Announcements />
+          <Events />
+        </div>
       </div>
 
     </div>

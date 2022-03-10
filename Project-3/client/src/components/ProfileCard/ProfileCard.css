@@ -1,9 +1,0 @@
-.ProfileCard{
-    display: flex;
-    flex-direction: column;
-}
-
-.ProfileCard img{
-    width: 200px;
-    
-}

@@ -48,10 +48,12 @@ router.post('/signup', (req, res, next) => {
       // If email is unique, proceed to hash the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-
+      let usernameToLowerCase = username.toLowerCase();
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then` 
-      return User.create({ email, password: hashedPassword, username , image});
+
+      return User.create({ email, password: hashedPassword, username: usernameToLowerCase });
+
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password

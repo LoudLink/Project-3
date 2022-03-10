@@ -65,6 +65,58 @@
   background-color: yellowgreen;
 }
 
-.signup {
+.margin-top {
   margin-top: 100px;
+}
+
+.users{
+  padding-left: 2rem;
+}
+.columns{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top:2rem;
+  
+}
+
+.goBackBtn {
+  width: 32px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row>div{
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.dividersMain {
+  height: 200px;
+
 }
