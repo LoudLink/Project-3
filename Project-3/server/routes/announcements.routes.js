@@ -42,14 +42,14 @@ router.get("/announcements/:announcementsId", (req, res) => {
 /* ------------- EDIT A SPECIFIC ANNOUNCEMENT ------------------------ */
 
 router.put("/announcements/:announcementsId", (req, res) => {
-  const { announId } = req.params;
+  const { announcementsId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(announId)) {
+  if (!mongoose.Types.ObjectId.isValid(announcementsId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  Announcement.findByIdAndUpdate(announId, req.body, { new: true })
+  Announcement.findByIdAndUpdate(announcementsId, req.body, { new: true })
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
