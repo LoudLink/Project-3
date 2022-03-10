@@ -1,4 +1,7 @@
-# Project-3
+
+LOUD LINK
+
+
 
 ```
 Frontend Routes
@@ -250,7 +253,7 @@ Background Routes
 | HTTP verb | URL            | Request Headers                 | Request Body                    | Action         |
 | --------- | -------------- | ------------------------------- | ------------------------------- | -------------- |
 | POST      | `/auth/signup` | --                              | { email, password, usrn, tags } | Creates A User |     
-| POST      | `/auth/login`  | --                              | { username, password }             |                |
+| POST      | `/auth/login`  | --                              | { username, password }          |                |
 | GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                              |                |
 
 
@@ -277,13 +280,13 @@ Background Routes
 
 ##### Events
 
-| HTTP verb | URL                                 | Request body  | Action                      |
-| --------- | ------------------------------------| ------------- | ----------------------------|
-| GET       | `/api/events`                       | (empty)       | Return All Events           |
-| POST      | `/api/events`                       | JSON          | Create an Event             |
-| GET       | `/api/annoucements/:eventId`        | (empty)       | Returns the specified Event |
-| PUT       | `/api/annoucements/:eventId/edit`   | JSON          | Edit the specified Event    |
-| DELETE    | `/api/annoucements/:eventId`        | (empty)       | Delete the specified Event  |
+| HTTP verb | URL                          | Request body  | Action                      |
+| --------- | -----------------------------| ------------- | ----------------------------|
+| GET       | `/api/events`                | (empty)       | Return All Events           |
+| POST      | `/api/events`                | JSON          | Create an Event             |
+| GET       | `/api/event/:eventId`        | (empty)       | Returns the specified Event |
+| PUT       | `/api/event/:eventId/edit`   | JSON          | Edit the specified Event    |
+| DELETE    | `/api/event/:eventId`        | (empty)       | Delete the specified Event  |
 
 
 Models
@@ -340,4 +343,5 @@ Events
 ```
 
 #### Deploy Link
+
 
