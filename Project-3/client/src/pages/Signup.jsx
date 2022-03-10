@@ -4,13 +4,16 @@ import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
+import axios from "axios";
 
 export default function Signup({ authenticate }) {
   const [form, setForm] = useState({
     username: "",
     password: "",
+    email: "",
+    tags: ""
   });
-  const { username, password } = form;
+  const { username, password, email, tags } = form;
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -24,32 +27,30 @@ export default function Signup({ authenticate }) {
     const credentials = {
       username,
       password,
+      email,
+      tags
     };
-    signup(credentials).then((res) => {
-      if (!res.status) {
-        // unsuccessful signup
-        console.error("Signup was unsuccessful: ", res);
-        return setError({
-          message: "Signup was unsuccessful! Please check the console.",
-        });
-      }
-      // successful signup
-      USER_HELPERS.setUserToken(res.data.accessToken);
-      authenticate(res.data.user);
-      navigate(PATHS.HOMEPAGE);
-    });
+    console.log("API:", process.env.REACT_APP_SERVER_URL)
+
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, credentials)
+    .then((response) => {
+      navigate("/login")
+      console.log(response)
+    })
+
+    
   }
 
   return (
-    <div>
-      <h1>Sign Up</h1>
+    <div className="signup">
+      <h2></h2>
       <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-username">Username</label>
         <input
           id="input-username"
           type="text"
           name="username"
-          placeholder="Text"
+          placeholder="Choose your username"
           value={username}
           onChange={handleInputChange}
           required
@@ -66,6 +67,26 @@ export default function Signup({ authenticate }) {
           required
           minLength="8"
         />
+
+        <label htmlFor="input-email">Email</label>
+        <input
+          id="input-email"
+          type="email"
+          name="email"
+          placeholder="email"
+          value={email}
+          onChange={handleInputChange}
+          required
+          minLength="8"
+        />
+
+        <label htmlFor="input-tags">Select 5 tags that define you</label>
+        <select onChange={handleInputChange} multiple>
+          <option value="rock">Rock</option>
+          <option value="classical">Classical</option>
+          <option selected value="band">Band</option>
+          <option value="sound-tech">Sound Tech</option>
+        </select>
 
         {error && (
           <div className="error-block">
