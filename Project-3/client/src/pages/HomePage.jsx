@@ -28,7 +28,9 @@ function HomePage() {
       <div className="homePageBottom">
 
         <Searchbar />
-        <Users />
+        <div className="users">
+          <Users />
+        </div>
         <Announcements />
         <Events />
       </div>
