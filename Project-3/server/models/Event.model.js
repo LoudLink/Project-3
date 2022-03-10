@@ -3,11 +3,10 @@ const ObjectId = Schema.Types.ObjectId;
 
 const eventSchema = new Schema(
     {
-        category: {type: String, required: true, unique: true},
         owner: [{type: Schema.Types.ObjectId, ref:'User'}],
         title: {type: String, required: true},
         description: {type: String, maxlength: 400},
-        img: [String],
+        image: [String],
         date: {type: Date},
         schedule: {type: Date},
         artists: [{type: Schema.Types.ObjectId, ref:'Artist'}],
@@ -18,6 +17,6 @@ const eventSchema = new Schema(
 
 )
 
-const Session = model("Session", eventSchema);
+const Event = model("Event", eventSchema);
 
-module.exports = Session;
+module.exports = Event;
