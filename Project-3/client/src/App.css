@@ -65,11 +65,35 @@
   background-color: yellowgreen;
 }
 
-.signup {
+.margin-top {
   margin-top: 100px;
 }
 
 .users{
   padding-top:2rem;
   padding-left: 2rem;
+
+.goBackBtn {
+  width: 32px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+
 }
