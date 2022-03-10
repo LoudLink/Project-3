@@ -2,10 +2,13 @@ import React from 'react';
 import './Announcement.css'
 
 function AnnouncementCard(props) {
+    function capitalize(str){
+        return str[0].toUpperCase()+str.slice(1)
+    }
     return (
         <div className='announcementCard'>
             <div className='card'>
-                <h2>{props.announcement.title}</h2>
+                <h2>{capitalize(props.announcement.title)}</h2>
                 <img src={props.announcement.image} alt='announcement-pic'></img>
                 <p>{props.announcement.description}</p>
                 <p>{props.announcement.owner[0]}</p>
