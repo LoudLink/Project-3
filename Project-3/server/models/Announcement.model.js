@@ -3,14 +3,13 @@ const ObjectId = Schema.Types.ObjectId;
 
 const AnnouncementSchema = new Schema(
     {
-        category: {type: String, required: true, unique: true},
         title: {type: String, required: true},
-        img: [{type: Schema.ObjectId, ref: "User"}],
+        image: [{type: Schema.ObjectId, ref: "User"}],
         description: {type: String, maxlength: 400},
         owner: [{type: Schema.Types.ObjectId,ref:'User'}],
         participants: [{type: Schema.Types.ObjectId,ref:'User'}],
         eventDate: {type: Date},
-        expiracyDate: {type: Date},
+        expirationDate: {type: Date},
         active: {type: Boolean},
         tags:[String]
       }
@@ -18,6 +17,6 @@ const AnnouncementSchema = new Schema(
 
 )
 
-const Session = model("Session", AnnouncementSchema);
+const Announcement = model("Announcement", AnnouncementSchema);
 
-module.exports = Session;
+module.exports = Announcement;
