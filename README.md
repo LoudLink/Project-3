@@ -312,7 +312,7 @@ Announcement
  {
    title: {type: String, required: true},
    image: [{type: Schema.ObjectId, ref: "User"}],
-   description: {type: String, maxlength: 400},
+   description: {type: String, maxlength: 400}, 
    owner: [{type: Schema.Types.ObjectId,ref:'User'}],
    participants: [{type: Schema.Types.ObjectId, ref:'User'}],
    eventDate: {type: Date},

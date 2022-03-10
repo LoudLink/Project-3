@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import LoadingComponent from "./components/Loading";
-import Navbar from "./components/Navbar/Navbar";
-import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
 
 export default function App() {
+
+  /*
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,4 +58,6 @@ export default function App() {
       </Routes>
     </div>
   );
+  */
 }
+ 
