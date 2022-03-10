@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signup } from "../services/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./auth.css";
 import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
@@ -43,7 +43,11 @@ export default function Signup({ authenticate }) {
 
   return (
     <div className="signup">
-      <h2></h2>
+    <div className="flex-center">
+      <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
+      <Link exact to="/"> Go back</Link>
+    </div>
+      <h2>SIGN UP</h2>
       <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-username">Username</label>
         <input
@@ -84,7 +88,7 @@ export default function Signup({ authenticate }) {
         <select onChange={handleInputChange} multiple>
           <option value="rock">Rock</option>
           <option value="classical">Classical</option>
-          <option selected value="band">Band</option>
+          <option value="band">Band</option>
           <option value="sound-tech">Sound Tech</option>
         </select>
 

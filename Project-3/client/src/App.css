@@ -68,3 +68,22 @@
 .signup {
   margin-top: 100px;
 }
+
+.goBackBtn {
+  width: 32px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
