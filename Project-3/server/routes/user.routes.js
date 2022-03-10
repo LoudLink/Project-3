@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 //--------------------------RETURN SPECIFIED USER----------------------------
 //---------------------------------------------------------------------------
 
-router.get('/api/users/:userId', (req,res) =>{
+router.get('/:userId', (req,res) =>{
     const {userId} = req.params
     if (!mongoose.Types.ObjectId.isValid(userId)) {
         res.status(400).json({ message: "Specified id is not valid" });
@@ -35,7 +35,7 @@ router.get('/api/users/:userId', (req,res) =>{
 //--------------------------EDIT SPECIFIED USER------------------------------
 //---------------------------------------------------------------------------
 
-router.put('/api/users/:userId', (req,res) =>{
+router.put('/:userId', (req,res) =>{
     const {userId} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -52,7 +52,7 @@ router.put('/api/users/:userId', (req,res) =>{
 //--------------------------DELETE SPECIFIED USER----------------------------
 //---------------------------------------------------------------------------
 
-router.delete('/api/users/:userId', (req,res) =>{
+router.delete('/:userId', (req,res) =>{
     const {userId} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
