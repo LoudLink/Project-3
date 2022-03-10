@@ -17,7 +17,7 @@ function HomePage() {
 
       <div className="homePageLanding">
         
-          <Banner />
+          
           <div className="homePageLinks">
           <Link exact to={"/signup"}>SIGNUP</Link>
           /

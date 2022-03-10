@@ -6,6 +6,7 @@ import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import MainPage from "./pages/MainPage";
 import * as USER_HELPERS from "./utils/userToken";
+import Banner from "./components/Banner/Banner";
 
 export default function App() {
 /*
@@ -55,6 +56,7 @@ export default function App() {
   }*/
   return (
     <div className="App">
+    <Banner />
       
       <Routes>
         <Route exact path="/" element={<HomePage/>}/>
