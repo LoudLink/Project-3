@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import { login } from "../services/auth";
 import { useNavigate, Link } from "react-router-dom";
-import "./Signup";
+
+import "./SignupPage";
+
 import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
 import axios from "axios";
@@ -25,9 +27,9 @@ export default function LogIn({ authenticate }) {
     const requestBody = { username, password };
 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
-      .then((response) => {
-        console.log("JWT token", response.data.authToken);
-        
+
+      .then((response) => {        
+
         storeToken(response.data.authToken);
         authenticateUser();
         navigate("/main");
@@ -40,7 +42,9 @@ export default function LogIn({ authenticate }) {
   
   return (
     <div className="margin-top ">
+
       <h1>Login</h1>
+
 
       <form onSubmit={handleLoginSubmit} className="auth__form">
         <label>Username:</label>
@@ -54,6 +58,7 @@ export default function LogIn({ authenticate }) {
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
       <p>Don't have an account yet?</p>
+
       <Link to={"/signup"}> Sign Up</Link>
     </div>
   )
