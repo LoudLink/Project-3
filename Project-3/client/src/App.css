@@ -92,3 +92,19 @@ a:hover {
   display: flex;
   flex-direction: column;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row>div{
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.dividersMain {
+  height: 200px;
+}
