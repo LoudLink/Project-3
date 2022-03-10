@@ -30,7 +30,7 @@ export default function LogIn({ authenticate }) {
         
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/mainPage");
+        navigate("/main");
       })
       .catch((error) => {
       	const errorDescription = error.response.data.message;
