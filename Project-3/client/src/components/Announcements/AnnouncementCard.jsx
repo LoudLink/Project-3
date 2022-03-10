@@ -1,9 +1,10 @@
 import React from 'react';
+import './Announcement.css'
 
 function AnnouncementCard(props) {
     return (
-        <div>
-            <div className='announcement'>
+        <div className='announcementCard'>
+            <div className='card'>
                 <h2>{props.announcement.title}</h2>
                 <img src={props.announcement.image} alt='announcement-pic'></img>
                 <p>{props.announcement.description}</p>
