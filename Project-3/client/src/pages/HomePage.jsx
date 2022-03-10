@@ -11,6 +11,7 @@ function HomePage() {
   return (
     <div className="App">
 
+
       <div>
       </div>
 
@@ -25,6 +26,7 @@ function HomePage() {
         
       </div>
       <div className="homePageBottom">
+
         <Searchbar />
         <Users />
         <Announcements />

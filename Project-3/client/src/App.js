@@ -4,6 +4,7 @@ import routes from "./config/routes";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
+import MainPage from "./pages/MainPage";
 import * as USER_HELPERS from "./utils/userToken";
 
 export default function App() {
@@ -57,8 +58,9 @@ export default function App() {
       
       <Routes>
         <Route exact path="/" element={<HomePage/>}/>
-        <Route exact path="./auth/signup" element={<Signup/>}/>
-        <Route exact path="./auth/logIn" element={<LogIn/>}/>
+        <Route exact path="/signup" element={<Signup/>}/>
+        <Route exact path="/logIn" element={<LogIn/>}/>
+        <Route exact path="/mainPage" element={<MainPage/>}/>
     
       </Routes>
     </div>
