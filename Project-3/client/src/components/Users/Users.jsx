@@ -6,7 +6,7 @@ function Users(props) {
     const[users,setUsers]=useState([]);
 
     useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users`)
     .then((response)=>{
         console.log('RESPUESTA:',response.data)
         setUsers(response.data)

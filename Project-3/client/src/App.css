@@ -65,7 +65,7 @@
   background-color: yellowgreen;
 }
 
-.signup {
+.margin-top {
   margin-top: 100px;
 }
 
@@ -86,4 +86,9 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }

@@ -30,10 +30,12 @@ export default function Signup({ authenticate }) {
       email,
       tags
     };
-    console.log("API:", process.env.REACT_APP_SERVER_URL)
+    console.log("credentials:", credentials)
+
 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, credentials)
     .then((response) => {
+      console.log(response)
       navigate("/login")
       console.log(response)
     })
@@ -42,7 +44,7 @@ export default function Signup({ authenticate }) {
   }
 
   return (
-    <div className="signup">
+    <div className="margin-top">
     <div className="flex-center">
       <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
       <Link exact to="/"> Go back</Link>
@@ -85,7 +87,7 @@ export default function Signup({ authenticate }) {
         />
 
         <label htmlFor="input-tags">Select 5 tags that define you</label>
-        <select onChange={handleInputChange} multiple>
+        <select onChange={handleInputChange} value={[tags]} name="tags" multiple>
           <option value="rock">Rock</option>
           <option value="classical">Classical</option>
           <option value="band">Band</option>
