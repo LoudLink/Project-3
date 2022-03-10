@@ -49,6 +49,8 @@ router.post('/signup', (req, res, next) => {
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
       let usernameToLowerCase = username.toLowerCase();
+
+      
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then` 
 

@@ -20,9 +20,18 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
 
+const {title, description, image, date, schedule, price, tags} = req.body;
+let titleToLowerCase = title.toLowerCase();
 
-    
-    Event.create(req.body)
+  Event.create({
+    title: titleToLowerCase, 
+    description, 
+    image, 
+    date, 
+    schedule, 
+    price, 
+    tags
+  })
     .then((newEvent) => res.json(newEvent))
     .catch((error) => res.json(error));
 });
@@ -53,9 +62,12 @@ router.put("/:eventId", (req, res) => {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
+  const {title, description, image, date, schedule, price, tags} = req.body
+  let titleToLowerCase = title.toLowerCase();
 
-  Event.findByIdAndUpdate(eventId, req.body, { new: true })
-    .populate("owner")
+
+  Event.findByIdAndUpdate(eventId, { title: titleToLowerCase, description, image, date, schedule, price, tags }, { new: true })
+
     .then((updatedEvent) => res.status(200).json(updatedEvent))
     .catch((error) => res.json(error));
 });
