@@ -40,6 +40,7 @@ router.post("/signup", (req, res, next) => {
   }
 
   // Check the users collection if a user with the same email already exists
+
   User.findOne({ email }).then((foundUser) => {
     console.log("DAAATAAAA", foundUser);
     // If the user with the same email already exists, send an error response
@@ -62,17 +63,18 @@ router.post("/signup", (req, res, next) => {
       username: usernameToLowerCase,
       image,
     })
-      .then((createdUser) => {
-        // Deconstruct the newly created user object to omit the password
-        // We should never expose passwords publicly
-        const { email, username, _id } = createdUser;
+    .then((createdUser) => {
+      // Deconstruct the newly created user object to omit the password
+      // We should never expose passwords publicly
+      const { email, username, _id } = createdUser;
+    
+      // Create a new object that doesn't expose the password
+      // const user = { email, username, _id };
 
-        // Create a new object that doesn't expose the password
-        // const user = { email, username, _id };
+      // Send a json response containing the user object
+      res.status(201).json({ user: { email, username, _id } });
 
-        // Send a json response containing the user object
-        res.status(201).json({ user: { email, username, _id } });
-      })
+    })
       .catch((err) => {
         console.log(err);
         res.status(500).json({ message: "Internal Server Error" });
