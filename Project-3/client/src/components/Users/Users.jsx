@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import{Link} from 'react-router-dom'
 import axios from 'axios';
-import ProfileCard from '../ProfileCard'
+import ProfileCard from '../ProfileCard/ProfileCard'
 
 function Users(props) {
     const[users,setUsers]=useState([{}]);
