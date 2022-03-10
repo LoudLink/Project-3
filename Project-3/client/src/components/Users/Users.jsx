@@ -3,11 +3,12 @@ import axios from 'axios';
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 function Users(props) {
-    const[users,setUsers]=useState([{}]);
+    const[users,setUsers]=useState([]);
 
     useEffect(()=>{
     axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
     .then((response)=>{
+        console.log('RESPUESTA:',response.data)
         setUsers(response.data)
     })
     .catch((err)=>console.log('CAGADAAAAAAAA',err))
