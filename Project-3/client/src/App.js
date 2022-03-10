@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import routes from "./config/routes";
+import HomePage from "./pages/HomePage";
+import LogIn from "./pages/LogIn";
+import Signup from "./pages/Signup";
 import * as USER_HELPERS from "./utils/userToken";
 
 export default function App() {
@@ -50,9 +53,10 @@ export default function App() {
     <div className="App">
       
       <Routes>
-        {routes({ user, authenticate, handleLogout }).map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        <Route exact path="/" element={<HomePage/>}/>
+        <Route exact path="./auth/signup" element={<Signup/>}/>
+        <Route exact path="./auth/logIn" element={<LogIn/>}/>
+    
       </Routes>
     </div>
   );
