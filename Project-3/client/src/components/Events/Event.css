@@ -1,6 +1,6 @@
 .eventCard{
     display: flex;
-    width: 300px;
+    width: 150px;
     border:2px solid green;
     border-radius:15px;
     margin-bottom: 2rem;
@@ -8,12 +8,16 @@
     justify-content: center;
 }
 .eventCard img{
-    width: auto;
-    height: auto;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 .card{
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+.card p{
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
