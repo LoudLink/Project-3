@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Event = require("../models/Event.model");
+const User = require("../models/User.model")
 
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL EVENTS-------------------------------
@@ -18,7 +19,10 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/", (req, res) => {
-  Event.create(req.body)
+
+
+    
+    Event.create(req.body)
     .then((newEvent) => res.json(newEvent))
     .catch((error) => res.json(error));
 });
@@ -51,6 +55,7 @@ router.put("/:eventId", (req, res) => {
   }
 
   Event.findByIdAndUpdate(eventId, req.body, { new: true })
+    .populate("owner")
     .then((updatedEvent) => res.status(200).json(updatedEvent))
     .catch((error) => res.json(error));
 });

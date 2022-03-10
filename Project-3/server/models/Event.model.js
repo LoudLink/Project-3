@@ -9,7 +9,7 @@ const eventSchema = new Schema(
         image: [String],
         date: {type: Date},
         schedule: {type: Date},
-        artists: [{type: Schema.Types.ObjectId, ref:'Artist'}],
+        artists: [{type: Schema.Types.ObjectId, ref:'User'}],
         location: {type: String},
         price: {type: Number},
         tags:[String]

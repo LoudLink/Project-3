@@ -6,7 +6,7 @@ const userSchema = new Schema(
     username: {type: String, required: true, unique: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    image: {type: String},
+    image: {type: String, default:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png"},
     description: {type: String, maxlength: 400},
     tags:[String],
     location: {type: String},

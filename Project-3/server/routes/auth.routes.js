@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
 
+const isLoogedIn = require
+
 const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
 
 const router = express.Router();
@@ -11,7 +13,7 @@ const saltRounds = 5;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, username , image } = req.body;
 
   // Check if email or password or name are provided as empty string 
   if (email === '' || password === '' || username === '') {
@@ -49,7 +51,9 @@ router.post('/signup', (req, res, next) => {
       let usernameToLowerCase = username.toLowerCase();
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then` 
+
       return User.create({ email, password: hashedPassword, username: usernameToLowerCase });
+
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
@@ -95,6 +99,7 @@ router.post('/login', (req, res, next) => {
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
         const { _id, email, username } = foundUser;
+        console.log(_id)
         
         // Create an object that will be set as the token payload
         const payload = { _id, email, username };
