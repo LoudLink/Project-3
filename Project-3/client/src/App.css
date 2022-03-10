@@ -69,6 +69,10 @@
   margin-top: 100px;
 }
 
+.users{
+  padding-top:2rem;
+  padding-left: 2rem;
+
 .goBackBtn {
   width: 32px;
 }
@@ -91,4 +95,5 @@ a:hover {
 .flex-column {
   display: flex;
   flex-direction: column;
+
 }

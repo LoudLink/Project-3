@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProfileCard from '../ProfileCard/ProfileCard'
+import ProfileCard from '../UserCard/UserCard'
 
 function Users(props) {
     const[users,setUsers]=useState([]);
@@ -8,7 +8,6 @@ function Users(props) {
     useEffect(()=>{
     axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users`)
     .then((response)=>{
-        console.log('RESPUESTA:',response.data)
         setUsers(response.data)
     })
     .catch((err)=>console.log('CAGADAAAAAAAA',err))
