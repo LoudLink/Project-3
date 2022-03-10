@@ -12,7 +12,7 @@ function HomePage() {
 
       <div className="HomePageLanding">
         <Link exact to={"/signup"}>SIGNUP</Link>
-        <Link exact to={"/login"}>LOGIN</Link>
+        <Link exact to={"/logIn"}>LOGIN</Link>
         <Searchbar />
         <Users />
         <Announcements />
