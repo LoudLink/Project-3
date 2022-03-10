@@ -1,0 +1,19 @@
+.announcementCard{
+    display: flex;
+    width: 300px;
+    border:2px solid green;
+    border-radius:15px;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.announcementCard img{
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

@@ -29,7 +29,7 @@ const authService = axios.create({
 
 export function login(credentials) {
   return authService
-    .post("/login", credentials)
+    .post("/auth/login", credentials)
     .then(successStatus)
     .catch(internalServerError);
 }

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Event = require("../models/Event.model");
+const User = require("../models/User.model")
 
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL EVENTS-------------------------------
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/", (req, res) => {
+
 const {title, description, image, date, schedule, price, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
 
@@ -63,7 +65,9 @@ router.put("/:eventId", (req, res) => {
   const {title, description, image, date, schedule, price, tags} = req.body
   let titleToLowerCase = title.toLowerCase();
 
+
   Event.findByIdAndUpdate(eventId, { title: titleToLowerCase, description, image, date, schedule, price, tags }, { new: true })
+
     .then((updatedEvent) => res.status(200).json(updatedEvent))
     .catch((error) => res.json(error));
 });
