@@ -29,9 +29,6 @@ function HomePage() {
 
         <Searchbar />
         <div className="columns">
-          <div className="users">
-            <Users />
-          </div>
           <Announcements />
           <Events />
         </div>
