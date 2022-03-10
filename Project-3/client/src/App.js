@@ -50,6 +50,7 @@ export default function App() {
 
   if (isLoading) {
     return <LoadingComponent />;
+
   }*/
   return (
     <div className="App">
@@ -63,5 +64,6 @@ export default function App() {
     </div>
   );
   
+
 }
  
