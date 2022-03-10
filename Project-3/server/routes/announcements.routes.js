@@ -29,16 +29,16 @@ router.post("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.get("/:announcementId", (req, res) => {
-  const { announcementsId } = req.params;
+  const { announcementId } = req.params;
 
-  console.log(announcementsId);
+  
 
-  if (!mongoose.Types.ObjectId.isValid(announcementsId)) {
+  if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  Announcement.findById(announcementsId).then((announcement) =>
+  Announcement.findById(announcementId).then((announcement) =>
     res.status(200).json(announcement)
   );
 });
@@ -47,15 +47,17 @@ router.get("/:announcementId", (req, res) => {
 //--------------------------EDIT SPECIFIED ANNOUNCEMENT----------------------
 //---------------------------------------------------------------------------
 
+
 router.put("/:announcementId", (req, res) => {
   const { announId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(announId)) {
+
+  if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  Announcement.findByIdAndUpdate(announId, req.body, { new: true })
+  Announcement.findByIdAndUpdate(announcementId, req.body, { new: true })
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
