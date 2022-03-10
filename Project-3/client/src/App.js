@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 import * as USER_HELPERS from "./utils/userToken";
 
 export default function App() {
-
+/*
   const [user, setUser] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
