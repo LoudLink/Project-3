@@ -7,7 +7,7 @@ function ProfileCard(props) {
             <div className='card'>
                 <h2>{props.profile.username}</h2>
                 <img src={props.profile.image} alt='profile-pic'></img>
-                <ul>
+                <ul className='flex'>
                     {props.profile.tags.map((tag)=><li>{tag}</li>)}
                 </ul>
             </div>

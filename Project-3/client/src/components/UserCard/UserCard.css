@@ -1,6 +1,6 @@
 .ProfileCard{
     display: flex;
-    width: 300px;
+    width: 150px;
     border:2px solid green;
     border-radius:15px;
     margin-bottom: 2rem;
@@ -9,8 +9,8 @@
 }
 
 .ProfileCard img{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 .card{
