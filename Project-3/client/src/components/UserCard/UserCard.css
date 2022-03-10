@@ -1,6 +1,6 @@
 .ProfileCard{
     display: flex;
-    width: 300px;
+    width: 150px;
     border:2px solid green;
     border-radius:15px;
     margin-bottom: 2rem;

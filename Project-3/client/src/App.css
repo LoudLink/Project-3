@@ -75,8 +75,9 @@
   padding-left: 2rem;
 }
 .columns{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display:flex;
+  justify-content: center;
+  gap: 2rem;
   padding-top:2rem;
 }
 

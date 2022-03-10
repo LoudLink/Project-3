@@ -9,6 +9,7 @@ const User = require("../models/User.model");
 
 router.get("/", (req, res) => {
   User.find()
+    .populate("ownEvents")
     .then((allUsers) => res.json(allUsers))
     .catch((err) => res.json(err));
 });
