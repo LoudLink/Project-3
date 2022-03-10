@@ -69,6 +69,16 @@
   margin-top: 100px;
 }
 
+.users{
+  padding-left: 2rem;
+}
+.columns{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top:2rem;
+  
+}
+
 .goBackBtn {
   width: 32px;
 }
@@ -91,6 +101,7 @@ a:hover {
 .flex-column {
   display: flex;
   flex-direction: column;
+
 }
 
 .flex-row {
@@ -107,4 +118,5 @@ a:hover {
 
 .dividersMain {
   height: 200px;
+
 }

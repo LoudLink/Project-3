@@ -1,0 +1,21 @@
+.ProfileCard{
+    display: flex;
+    width: 300px;
+    border:2px solid green;
+    border-radius:15px;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProfileCard img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    
+    text-align: center;
+}
