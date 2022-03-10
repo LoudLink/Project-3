@@ -38,7 +38,7 @@ export default function LogIn({ authenticate }) {
   
   return (
     <div className="margin-top ">
-      <h1>Login</h1>
+      <h1>Login!</h1>
 
       <form onSubmit={handleLoginSubmit} className="auth__form">
         <label>Username:</label>
