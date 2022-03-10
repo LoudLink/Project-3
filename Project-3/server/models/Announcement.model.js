@@ -13,8 +13,6 @@ const AnnouncementSchema = new Schema(
         active: {type: Boolean},
         tags:[String]
       }
-
-
 )
 
 const Announcement = model("Announcement", AnnouncementSchema);

@@ -247,21 +247,21 @@ Background Routes
 
 ##### Auth routes
 
-| HTTP verb | URL            | Request Headers                 | Request Body              |
-| --------- | -------------- | ------------------------------- | ------------------------- |
-| POST      | `/auth/signup` | --                              | { email, password, name } |
-| POST      | `/auth/login`  | --                              | { email, password }       |
-| GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                        |
+| HTTP verb | URL            | Request Headers                 | Request Body                    | Action         |
+| --------- | -------------- | ------------------------------- | ------------------------------- | -------------- |
+| POST      | `/auth/signup` | --                              | { email, password, usrn, tags } | Creates A User |     
+| POST      | `/auth/login`  | --                              | { username, password }             |                |
+| GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                              |                |
 
 
 ##### Profile
 
-| HTTP verb | URL                  | Request body | Action                     |
-| --------- | -------------------- | ------------ | -------------------------- |
-| GET       | `/api/users`         | (empty)      | Return All Users           |
-| GET       | `/api/users/:userId` | (empty)      | Returns the specified User |
-| PUT       | `/api/users/:userId` | JSON         | Edit the specified User   |
-| DELETE    | `/api/users/:userId` | (empty)      | Delete the specified User |
+| HTTP verb | URL                  | Request body    | Action                     |
+| --------- | -------------------- | --------------- | -------------------------- |
+| GET       | `/api/users`         | (empty)         | Return All Users           |
+| GET       | `/api/users/:userId` | {userId}        | Returns the specified User |
+| PUT       | `/api/users/:userId` | {userId, JSON}  | Edit the specified User    |
+| DELETE    | `/api/users/:userId` | {userId}        | Delete the specified User  |
 
 
 ##### Announcements
