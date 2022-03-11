@@ -3,6 +3,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 const eventSchema = new Schema(
     {
+
         owner: [{type: Schema.Types.ObjectId, ref:'User'}],
         title: {type: String, required: true},
         description: {type: String, maxlength: 400},
