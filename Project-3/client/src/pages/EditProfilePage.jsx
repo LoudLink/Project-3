@@ -12,7 +12,6 @@ function handleSubmit(event){
     event.preventDefault();
     axios.put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`,user)
         .then((response)=>{
-            console.log(response)
             setUser(user=>({...user,username:'',email:'',description:'',tags:''}))
         })
         .catch((err)=>console.log(err))
@@ -21,7 +20,6 @@ function handleSubmit(event){
 function handleChange(event){
     const key= event.target.name;
     const value= event.target.value
-    console.log('DATA:::::',user)
     setUser((user)=>({...user,[key]:value}))
 }
 
@@ -36,6 +34,10 @@ function handleChange(event){
             <div>
                 <label>E-mail:</label>
                 <input type='email' name='email' value={user.email} onChange={handleChange}></input>
+            </div>
+            <div>
+                <label>Image:</label>
+                <input type='text' name='image' value={user.image} onChange={handleChange}></input>
             </div>
             <div>
                 <label>Description:</label>
