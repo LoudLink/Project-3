@@ -92,10 +92,12 @@ router.post("/login", (req, res, next) => {
     res.status(400).json({ message: "Provide username and password." });
     return;
   }
-
+  const usernameToLowerCase = username.toLowerCase();
+  
   // Check the users collection if a user with the same username exists
-  User.findOne({ username })
+  User.findOne({ username: usernameToLowerCase })
     .then((foundUser) => {
+      
       if (!foundUser) {
         // If the user is not found, send an error response
         res.status(401).json({ message: "User not found." });
