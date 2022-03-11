@@ -42,6 +42,7 @@ function AllProfiles(props) {
                     <UserCard key={user._id} profile={user}/>
                 ))}
             </div>
+            <Navbar />
         </div>
     );
 }
