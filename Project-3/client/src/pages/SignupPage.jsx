@@ -81,7 +81,7 @@ export default function Signup({ authenticate }) {
           minLength="8"
         />
 
-        <label htmlFor="input-tags">Select 5 tags that define you</label>
+        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
         <select onChange={handleInputChange} value={[tags]} name="tags" multiple>
           <option value="rock">Rock</option>
           <option value="classical">Classical</option>
