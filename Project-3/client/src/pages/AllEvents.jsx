@@ -38,7 +38,6 @@ function AllEvents(props) {
             <h1>Check all the events</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Events />
             <Navbar />
             <div>
                 {eventsFiltered.map((event)=>(
