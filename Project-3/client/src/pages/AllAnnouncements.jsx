@@ -18,7 +18,7 @@ function AllAnnouncements(props) {
             setAnnouncementsfiltered(response.data);
         })
         .catch((err)=>console.log(err))
-    })
+    }, [])
 
     function search(str){
         const newList=announcements.filter((announcement)=>{
@@ -35,15 +35,14 @@ function AllAnnouncements(props) {
         </div>
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
-            <Searchbar />
-            <Announcements />
-            <Navbar />
             <Searchbar filter={search} />
+            <Link exact to="/announcements/create-announcement">Create an announcement</Link>
             <div>
                 {announcementsFiltered.map((announcement)=>(
                     <AnnouncementCard key={announcement._id} announcement={announcement}/>
                 ))}
             </div>
+            <Navbar />
         </div>
     );
 }

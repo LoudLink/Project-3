@@ -11,7 +11,8 @@ const AnnouncementSchema = new Schema(
         eventDate: {type: Date},
         expirationDate: {type: Date},
         active: {type: Boolean},
-        tags:[String]
+        tags:[String],
+        location: {type: String}
       }
 )
 
