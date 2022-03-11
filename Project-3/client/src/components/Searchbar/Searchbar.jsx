@@ -1,9 +1,17 @@
-export default function Searchbar() {
-    return (
+import { useState } from "react";
+
+export default function Searchbar(props) {
+const[word,setWord] = useState(''); 
+
+function searching(event){
+const value= event.target.value;
+setWord(value)
+
+props.filter(value)
+}
+    return(
         <div>
-            <label>Search</label>
-            <input></input>
-            
+            <input type='text' name='name' value={word} onChange={searching}/>
         </div>
     )
 }

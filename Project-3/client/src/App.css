@@ -67,9 +67,7 @@
   background-color: yellowgreen;
 }
 
-.margin-top {
-  margin-top: 100px;
-}
+/*REMEMBER TO REMOVE THE MARGIN TOP CLASS */
 
 .users{
   padding-left: 2rem;
