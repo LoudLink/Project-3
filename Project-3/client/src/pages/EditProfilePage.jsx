@@ -2,17 +2,20 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function EditProfilePage(props) {
     
     const[user,setUser]=useState({})
     const {id} = useParams();
+    const navigate = useNavigate();
 
 function handleSubmit(event){
     event.preventDefault();
     axios.put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`,user)
         .then((response)=>{
             setUser(user=>({...user,username:'',email:'',description:'',tags:''}))
+            navigate('/profile')
         })
         .catch((err)=>console.log(err))
 }
