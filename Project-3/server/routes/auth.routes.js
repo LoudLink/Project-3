@@ -6,9 +6,9 @@ const User = require("../models/User.model");
 const isLoogedIn = require
 
 const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
+const saltRounds = 5;
 
 const router = express.Router();
-const saltRounds = 5;
 
 
 // POST /auth/signup  - Creates a new user in the database
@@ -52,7 +52,7 @@ router.post('/signup', (req, res, next) => {
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then` 
 
-      return User.create({ email, password: hashedPassword, username: usernameToLowerCase });
+      return User.create({ email, password: hashedPassword, username: usernameToLowerCase, image });
 
     })
     .then((createdUser) => {
