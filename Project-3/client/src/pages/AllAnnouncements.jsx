@@ -18,7 +18,7 @@ function AllAnnouncements(props) {
             setAnnouncementsfiltered(response.data);
         })
         .catch((err)=>console.log(err))
-    })
+    }, [])
 
     function search(str){
         const newList=announcements.filter((announcement)=>{

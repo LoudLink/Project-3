@@ -26,8 +26,8 @@ let titleToLowerCase = title.toLowerCase();
 
 
   Event.create({
-
-    title: titleToLowerCase, 
+    owner: req.params.id,
+    title: titleToLowerCase,
     description, 
     image, 
     date, 
