@@ -5,7 +5,7 @@ import Searchbar from '../components/Searchbar/Searchbar';
 import { Link } from 'react-router-dom';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import Navbar from '../components/Navbar/Navbar';
-import Announcements from '../components/Announcements/Announcements';
+
 
 function AllAnnouncements(props) {
     const[announcements,setAnnouncements]=useState([])
@@ -18,7 +18,7 @@ function AllAnnouncements(props) {
             setAnnouncementsfiltered(response.data);
         })
         .catch((err)=>console.log(err))
-    })
+    },[])
 
     function search(str){
         const newList=announcements.filter((announcement)=>{
@@ -36,7 +36,6 @@ function AllAnnouncements(props) {
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
             <Searchbar />
-            <Announcements />
             <Navbar />
             <Searchbar filter={search} />
             <div>
