@@ -2,6 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import AnnouncementCard from '../components/Announcements/AnnouncementCard';
 import Searchbar from '../components/Searchbar/Searchbar';
+import { Link } from 'react-router-dom';
+import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
+import Navbar from '../components/Navbar/Navbar';
+import Announcements from '../components/Announcements/Announcements';
 
 function AllAnnouncements(props) {
     const[announcements,setAnnouncements]=useState([])
@@ -24,8 +28,16 @@ function AllAnnouncements(props) {
     }
 
     return (
-        <div>
+        <div className='margin-top'>
+        <div className="flex-center">
+            <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
+            <Link exact to="/main"> Go back</Link>
+        </div>
             <h1>Check all the announcements</h1>
+            <ScrollUpBtn />
+            <Searchbar />
+            <Announcements />
+            <Navbar />
             <Searchbar filter={search} />
             <div>
                 {announcementsFiltered.map((announcement)=>(
