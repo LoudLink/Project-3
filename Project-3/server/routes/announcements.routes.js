@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 //--------------------------CREATE A NEW ANNOUNCEMENT--------------------
 //---------------------------------------------------------------------------
 
-router.post("/", (req, res) => {
+router.post("/:id/create-announcement", (req, res) => {
 const {title, description, eventDate, expirationDate, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
 
@@ -26,9 +26,10 @@ let titleToLowerCase = title.toLowerCase();
     title: titleToLowerCase, 
     description, 
     eventDate,
-    expirationDate, 
+    expirationDate,
     tags
   })
+
     .then((newAnnoun) => res.json(newAnnoun))
     .catch((error) => res.json(error));
 });
