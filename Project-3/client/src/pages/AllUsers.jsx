@@ -19,11 +19,14 @@ function AllProfiles(props) {
 },[])
 
     function search(str){
-        const newList=users.filter((user)=>{
-            return user.username.toLowerCase().includes(str.toLowerCase())
-    })
+        const strLength = str.length
+        const newList = users.slice().filter((el)=> {
+        return el.username.slice(0,strLength).toLowerCase() === str.slice(0,strLength).toLowerCase()
+        })
     setFilteredUsers(newList)
     }
+
+
 
     return (
         <div>
