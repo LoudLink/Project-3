@@ -42,7 +42,6 @@ router.post("/signup", (req, res, next) => {
   // Check the users collection if a user with the same email already exists
 
   User.findOne({ email }).then((foundUser) => {
-    console.log("DAAATAAAA", foundUser);
     // If the user with the same email already exists, send an error response
     if (foundUser) {
       res.status(400).json({ message: "User already exists." });
@@ -107,7 +106,6 @@ router.post("/login", (req, res, next) => {
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
         const { _id, email, username } = foundUser;
-        console.log(_id);
 
         // Create an object that will be set as the token payload
         const payload = { _id, email, username };
@@ -131,8 +129,6 @@ router.post("/login", (req, res, next) => {
 router.get("/verify", isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`
-  console.log(`req.payload`, req.payload);
-
   // Send back the object with user data
   // previously set as the token payload
   res.status(200).json(req.payload);

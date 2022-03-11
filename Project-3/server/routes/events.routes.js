@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Event = require("../models/Event.model");
 const User = require("../models/User.model")
@@ -18,7 +19,7 @@ router.get("/", (req, res) => {
 //--------------------------CREATE A NEW EVENT-------------------------------
 //---------------------------------------------------------------------------
 
-router.post("/", (req, res) => {
+router.post("/:id", (req, res) => {
 
 const {title, description, image, date, schedule, price, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
@@ -32,7 +33,8 @@ let titleToLowerCase = title.toLowerCase();
     price, 
     tags
   })
-    .then((newEvent) => res.json(newEvent))
+    .then((newEvent) => {
+      res.json(newEvent)})
     .catch((error) => res.json(error));
 });
 

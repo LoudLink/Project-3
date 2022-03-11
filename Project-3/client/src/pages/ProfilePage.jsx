@@ -32,7 +32,7 @@ function ProfilePage(props) {
     return (
         <div className='margin-top'>
             <div>
-               <img src={user.image} alt="cargol" /> 
+               <img src={user.image} alt="Your avatar goes here" /> 
                <p>{user.username}</p>
                <p>{user.email}</p>
                <p>{user.description}</p>
