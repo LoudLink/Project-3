@@ -6,6 +6,7 @@ import LogIn from "./pages/LoginPage";
 import Signup from "./pages/SignupPage";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
+import CreateEventPage from "./pages/CreateEventPage";
 import * as USER_HELPERS from "./utils/userToken";
 import Banner from "./components/Banner/Banner";
 
@@ -60,6 +61,7 @@ export default function App() {
     <Banner />
       
       <Routes>
+        <Route exact path="/events/create-event" element={<CreateEventPage/>}/>
         <Route exact path="/profile" element={<ProfilePage/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/logIn" element={<LogIn/>}/>

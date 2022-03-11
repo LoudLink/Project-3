@@ -30,16 +30,11 @@ export default function Signup({ authenticate }) {
       email,
       tags
     };
-    console.log("credentials:", credentials)
-
 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, credentials)
     .then((response) => {
-      console.log(response)
       navigate("/login")
-      console.log(response)
     })
-
     
   }
 
