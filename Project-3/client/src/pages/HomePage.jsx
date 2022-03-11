@@ -5,6 +5,7 @@ import Searchbar from "../components/Searchbar/Searchbar"
 import Users from "../components/Users/Users"
 import Announcements from "../components/Announcements/Announcements"
 import Events from "../components/Events/Events"
+import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
 
 
 function HomePage() {
@@ -28,6 +29,7 @@ function HomePage() {
       <div className="homePageBottom">
 
         <Searchbar />
+        <ScrollUpBtn />
         <div className="columns">
           <Announcements />
           <Events />

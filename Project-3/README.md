@@ -21,7 +21,7 @@ COMPONENTS
 <Events />
 <Ads />
 <NavBar />
-<ProfileCard />
+<UserCard />
 <EventCard />
 <AdCard />
 
@@ -109,7 +109,7 @@ PAGES
 ...<SearchBar />
 .
 .
-...<ProfileCard />
+...<UserCard />
 .
 .
 ...<NavBar />
