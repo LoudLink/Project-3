@@ -44,15 +44,11 @@ function CreateAnnouncementPage(props) {
       tags,
     };
 
-    axios
-      .post(
-        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/create-announcement`,
-        eventDetails
-      )
-      .then((response) => {
-        navigate("/announcements");
-      });
-  }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}`, eventDetails )
+        .then((response) => {
+            navigate("/announcements")
+        })
+    }
 
   return (
     <div>

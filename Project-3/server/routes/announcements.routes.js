@@ -3,6 +3,7 @@ const announcementsRoutes = require("./announcements.routes");
 const mongoose = require("mongoose");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Announcement = require("../models/Announcement.model");
+const User = require("../models/User.model");
 
 //---------------------------------------------------------------------------
 //--------------------------GET ALL ANNOUNCEMENTS---------------------------
@@ -18,18 +19,25 @@ router.get("/", (req, res) => {
 //--------------------------CREATE A NEW ANNOUNCEMENT--------------------
 //---------------------------------------------------------------------------
 
-router.post("/:id/create-announcement", (req, res) => {
+router.post("/:id", (req, res) => {
 const {title, description, eventDate, expirationDate, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
 
   Announcement.create({
+    owner: req.params.id,
     title: titleToLowerCase, 
     description, 
     eventDate,
-    expirationDate, 
+    expirationDate,
     tags
   })
-    .then((newAnnoun) => res.json(newAnnoun))
+    .then(newEvent => {
+      console.log("announcementId", newEvent._id.toString())
+      console.log("userId", req.params)
+      
+      return User.findByIdAndUpdate(req.params.id, { $push: { announcements: newEvent._id.toString() } }, {new : true})
+    })  
+    .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
 

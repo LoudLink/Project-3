@@ -20,9 +20,10 @@ function AllProfiles(props) {
 },[])
 
     function search(str){
-        const newList=users.filter((user)=>{
-            return user.username.toLowerCase().includes(str.toLowerCase())
-    })
+        const strLength = str.length
+        const newList = users.slice().filter((el)=> {
+        return el.username.slice(0,strLength).toLowerCase() === str.slice(0,strLength).toLowerCase()
+        })
     setFilteredUsers(newList)
     }
 
@@ -32,9 +33,10 @@ function AllProfiles(props) {
                 <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
                 <Link exact to="/main"> Go back</Link>
             </div>
-            <h1>Check all the profiles</h1>
-            <Searchbar filter={search}/>
-            <ScrollUpBtn />
+                <h1>Check all the profiles</h1>
+                <ScrollUpBtn />
+                <Searchbar filter={search}/>
+                <Navbar />
             <div>
                 {filteredUsers.map((user)=>(
                     <UserCard key={user._id} profile={user}/>
