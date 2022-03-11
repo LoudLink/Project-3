@@ -4,6 +4,7 @@ import UserCard from '../components/UserCard/UserCard'
 import axios from 'axios';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
 
 function AllProfiles(props) {
     const[users,setUsers]=useState([]);
@@ -39,6 +40,7 @@ function AllProfiles(props) {
                     <UserCard key={user._id} profile={user}/>
                 ))}
             </div>
+            <Navbar />
         </div>
     );
 }

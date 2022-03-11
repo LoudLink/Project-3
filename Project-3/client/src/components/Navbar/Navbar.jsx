@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./navbar.css"
 
 function Navbar(props) {
 
-    function popUp() {
-
-    }
+    const popBtn = document.getElementById('popUp');
+    
+        function popUp() {
+            popBtn.classList.toggle("show");
+        }
 
     return (
         <div className='navbar flex-row flex-center'>
-            <button onClick={popUp}>Add</button>
+            <button onClick={popUp} className='popup'>Add
+                <div id="popUp" className='popBtntext'></div>
+            </button>
             <button><Link exact to="/main">HOME</Link></button>
             <button><Link exact to="/profile">Profile</Link></button>
         </div>
