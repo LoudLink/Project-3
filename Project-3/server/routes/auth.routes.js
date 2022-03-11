@@ -5,10 +5,12 @@ const User = require("../models/User.model");
 
 const isLoogedIn = require;
 
-const { isAuthenticated } = require("./../middleware/jwt.middleware.js");
+
+const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
+const saltRounds = 5;
+
 
 const router = express.Router();
-const saltRounds = 5;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
