@@ -67,7 +67,7 @@ export default function App() {
         <Route exact path="/events/create-event" element={<CreateEventPage/>}/>
         <Route exact path="/profile" element={<ProfilePage/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
-        <Route exact path="/logIn" element={<LogIn/>}/>
+        <Route exact path="/login" element={<LogIn/>}/>
         <Route exact path="/main" element={<MainPage/>}/>
         <Route exact path="/events" element={<AllEvents/>}/>
         <Route exact path="/announcements" element={<AllAnnouncements/>}/>
