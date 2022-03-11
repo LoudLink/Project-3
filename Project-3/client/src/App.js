@@ -8,6 +8,9 @@ import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import * as USER_HELPERS from "./utils/userToken";
 import Banner from "./components/Banner/Banner";
+import AllEvents from "./pages/AllEvents";
+import AllAnnouncements from "./pages/AllAnnouncements";
+import AllProfiles from "./pages/AllProfiles";
 
 export default function App() {
 /*
@@ -64,6 +67,9 @@ export default function App() {
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/logIn" element={<LogIn/>}/>
         <Route exact path="/main" element={<MainPage/>}/>
+        <Route exact path="/allEvents" element={<AllEvents/>}/>
+        <Route exact path="/allAnnouncements" element={<AllAnnouncements/>}/>
+        <Route exact path="/allProfiles" element={<AllProfiles/>}/>
         <Route exact path="/" element={<HomePage/>}/>
     
       </Routes>
