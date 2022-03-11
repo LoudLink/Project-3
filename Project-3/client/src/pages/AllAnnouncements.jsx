@@ -19,6 +19,7 @@ function AllAnnouncements(props) {
         .catch((err)=>console.log(err))
     },[])
 
+
     function search(str){
         const strLength = str.length
         const newList = announcements.slice().filter((el)=> {
@@ -42,6 +43,7 @@ function AllAnnouncements(props) {
                     <AnnouncementCard key={announcement._id} announcement={announcement}/>
                 ))}
             </div>
+            <Navbar />
         </div>
     );
 }

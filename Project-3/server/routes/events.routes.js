@@ -24,8 +24,10 @@ router.post("/:id", (req, res) => {
 const {title, description, image, date, schedule, price, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
 
+
   Event.create({
-    title: titleToLowerCase, 
+    owner: req.params.id,
+    title: titleToLowerCase,
     description, 
     image, 
     date, 
@@ -33,8 +35,13 @@ let titleToLowerCase = title.toLowerCase();
     price, 
     tags
   })
-    .then((newEvent) => {
-      res.json(newEvent)})
+    .then(newEvent => {
+      console.log("eventId", newEvent._id.toString())
+      console.log("userId", req.params)
+      
+      return User.findByIdAndUpdate(req.params.id, { $push: { ownEvents: newEvent._id.toString() } }, {new : true})
+    })
+    .then(response => res.json(response))
     .catch((error) => res.json(error));
 });
 
