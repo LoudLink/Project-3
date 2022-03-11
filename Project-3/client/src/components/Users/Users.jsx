@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProfileCard from '../UserCard/UserCard'
+import UserCard from '../UserCard/UserCard'
 
 function Users(props) {
     const[users,setUsers]=useState([]);
@@ -15,7 +15,7 @@ function Users(props) {
     return (
         <div>
         {users.map((user)=>(
-            <ProfileCard key={user._id} profile={user}/>
+            <UserCard key={user._id} profile={user}/>
         ))}
             
         </div>
