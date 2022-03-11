@@ -26,9 +26,10 @@ let titleToLowerCase = title.toLowerCase();
     title: titleToLowerCase, 
     description, 
     eventDate,
-    expirationDate, 
+    expirationDate,
     tags
   })
+
     .then((newAnnoun) => res.json(newAnnoun))
     .catch((error) => res.json(error));
 });
