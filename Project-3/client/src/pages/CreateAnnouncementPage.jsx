@@ -11,7 +11,7 @@ function CreateAnnouncementPage(props) {
     announcementDate: "",
     expirationDate: "",
     active: false,    
-    tags: "",
+    tags: [],
   });
 
   const {
