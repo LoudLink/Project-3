@@ -20,10 +20,9 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/:id", (req, res) => {
-
-const {title, description, image, date, schedule, price, tags} = req.body;
+console.log(req.body)
+const {title, description, image, date, schedule, price, tags, location} = req.body;
 let titleToLowerCase = title.toLowerCase();
-
 
   Event.create({
     owner: req.params.id,
@@ -33,11 +32,10 @@ let titleToLowerCase = title.toLowerCase();
     date, 
     schedule, 
     price, 
-    tags
+    tags,
+    location
   })
     .then(newEvent => {
-      console.log("eventId", newEvent._id.toString())
-      console.log("userId", req.params)
       
       return User.findByIdAndUpdate(req.params.id, { $push: { ownEvents: newEvent._id.toString() } }, {new : true})
     })
@@ -59,9 +57,7 @@ router.get("/:eventId", (req, res) => {
 
   Event.findById(eventId)
   .populate("owner")
-  .then((event) => {
-    console.log("PABLO: ", event)
-    res.status(200).json(event)});
+  .then((event) => {res.status(200).json(event)});
 });
 
 //---------------------------------------------------------------------------
@@ -70,16 +66,17 @@ router.get("/:eventId", (req, res) => {
 
 router.put("/:eventId", (req, res) => {
   const { eventId } = req.params;
-
+  console.log("KAKAKAKKAA",req.body)
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
-  const {title, description, image, date, schedule, price, tags} = req.body
+  const {title, description, image, date, schedule, price, location, tags} = req.body
   let titleToLowerCase = title.toLowerCase();
 
 
-  Event.findByIdAndUpdate(eventId, { title: titleToLowerCase, description, image, date, schedule, price, tags }, { new: true })
+
+  Event.findByIdAndUpdate(eventId, { title: titleToLowerCase, location, description, image, date, schedule, price, tags }, { new: true })
 
     .then((updatedEvent) => res.status(200).json(updatedEvent))
     .catch((error) => res.json(error));
