@@ -42,8 +42,6 @@ function CreateEventPage(props) {
             tags,
         }
 
-        
-
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/events/${user._id}`, eventDetails )
         .then((response) => {
             navigate("/events")
@@ -58,30 +56,81 @@ function CreateEventPage(props) {
         </div>
         <h2>CREATE EVENT</h2>
         <form onSubmit={handleFormSubmission} className="auth__form">
-          <label htmlFor="input-title">title</label>
+          <label htmlFor="input-title">Title</label>
           <input
             id="input-title"
             type="text"
             name="title"
             placeholder="Choose your title"
-            value={title}
             onChange={handleInputChange}
             required
           />
 
-          <label htmlFor="input-description">description</label>
+          <label htmlFor="input-description">Description</label>
           <input
             id="input-description"
             type="description"
             name="description"
-            placeholder="description"
-            value={description}
+            placeholder="What's the event about"
             onChange={handleInputChange}
             required
             minLength="8"
           />
 
-          
+<label htmlFor="input-date">Date</label>
+        <input
+          id="input-date"
+          type="date"
+          name="date"
+          onChange={handleInputChange}
+          required
+          minLength="8"
+        />
+
+        <label htmlFor="input-schedule">Schedule</label>
+        <input
+          id="input-schedule"
+          type="time"
+          name="schedule"
+          onChange={handleInputChange}
+          required
+          minLength="8"
+        />
+
+        <label htmlFor="input-price">Price</label>
+        <input
+          id="input-price"
+          type="price"
+          name="price"
+          placeholder='In €uros'
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="input-location">Location</label>
+        <input
+          id="input-location"
+          type="location"
+          name="location"
+          placeholder="Where's this happening"
+          onChange={handleInputChange}
+          required
+          minLength="8"
+        />
+
+        <label htmlFor="input-tags">
+          Select up to 5 tags to define what you're searching for
+        </label>
+        <select
+          onChange={handleInputChange}
+          value={event[tags]}
+          name="tags"
+          multiple
+        >
+          <option value="rock">Rock</option>
+          <option value="classical">Classical</option>
+          <option value="band">Band</option>
+          <option value="sound-tech">Sound Tech</option>
+        </select>
 
           {error && (
             <div className="error-block">

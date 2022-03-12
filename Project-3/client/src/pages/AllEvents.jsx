@@ -45,7 +45,7 @@ function AllEvents(props) {
                     <EventCard key={event._id} event={event} />
                 ))}
             </div>
-            <Link exact to="/events/create-event">Create an event</Link>
+            <Link to='/events/create-event'><button>Create Event</button></Link>
             
         </div>
     );
