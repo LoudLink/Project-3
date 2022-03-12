@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-//import { populate } from "../../../server/models/Event.model";
+import Navbar from "../components/Navbar/Navbar";
 
 function EventDetailPage(props) {
   const { id } = useParams();
@@ -19,6 +19,8 @@ function EventDetailPage(props) {
       .catch((error) => console.log(error));
   }, []);
 
+  console.log(event)
+
   return (
     <div>
       <div className="flex-center">
@@ -35,13 +37,14 @@ function EventDetailPage(props) {
       <h3>{event.title}</h3>
       {/*<p>Hosted by: {event.owner[0]}</p>*/}
       <p>{event.description}</p>
-      <p>When: {event.date}</p>
+      <p>When: {new Date(event.date).toDateString()}</p>
       <p>Time: {event.schedule}</p>
       <p>At: {event.location}</p>
       <p>How much: {event.price}</p>
       <div>
           <Link exact to={`/events/${id}/edit`}>Edit this event</Link>
       </div>
+      <Navbar />
     </div>
   );
 }

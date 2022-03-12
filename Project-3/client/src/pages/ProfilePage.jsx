@@ -24,12 +24,9 @@ function ProfilePage(props) {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
             axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
-            .then((res)=>{
-                console.log(res)
-                setUser(res.data)        
-            })
+            .then((res)=>{setUser(res.data)})
+            .catch(error => console.log(error))
         })
-        
     }
     
     useEffect(() => {getUser()}, [])
