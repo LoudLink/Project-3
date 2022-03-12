@@ -20,7 +20,6 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/:id", (req, res) => {
-console.log(req.body)
 const {title, description, image, date, schedule, price, tags, location} = req.body;
 let titleToLowerCase = title.toLowerCase();
 

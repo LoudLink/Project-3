@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 import { AuthContext } from "../context/auth.context";
 
 function EventEditPage(props) {
@@ -158,6 +159,7 @@ function EventEditPage(props) {
           Submit
         </button>
       </form>
+      <Navbar />
     </div>
   );
 }
