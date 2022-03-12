@@ -8,8 +8,6 @@ function EventCard(props) {
         return str[0].toUpperCase()+str.slice(1)
     }
 
-    console.log(props.event)
-
     return (
         <div className='eventCard'>
             <div className='card'>
