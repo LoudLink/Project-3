@@ -8,6 +8,9 @@ import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 
+import EventDetailPage from "./pages/EventDetailPage";
+
+
 import EditProfilePage from './pages/EditProfilePage'
 
 import CreateAnnouncementPage from "./pages/CreateAnnouncementPage";
@@ -70,6 +73,7 @@ export default function App() {
       
       <Routes>
         <Route exact path="/announcements/create-announcement" element={<CreateAnnouncementPage/>}/>
+        <Route exact path="/events/:id" element={<EventDetailPage/>}/>
         <Route exact path="/events/create-event" element={<CreateEventPage/>}/>
         <Route exact path="/profile/:id/edit" element={<EditProfilePage/>}/>
         <Route exact path="/profile" element={<ProfilePage/>}/>
