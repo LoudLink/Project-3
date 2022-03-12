@@ -3,12 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
+import './auth.css'
 
 function EditProfilePage(props) {
     
     const[user,setUser]=useState({})
     const {id} = useParams();
     const navigate = useNavigate();
+
+useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
+    .then((response)=>{
+        setUser(response.data)
+    })
+    .catch((err)=>console.log(err))
+},[id])
 
 function handleSubmit(event){
     event.preventDefault();
@@ -29,7 +38,7 @@ function handleChange(event){
     
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="auth__form">
             <div>
                 <label>Username:</label>
                 <input type='text' name='username' value={user.username} onChange={handleChange}></input>
@@ -70,7 +79,7 @@ function handleChange(event){
                 <label>Events:</label>
                 {user.events}
             </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className="button__submit">Submit</button>
             </form>
             <Navbar/>
         </div>
