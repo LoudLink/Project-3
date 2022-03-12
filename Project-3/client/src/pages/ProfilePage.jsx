@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ProfilePage(props) {
 
+    const navigate = useNavigate();
     
     const [user, setUser] = useState({
         image: "",
@@ -31,6 +32,17 @@ function ProfilePage(props) {
     
     useEffect(() => {getUser()}, [])
 
+    function deleteUser() {
+        const storedToken = localStorage.getItem("authToken");
+
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
+        .then(response => {
+            axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
+            .then(() => navigate("/"))
+        })
+        .catch(error => console.log("Error while deleting user: ",error))
+    }
+
     return (
         <div>
             <div>
@@ -48,6 +60,7 @@ function ProfilePage(props) {
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
                <h3>Events</h3>
+               <button onClick={deleteUser}>Delete Account</button>
             </div>
             
             <Navbar />
