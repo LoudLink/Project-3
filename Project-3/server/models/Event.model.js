@@ -8,10 +8,10 @@ const eventSchema = new Schema(
         title: {type: String, required: true},
         description: {type: String, maxlength: 400, required: true},
         image: {type: String, default:"https://i.imgur.com/dvJsTWT.jpeg"},
-        date: {type:Date,default:Date.now},
-        schedule: {type: String,default:'19:00'},
+        date: {type:Date,required:true},
+        schedule: {type: String,required:true},
         artists: [{type: Schema.Types.ObjectId, ref:'User'}],
-        location: {type: String, default:'Barcelona'},
+        location: {type: String, required:true},
         price: {type: Number,default:0},
         tags:[String]
       }
