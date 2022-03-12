@@ -7,7 +7,11 @@ import Signup from "./pages/SignupPage";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
+
+import AnnouncementDetailPage from "./pages/AnnouncementDetailPage"
+
 import EditEventPage from "./pages/EditEventPage";
+
 
 import EventDetailPage from "./pages/EventDetailPage";
 
@@ -86,6 +90,7 @@ export default function App() {
         <Route exact path="/main" element={<MainPage/>}/>
         <Route exact path="/events" element={<AllEvents/>}/>
         <Route exact path="/announcements" element={<AllAnnouncements/>}/>
+        <Route exact path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
         <Route exact path="/users" element={<AllUsers/>}/>
         <Route exact path="/" element={<HomePage/>}/>
     
