@@ -27,6 +27,7 @@ router.get("/:userId", (req, res) => {
   }
 
   User.findById(userId)
+  .populate("ownEvents")
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
 });
