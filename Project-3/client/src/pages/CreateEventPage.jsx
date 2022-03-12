@@ -9,7 +9,7 @@ function CreateEventPage(props) {
     const [event, setEvent] = useState({
         title: "",
         description: "",
-        image: undefined,
+        image: ' ',
         date: "",
         schedule: "",
         artists: "",
