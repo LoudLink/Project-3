@@ -1,5 +1,6 @@
 import React from 'react';
 import './Announcement.css'
+import { Link } from 'react-router-dom';
 
 function AnnouncementCard(props) {
     function capitalize(str){
@@ -12,6 +13,8 @@ function AnnouncementCard(props) {
                 <img src={props.announcement.image} alt='announcement-pic'></img>
                 <p>{props.announcement.description}</p>
                 <p>{props.announcement.owner[0]}</p>
+                <Link exact to={`/announcements/${props.announcement._id}`}>Read More</Link>
+                
             </div>
         </div>
     );
