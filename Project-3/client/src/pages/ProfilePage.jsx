@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import { setUserToken } from '../utils/userToken';
+import { Link } from 'react-router-dom';
 
 function ProfilePage(props) {
 
@@ -23,16 +23,24 @@ function ProfilePage(props) {
         
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
-            setUser(response.data)
+            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
+            .then((res)=>{
+                console.log(res)
+                setUser(res.data)        
+            })
         })
+        
     }
     
     useEffect(() => {getUser()}, [])
 
     return (
-        <div className='margin-top'>
+        <div>
             <div>
-               <img src={user.image} alt="Your avatar goes here" /> 
+                <Link to={`/profile/${user._id}/edit`}><button>Edit profile</button></Link>
+            </div>
+            <div>
+               <img width={50} src={user.image} alt="Your avatar goes here" /> 
                <p>{user.username}</p>
                <p>{user.email}</p>
                <p>{user.description}</p>
@@ -42,9 +50,9 @@ function ProfilePage(props) {
                <p>user videos</p>
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
-               <h4>Announcements you've applied to</h4>
                <h3>Events</h3>
             </div>
+            
             <Navbar />
         </div>
     );

@@ -20,14 +20,14 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/:id", (req, res) => {
-const {title, description, eventDate, expirationDate, tags} = req.body;
+const {title, description, announcementDate, expirationDate, tags} = req.body;
 let titleToLowerCase = title.toLowerCase();
 
   Announcement.create({
     owner: req.params.id,
     title: titleToLowerCase, 
     description, 
-    eventDate,
+    announcementDate,
     expirationDate,
     tags
   })

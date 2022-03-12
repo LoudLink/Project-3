@@ -19,7 +19,6 @@ function AllAnnouncements(props) {
         .catch((err)=>console.log(err))
     },[])
 
-
     function search(str){
         const strLength = str.length
         const newList = announcements.slice().filter((el)=> {
