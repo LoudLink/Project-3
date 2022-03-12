@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserCard.css'
+import { Link } from 'react-router-dom';
 
 function UserCard(props) {
     function capitalize(str){
@@ -15,6 +16,7 @@ function UserCard(props) {
                 <ul className='flex '>
                     {props.profile.tags.map((tag)=><li key={tag}>{tag}</li>)}
                 </ul>
+                <Link exact to={`/users/${props.profile._id}`}>Read More</Link>
             </div>
         </div>
         

@@ -39,6 +39,9 @@ function EventDetailPage(props) {
       <p>Time: {event.schedule}</p>
       <p>At: {event.location}</p>
       <p>How much: {event.price}</p>
+      <div>
+          <Link exact to={`/events/${id}/edit`}>Edit this event</Link>
+      </div>
     </div>
   );
 }
