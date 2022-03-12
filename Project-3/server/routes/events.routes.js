@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Event = require("../models/Event.model");
-const User = require("../models/User.model")
+const User = require("../models/User.model");
 
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL EVENTS-------------------------------
@@ -57,7 +57,11 @@ router.get("/:eventId", (req, res) => {
     return;
   }
 
-  Event.findById(eventId).then((event) => res.status(200).json(event));
+  Event.findById(eventId)
+  .populate("owner")
+  .then((event) => {
+    console.log("PABLO: ", event)
+    res.status(200).json(event)});
 });
 
 //---------------------------------------------------------------------------
