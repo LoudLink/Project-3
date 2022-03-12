@@ -35,7 +35,7 @@ let titleToLowerCase = title.toLowerCase();
       console.log("announcementId", newEvent._id.toString())
       console.log("userId", req.params)
       
-      return User.findByIdAndUpdate(req.params.id, { $push: { announcements: newEvent._id.toString() } }, {new : true})
+      return User.findByIdAndUpdate(req.params.id, { $push: { ownAnnouncements: newEvent._id.toString() } }, {new : true})
     })  
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
@@ -97,5 +97,47 @@ router.delete("/:announcementId", (req, res) => {
     .then((deletedAnnouncement) => res.status(400).json(deletedAnnouncement))
     .catch((error) => res.json(error));
 });
+
+//---------------------------------------------------------------------------
+//--------------------------PUSHING ARTISTS/ANNOUNCEMENTS ARRAYS-------------
+//---------------------------------------------------------------------------
+
+
+router.post("/:id/apply/:an", (req,res)=>{
+
+  const {id, an} = req.params
+  let flag = false
+
+  User.findById(id)
+  .then((user)=>{
+    if(user.announcements.length === 0){
+      User.findByIdAndUpdate(id, { $push: { announcements: an}})
+      .then(res.status(200).json({message: "applied successfully"}))}
+    else{
+      user.announcements.map((ano)=>{
+
+        if(ano.toString() === an) flag = true
+      })
+
+        if (flag === false){ 
+        User.findByIdAndUpdate(id, { $push: { announcements: an}})
+        .then(res.status(200).json({message: "applied successfully"}))
+
+        Announcement.findByIdAndUpdate(an, {$push: {participants : id}})
+        .then(console.log("SOMETHING"))
+        }
+
+        else {console.log("you've alredy applied")}
+      
+
+    }
+
+
+    }
+  )
+  
+
+  
+})
 
 module.exports = router;
