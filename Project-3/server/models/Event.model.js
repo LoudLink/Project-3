@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const { get } = require("../routes/events.routes");
 const ObjectId = Schema.Types.ObjectId;
 
 const eventSchema = new Schema(

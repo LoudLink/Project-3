@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
+const Announcement = require("../models/Announcement.model");
+const Event = require("../models/Event.model");
 const fileUploader = require("../config/cloudinary.config");
+
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL USERS--------------------------------
 //---------------------------------------------------------------------------
@@ -27,7 +30,7 @@ router.get("/:userId", (req, res) => {
   }
 
   User.findById(userId)
-  .populate("ownEvents")
+    .populate("ownEvents")
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
 });
@@ -43,12 +46,23 @@ router.put("/:userId", fileUploader.single("image"), (req, res) => {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
-    const { username, description, tags, location, videos } = req.body
-    console.log(req.body)
-    const image = req.file && req.file.path;
-    let usernameToLowerCase = username.toLowerCase();
-    
-  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, videos }, { new: true })
+  const { username, description, tags, location, videos } = req.body;
+  console.log(req.body);
+  const image = req.file && req.file.path;
+  let usernameToLowerCase = username.toLowerCase();
+
+  User.findByIdAndUpdate(
+    userId,
+    {
+      username: usernameToLowerCase,
+      image,
+      description,
+      tags,
+      location,
+      videos,
+    },
+    { new: true }
+  )
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
 });
@@ -65,13 +79,33 @@ router.delete("/:userId", (req, res) => {
     return;
   }
 
-  User.findByIdAndDelete(userId)
-    .then(() =>
-      res.status(200).json({
-        message: `User with ${userId} is removed successfully.`,
-      })
-    )
-    .catch((err) => res.json(err));
+  Announcement.find()
+    .populate("owner")
+    .then((anno) => {
+      anno.map((annito) => {
+        if (annito.owner.toString().includes(userId)) {
+          Announcement.findByIdAndDelete(annito._id).then(
+            Event.find()
+              .populate("owner")
+              .then((eve) => {
+                eve.map((evito) => {
+                  if (evito.owner.toString().includes(userId)) {
+                    Event.findByIdAndDelete(evito._id).then(
+                      User.findByIdAndDelete(userId)
+                        .then(() => {
+                          res.status(200).json({
+                            message: `User with ${userId} is removed successfully.`,
+                          });
+                        })
+                        .catch((err) => res.json(err))
+                    );
+                  }
+                });
+              })
+          );
+        }
+      });
+    });
 });
 
 module.exports = router;
