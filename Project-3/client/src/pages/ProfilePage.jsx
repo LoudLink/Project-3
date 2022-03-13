@@ -32,13 +32,20 @@ function ProfilePage(props) {
     
     useEffect(() => {getUser()}, [])
 
+    function removeToken() {
+        localStorage.removeItem("authToken")
+    }
+
     function deleteUser() {
         const storedToken = localStorage.getItem("authToken");
 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
             axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
-            .then(() => navigate("/"))
+            .then(() => {
+                removeToken();
+                navigate("/")
+            })
         })
         .catch(error => console.log("Error while deleting user: ",error))
     }
