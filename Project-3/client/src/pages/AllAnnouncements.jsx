@@ -36,7 +36,7 @@ function AllAnnouncements(props) {
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Link exact to="/announcements/create-announcement">Create an announcement</Link>
+            <Link exact to="/announcements/create-announcement"><button>Create an announcement</button></Link>
             <Navbar />
             <div>
                 {announcementsFiltered.map((announcement)=>(

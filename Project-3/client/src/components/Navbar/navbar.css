@@ -61,8 +61,14 @@
     to {opacity:1 ;}
   }
 
-  .home-icon {
+  .nav-icon {
     width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  .nav-icon:hover {
+    box-shadow: 0 0 15px 5px white;
   }
 
   p {
