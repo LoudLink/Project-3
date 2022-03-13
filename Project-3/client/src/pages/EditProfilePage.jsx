@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
-
-const Options=['Rock','Bands','Sex','Sports','Learning','Coworking','Literature','Photo','Transports']
+import { Options } from "../utils/tags";
 
 
 function EditProfilePage(props) {

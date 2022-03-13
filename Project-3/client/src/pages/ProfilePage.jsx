@@ -36,6 +36,30 @@ function ProfilePage(props) {
         localStorage.removeItem("authToken")
     }
 
+    function handleLogout() {
+        const storedToken = localStorage.getItem("authToken");
+        /*
+        if (!storedToken) {
+          setUser(null);
+          return setIsLoading(false);
+        }
+        setIsLoading(true);
+        logout(accessToken).then((res) => {
+          if (!res.status) {
+            // deal with error here
+            console.error("Logout was unsuccessful: ", res);
+          }
+          USER_HELPERS.removeUserToken();
+          setIsLoading(false);
+          return setUser(null);
+        });
+        */
+        removeToken()
+        navigate("/")
+        
+        
+      }
+
     function deleteUser() {
         const storedToken = localStorage.getItem("authToken");
 
@@ -67,6 +91,7 @@ function ProfilePage(props) {
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
                <h3>Events</h3>
+               <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>
             </div>
             

@@ -2,6 +2,7 @@ import { React, useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { Options } from "../utils/tags";
 
 function CreateAnnouncementPage(props) {
   const [announcement, setAnnouncement] = useState({
@@ -10,7 +11,7 @@ function CreateAnnouncementPage(props) {
     image: "",
     announcementDate: "",
     expirationDate: "",
-    active: false,    
+    active: false,
     tags: [],
   });
 
@@ -44,11 +45,15 @@ function CreateAnnouncementPage(props) {
       tags,
     };
 
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}`, eventDetails )
-        .then((response) => {
-            navigate("/announcements")
-        })
-    }
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}`,
+        eventDetails
+      )
+      .then((response) => {
+        navigate("/announcements");
+      });
+  }
 
   return (
     <div>
@@ -121,19 +126,11 @@ function CreateAnnouncementPage(props) {
           minLength="8"
         />
 
-        <label htmlFor="input-tags">
-          Select up to 5 tags to define what you're searching for
-        </label>
-        <select
-          onChange={handleInputChange}
-          value={[tags]}
-          name="tags"
-          multiple
-        >
-          <option value="rock">Rock</option>
-          <option value="classical">Classical</option>
-          <option value="band">Band</option>
-          <option value="sound-tech">Sound Tech</option>
+        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
+        <select onChange={handleInputChange} name="tags" multiple>
+          {Options.map((e) => (
+            <option value={e}>{e}</option>
+          ))}
         </select>
 
         <label htmlFor="input-location">Location</label>

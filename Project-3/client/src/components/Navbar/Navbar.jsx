@@ -12,11 +12,12 @@ function Navbar(props) {
 
     return (
         <div className='navbar flex-row flex-center'>
-            <button onClick={popUp} className='popup'>Add
-                <div id="popUp" className='popBtntext'></div>
-            </button>
-            <button><Link exact to="/main">HOME</Link></button>
-            <button><Link exact to="/profile">Profile</Link></button>
+            
+                <img src="../../../plus.png" alt="home" className='home-icon' onClick={popUp}/>
+                
+            
+            <Link exact to="/main"><img src="../../../home-icon.png" alt="home" className='home-icon'/> </Link>
+            <Link exact to="/profile"><img src="../../../user-profile.png" alt="profile" className='home-icon'/></Link>
         </div>
     );
 }
