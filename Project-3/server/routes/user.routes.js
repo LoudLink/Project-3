@@ -24,6 +24,8 @@ router.get("/", (req, res) => {
 router.get("/:userId", (req, res) => {
   const { userId } = req.params;
 
+  const userannouncement = []
+
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;

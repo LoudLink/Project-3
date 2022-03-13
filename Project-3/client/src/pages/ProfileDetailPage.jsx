@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import YoutubeEmbed from "../components/Youtube/youtube";
+
+
 
 
 function ProfileDetailPage(props) {
@@ -40,7 +43,17 @@ function ProfileDetailPage(props) {
            <p>{user.tags}</p>
            <p>{user.location}</p>
            <h3>Videos</h3>
-           <p>user videos</p>
+           <p>user videos
+            {user.videos.length === 0 &&
+                <p>no videos to display</p>
+            }
+            {
+            user.videos.length !== 0 &&
+            <p><YoutubeEmbed embedId= {user.videos} /></p>     
+
+            }
+               
+           </p>
            <h3>Announcements</h3>
            <h4>Your announcements</h4>
            <h3>Events</h3>
