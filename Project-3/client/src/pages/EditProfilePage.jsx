@@ -54,21 +54,11 @@ function EditProfilePage(props) {
             onChange={handleChange}
           ></input>
         </div>
-        <div>
-          <label>E-mail:</label>
-          <input
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-          ></input>
-        </div>
+        
         <div>
           <label>Image:</label>
           <input
-            type="text"
-            name="image"
-            value={user.image}
+            type="file"
             onChange={handleChange}
           ></input>
         </div>
