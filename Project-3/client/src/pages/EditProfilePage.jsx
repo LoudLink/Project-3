@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
+import { Options } from "../utils/tags";
+
 
 function EditProfilePage(props) {
   const [user, setUser] = useState({});
@@ -44,6 +46,7 @@ function EditProfilePage(props) {
           description: "",
           tags: "",
           videos: ""
+
         }));
         navigate("/profile");
       })
@@ -87,14 +90,9 @@ function EditProfilePage(props) {
         </div>
         <div>
           <label>Tags:</label>
-          <input
-            type="text"
-            name="tags"
-            value={user.tags}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
+          <select name="tags" onChange={handleChange} multiple='multiple'>
+            {Options.map((e)=>(<option value={e}>{e}</option>))}
+          </select>
           <label>Location:</label>
           <input
             type="text"
