@@ -6,6 +6,7 @@ import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
 import axios from "axios";
 
+
 export default function Signup({ authenticate }) {
   const [form, setForm] = useState({
     username: "",
@@ -16,6 +17,8 @@ export default function Signup({ authenticate }) {
   const { username, password, email, tags } = form;
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const Options=['Rock','Bands','Sex','Sports','Learning','Coworking','Literature','Photo','Transports']
+  
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -82,11 +85,8 @@ export default function Signup({ authenticate }) {
         />
 
         <label htmlFor="input-tags">Select up to 5 tags that define you</label>
-        <select onChange={handleInputChange} value={[tags]} name="tags" multiple>
-          <option value="rock">Rock</option>
-          <option value="classical">Classical</option>
-          <option value="band">Band</option>
-          <option value="sound-tech">Sound Tech</option>
+        <select onChange={handleInputChange} name="tags" multiple>
+            {Options.map((e)=>(<option value={e}>{e}</option>))}
         </select>
 
         {error && (
@@ -103,3 +103,5 @@ export default function Signup({ authenticate }) {
     </div>
   );
 }
+
+ 
