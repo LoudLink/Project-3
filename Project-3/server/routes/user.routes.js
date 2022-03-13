@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const fileUploader = require("../config/cloudinary.config");
+const Announcement = require("../models/Announcement.model");
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL USERS--------------------------------
 //---------------------------------------------------------------------------
@@ -21,6 +22,8 @@ router.get("/", (req, res) => {
 router.get("/:userId", (req, res) => {
   const { userId } = req.params;
 
+  const userannouncement = []
+
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
@@ -28,7 +31,10 @@ router.get("/:userId", (req, res) => {
 
   User.findById(userId)
   .populate("ownEvents")
-    .then((user) => res.status(200).json(user))
+    .then((user) => {
+
+      res.status(200).json(user)
+    })
     .catch((err) => res.json(err));
 });
 
