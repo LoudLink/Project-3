@@ -5,6 +5,7 @@ import "./auth.css";
 import * as PATHS from "../utils/paths";
 import * as USER_HELPERS from "../utils/userToken";
 import axios from "axios";
+import { Options } from "../utils/tags";
 
 
 export default function Signup({ authenticate }) {
@@ -17,7 +18,7 @@ export default function Signup({ authenticate }) {
   const { username, password, email, tags } = form;
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const Options=['Rock','Bands','Sex','Sports','Learning','Coworking','Literature','Photo','Transports']
+  
   
 
   function handleInputChange(event) {
