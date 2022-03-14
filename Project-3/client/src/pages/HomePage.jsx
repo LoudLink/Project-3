@@ -20,9 +20,9 @@ function HomePage() {
         
           
           <div className="homePageLinks">
-          <Link exact to={"/signup"}>SIGNUP</Link>
+          <Link exact= "true" to={"/signup"}>SIGNUP</Link>
           /
-          <Link exact to={"/login"}>LOGIN</Link>
+          <Link exact= "true" to={"/login"}>LOGIN</Link>
           </div>
         
       </div>

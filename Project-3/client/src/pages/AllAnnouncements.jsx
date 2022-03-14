@@ -31,12 +31,12 @@ function AllAnnouncements(props) {
         <div className='margin-top'>
             <div className="flex-center">
                 <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-                <Link exact to="/main"> Go back</Link>
+                <Link exact= "true" to="/main"> Go back</Link>
             </div>
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Link exact to="/announcements/create-announcement"><button>Create an announcement</button></Link>
+            <Link exact= "true" to="/announcements/create-announcement"><button>Create an announcement</button></Link>
             <Navbar />
             <div>
                 {announcementsFiltered.map((announcement)=>(
