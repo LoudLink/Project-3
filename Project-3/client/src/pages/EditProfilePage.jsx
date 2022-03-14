@@ -24,7 +24,8 @@ function EditProfilePage(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    let start = ""
+    if(user.videos){
+      let start = ""
         for (let i = 0; i < user.videos.length; i++){
             if(user.videos[i] === "=") {
                 start = i + 1
@@ -32,6 +33,7 @@ function EditProfilePage(props) {
             }
         }
         user.videos = user.videos.slice(start, start + 11)
+      }
 
 
 
@@ -91,7 +93,7 @@ function EditProfilePage(props) {
         <div>
           <label>Tags:</label>
           <select name="tags" onChange={handleChange} multiple='multiple'>
-            {Options.map((e)=>(<option value={e}>{e}</option>))}
+            {Options.map((e)=>(<option key={e} value={e}>{e}</option>))}
           </select>
           <label>Location:</label>
           <input
