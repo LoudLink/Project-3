@@ -109,9 +109,10 @@ function ProfilePage(props) {
                <h3>Videos</h3>
                {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
                <h3>Announcements</h3>
-               <h4>Your announcements</h4>
+               <h3>Your announcements</h3>
                {user.ownAnnouncements.map((anno)=>(anno.title))}
                <h3>Events</h3>
+               {user.ownEvents.map((e)=>(<p>{e.title}</p>))}
                <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>
             </div>
