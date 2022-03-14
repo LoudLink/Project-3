@@ -20,9 +20,8 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/:id", (req, res) => {
-  const { title, description, announcementDate, expirationDate, tags, location } =
+  const { title, description, announcementDate, expirationDate, tags, location, image } =
     req.body;
-    let image = ""
   let titleToLowerCase = title.toLowerCase();
 
   Announcement.create({
@@ -89,6 +88,8 @@ router.put("/:announcementId", (req, res) => {
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
+
+
 
 //---------------------------------------------------------------------------
 //--------------------------DELETE SPECIFIED ANNOUNCEMENT--------------------

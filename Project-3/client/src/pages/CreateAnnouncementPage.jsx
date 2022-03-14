@@ -8,7 +8,7 @@ function CreateAnnouncementPage(props) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const [imageUrl, setImageUrl] = useState("");
+
   const [announcement, setAnnouncement] = useState({
     title: "",
     description: "",
@@ -29,53 +29,30 @@ function CreateAnnouncementPage(props) {
     tags,
   } = announcement;
 
-  
-
-  // console.log(user);
-
   function handleInputChange(e) {
     const { name, value } = e.target;
-    return setAnnouncement({ ...announcement, [name]: value}, );
+    return setAnnouncement({ ...announcement, [name]: value });
   }
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`)
       .then((response) => {
-        setImageUrl(response.data.image);
-        // console.log(`
-        //   "response.data.image", ${response.data.image}
-        //   "imageURL",  ${imageUrl}`)
+        setAnnouncement((oldAnn) => ({
+          ...oldAnn,
+          image: response.data.image,
+        }));
       })
-      .catch((error) => console.log(error))
-    }, [user._id, imageUrl]);
-
-    console.log(`
-    "imageURL",  ${imageUrl}`)
+      .catch((error) => console.log(error));
+  }, [user._id]);
 
   function handleFormSubmission(e) {
     e.preventDefault();
-
-    const announcementDetails = {
-      title,
-      description,
-      image: imageUrl ,
-      announcementDate,
-      expirationDate,
-      location,
-      tags,
-    };
-
-
-     console.log("EVENTS DETAILs", typeof(announcementDetails.image) )
-
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}`,
-        announcementDetails
+        announcement
       )
       .then((response) => {
-        console.log("RESPONSEresponse", response);
-
         navigate("/announcements");
       });
   }

@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { Options } from "../utils/tags";
+import './EditProfilePage.css'
 
 
 function EditProfilePage(props) {
@@ -33,9 +34,6 @@ function EditProfilePage(props) {
         }
         user.videos = user.videos.slice(start, start + 11)
 
-
-
-
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, user)
       .then((response) => {
@@ -59,6 +57,27 @@ function EditProfilePage(props) {
     setUser((user) => ({ ...user, [key]: value }));
   }
 
+
+function handleImgUpload(e){
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+ 
+    const uploadImgForm = new FormData();
+ 
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadImgForm.append("image", e.target.files[0]);
+ 
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}/img-upload`, uploadImgForm)
+      .then(response => {
+        console.log("response is: ", response);
+        // response carries "fileUrl" which we can use to update the state
+        setUser(oldUser=>({...oldUser, image: response.data.fileUrl }));
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
+
+}
+
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="auth__form">
@@ -74,9 +93,11 @@ function EditProfilePage(props) {
         
         <div>
           <label>Image:</label>
+          {user.image ? <img src={user.image} alt="EAHIVABVA" /> : <p>No image yet</p>}
           <input
             type="file"
-            onChange={handleChange}
+            name="image"
+            onChange={handleImgUpload}
           ></input>
         </div>
         <div>
