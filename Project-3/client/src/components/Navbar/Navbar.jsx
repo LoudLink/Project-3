@@ -26,7 +26,7 @@ function Navbar(props) {
             </div>    
             
             <Link exact= "true" to="/main"><img src="../../../home-icon.png" alt="home" className='nav-icon'/> </Link>
-            <Link exact= "true" to="/profile"><img src={user.image} alt="profile" className='nav-icon'/></Link>
+            <Link exact= "true" to="/profile"><img src='https://res.cloudinary.com/loudlink/image/upload/v1647284975/loudlink/default_profile_img_n1o8pi.png' alt="profile" className='nav-icon'/></Link>
         </div>
     );
 
