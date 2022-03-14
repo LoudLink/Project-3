@@ -49,7 +49,7 @@ export default function LogIn({ authenticate }) {
 
       <div className="flex-center">
         <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-        <Link exact= "true" to="/"> Go back</Link>
+        <Link exact= "true" to="/" className="goback"> Go back</Link>
       </div>
 
       <h1>Login</h1>

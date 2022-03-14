@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AnnouncementCard from "../components/Announcements/AnnouncementCard";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import '../App.css'
 
 import YoutubeEmbed from "../components/Youtube/youtube";
 import Spinner from "../components/Spinner/Spinner";
@@ -114,9 +115,7 @@ function ProfilePage(props) {
     return (
 
         <div>
-            <div>
-                <Link to={`/profile/${user._id}/edit`}><button>Edit profile</button></Link>
-            </div>
+            
             <div>
                <img width={50} src={user.image} alt="Your avatar goes here" /> 
                <p>{user.username}</p>
@@ -149,6 +148,9 @@ function ProfilePage(props) {
                  )}
                <h3>Events</h3>
                {user.ownEvents.map((e)=>(<p>{e.title}</p>))}
+               <div>
+                <Link to={`/profile/${user._id}/edit`} className='editprof'><button>Edit profile</button></Link>
+              </div>
                <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>
              
