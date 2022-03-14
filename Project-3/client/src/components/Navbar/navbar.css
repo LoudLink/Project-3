@@ -60,3 +60,25 @@
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+
+  .nav-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  .nav-icon:hover {
+    box-shadow: 0 0 15px 5px white;
+  }
+
+  p {
+    color: white;
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

@@ -14,7 +14,8 @@ const saltRounds = 5;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, username, image } = req.body;
+  const { email, password, username, image, tags } = req.body;
+  
 
   // Check if email or password or name are provided as empty string
   if (email === "" || password === "" || username === "") {
@@ -62,7 +63,9 @@ router.post("/signup", (req, res, next) => {
       email,
       password: hashedPassword,
       username: usernameToLowerCase,
+      videos:"",
       image,
+      tags
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password

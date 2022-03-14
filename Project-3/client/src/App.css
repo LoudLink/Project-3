@@ -124,7 +124,7 @@ a:hover {
 }
 
 .dividersMain {
-  height: 200px;
+  height: auto;
   overflow-x: hidden;
 }
 
@@ -133,3 +133,4 @@ a:hover {
   overflow: hidden;
   width: 0;
 }
+

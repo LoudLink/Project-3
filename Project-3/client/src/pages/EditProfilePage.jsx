@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
+import { Options } from "../utils/tags";
+
 
 function EditProfilePage(props) {
   const [user, setUser] = useState({});
@@ -21,6 +23,19 @@ function EditProfilePage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    let start = ""
+        for (let i = 0; i < user.videos.length; i++){
+            if(user.videos[i] === "=") {
+                start = i + 1
+                break
+            }
+        }
+        user.videos = user.videos.slice(start, start + 11)
+
+
+
+
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, user)
       .then((response) => {
@@ -30,6 +45,8 @@ function EditProfilePage(props) {
           email: "",
           description: "",
           tags: "",
+          videos: ""
+
         }));
         navigate("/profile");
       })
@@ -73,14 +90,9 @@ function EditProfilePage(props) {
         </div>
         <div>
           <label>Tags:</label>
-          <input
-            type="text"
-            name="tags"
-            value={user.tags}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
+          <select name="tags" onChange={handleChange} multiple='multiple'>
+            {Options.map((e)=>(<option value={e}>{e}</option>))}
+          </select>
           <label>Location:</label>
           <input
             type="text"
@@ -91,7 +103,11 @@ function EditProfilePage(props) {
         </div>
         <div>
           <label>Videos:</label>
-          {user.videos}
+          <input
+            type="text"
+            name="videos"
+            onChange={handleChange}
+          ></input>
         </div>
         <div>
           <label>Your Announcements:</label>

@@ -2,6 +2,7 @@ import { React, useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { Options } from "../utils/tags";
 
 function CreateAnnouncementPage(props) {
   const [error, setError] = useState(null);
@@ -64,6 +65,7 @@ function CreateAnnouncementPage(props) {
       tags,
     };
 
+
      console.log("EVENTS DETAILs", typeof(announcementDetails.image) )
 
     axios
@@ -73,6 +75,7 @@ function CreateAnnouncementPage(props) {
       )
       .then((response) => {
         console.log("RESPONSEresponse", response);
+
         navigate("/announcements");
       });
   }
@@ -136,19 +139,11 @@ function CreateAnnouncementPage(props) {
           minLength="8"
         />
 
-        <label htmlFor="input-tags">
-          Select up to 5 tags to define what you're searching for
-        </label>
-        <select
-          onChange={handleInputChange}
-          value={[tags]}
-          name="tags"
-          multiple
-        >
-          <option value="rock">Rock</option>
-          <option value="classical">Classical</option>
-          <option value="band">Band</option>
-          <option value="sound-tech">Sound Tech</option>
+        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
+        <select onChange={handleInputChange} name="tags" multiple>
+          {Options.map((e) => (
+            <option value={e}>{e}</option>
+          ))}
         </select>
 
         <label htmlFor="input-location">Location</label>
