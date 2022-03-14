@@ -16,13 +16,14 @@ function EventDetailPage(props) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`)
       .then((response) => setEvent(response.data))
-      .catch((error) => console.log(error));
+      .catch(setEvent(false));
   }, []);
 
-  console.log(event)
-
+  console.log(event);
 
   return (
+    <div>
+    {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
     <div>
       <div className="flex-center">
         <img
@@ -34,7 +35,7 @@ function EventDetailPage(props) {
           Go back
         </Link>
       </div>
-      
+
       <img src={event.image} alt={event.title} />
       <h3>{event.title}</h3>
       {/*<p>Hosted by: {event.owner[0]}</p>*/}
@@ -46,9 +47,14 @@ function EventDetailPage(props) {
       <p>At: {event.location}</p>
       <p>How much: {event.price}</p>
       <div>
-          <Link exact to={`/events/${id}/edit`}>Edit this event</Link>
+        <Link exact to={`/events/${id}/edit`}>
+          Edit this event
+        </Link>
       </div>
-      <Navbar />
+
+    </div>
+     }
+    <Navbar />
     </div>
   );
 }

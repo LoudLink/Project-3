@@ -7,6 +7,7 @@ import Signup from "./pages/SignupPage";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
+import ErrorPage from "./pages/ErrorPage"
 
 import AnnouncementDetailPage from "./pages/AnnouncementDetailPage"
 
@@ -93,6 +94,8 @@ export default function App() {
         <Route exact path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
         <Route exact path="/users" element={<AllUsers/>}/>
         <Route exact path="/" element={<HomePage/>}/>
+
+        <Route path="/*" element={ <ErrorPage /> } />
     
       </Routes>
     </div>

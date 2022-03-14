@@ -25,15 +25,17 @@ function ProfileDetailPage(props) {
         const storedToken = localStorage.getItem("authToken");
             axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
             .then((res)=>{
-                console.log("DATA HERE", res.data)
+                console.log("DATA HERE", typeof(res.data))
                 setUser(res.data)        
             })
+            .catch(setUser(false))
     }
     
     useEffect(() => {getUser()}, [])
 
     return (
         <div>
+        {!user  ? <h1>THIS USER DOES NOT EXISTS</h1> : 
         
         <div>
            <img width={50} src={user.image} alt="Your avatar goes here" /> 
@@ -51,7 +53,7 @@ function ProfileDetailPage(props) {
            <h4>Your announcements</h4>
            <h3>Events</h3>
         </div>
-        
+        }
         <Navbar />
     </div>
     );

@@ -39,8 +39,7 @@ function ProfilePage(props) {
           .then((res) => {
             setUser(res.data);
           })
-
-          .catch((error) => console.log(error));
+          .catch((err) => console.log(err));
       });
   };
 
@@ -92,6 +91,7 @@ function ProfilePage(props) {
     }
 
     return (
+
         <div>
             <div>
                 <Link to={`/profile/${user._id}/edit`}><button>Edit profile</button></Link>
@@ -110,10 +110,11 @@ function ProfilePage(props) {
                <h3>Events</h3>
                <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>
+             
             </div>
-            
             <Navbar />
         </div>
+
     );
 
 }
