@@ -1,25 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import AnnouncementCard from './AnnouncementCard';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import AnnouncementCard from "./AnnouncementCard";
+import { Link } from 'react-router-dom';
+import './Announcement.css'
 
 function Announcements() {
-    const[announcements,setAnnouncements]=useState([])
+  const [announcements, setAnnouncements] = useState([]);
 
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/announcements`)
-        .then((response)=>{
-            setAnnouncements(response.data)
-        })
-        .catch((err)=>console.log('ERROR DE ANUNCIOS',err))
-    },[])
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements`)
+      .then((response) => {
+        setAnnouncements(response.data);
+      })
+      .catch((err) => console.log("ERROR DE ANUNCIOS", err));
+  }, []);
 
-    return (
-        <div>
-            {announcements.map((announcement)=>(
-                <AnnouncementCard key={announcement._id} announcement={announcement}/>
-            ))}        
+  return (
+    <div>
+      {announcements.length ? (
+        announcements.map((announcement) => (
+          <div>
+            <AnnouncementCard
+              key={announcement._id}
+              announcement={announcement}
+            />
+          </div>
+        ))
+      ) : (
+        <div id="noMoreContent">
+          <p>There are no announcements to show!</p>
+          <Link exact to="/announcements/create-announcement">Create a new announcement</Link>
+          {/* <img src="../../images/" alt="pic" width="400" height="240" /> */}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default Announcements;
