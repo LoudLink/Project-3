@@ -8,6 +8,8 @@ function Navbar(props) {
 
   const popBtn = document.getElementById("popUp");
 
+
+  
   function popUp() {
     popBtn.classList.toggle("show");
   }
