@@ -63,7 +63,6 @@ router.post("/signup", (req, res, next) => {
       email,
       password: hashedPassword,
       username: usernameToLowerCase,
-      videos:"",
       image,
       tags
     })

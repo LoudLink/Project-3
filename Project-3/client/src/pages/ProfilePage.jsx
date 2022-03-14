@@ -104,19 +104,7 @@ function ProfilePage(props) {
                <p>{user.tags}</p>
                <p>{user.location}</p>
                <h3>Videos</h3>
-               <p>user videos</p>
-                <h3>Videos</h3>
-
-                <p>
-                  {user.videos.length === 0 && 
-                    <p>no videos to display</p>}
-                        {user.videos.length !== 0 && 
-                    <p>
-                        <YoutubeEmbed embedId={user.videos} />
-                    </p>}
-                 </p>
-
-               
+               {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
                <h3>Events</h3>
