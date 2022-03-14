@@ -6,16 +6,19 @@ import { useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Navbar from "../components/Navbar/Navbar";
+import IsPrivate from "../components/IsPrivate/IsPrivate";
+
 
 function AnnouncementDetailPage(props){
     const { id } = useParams()
-
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [announcement, setEvent] = useState({
         title: "",
-        description: ""
+        description: "",
+        participants: [],
     })
 
 
@@ -43,9 +46,12 @@ function AnnouncementDetailPage(props){
               alt="arrow back"
               className="goBackBtn"
             />
-            <Link exact= "true" to="/main">
+            {isLoggedIn ? <Link exact= "true" to="/main">
               Go back
-            </Link>
+            </Link> : <Link exact= "true" to="/">
+              Go back
+            </Link> }
+            
           </div>
         <h2>WISH TO APLLY TO THIS ANNOUNCEMENT</h2>
         <img src={announcement.image} alt={announcement.title} />
@@ -56,7 +62,7 @@ function AnnouncementDetailPage(props){
         <p>At: {announcement.location}</p>
         <p>Posted on: {new Date(announcement.announcementDate).toDateString()}</p>
         <p>Apply before: {new Date(announcement.expirationDate).toDateString()}</p>
-        {/* <p>PARTICIPANTS: { announcement.participants.length === 0 ? <p>Nobody has apply to this announcement yet</p> : <p>Already {announcement.participants.length} apply to this announcement </p>}</p> */}
+        <p>PARTICIPANTS: { announcement.participants.length === 0 ? <p>Nobody has apply to this announcement yet</p> : <p>Already {announcement.participants.length} apply to this announcement </p>}</p>
           <button onClick={apply}>
             Apply to this announcement 
           </button>

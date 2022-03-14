@@ -35,6 +35,7 @@ router.get("/:userId", (req, res) => {
   User.findById(userId)
 
     .populate("ownAnnouncements")
+    .populate('ownEvents')
 
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
@@ -45,7 +46,7 @@ router.get("/:userId", (req, res) => {
 //---------------------------------------------------------------------------
 
 
-router.put("/:userId", fileUploader.single("image"), (req, res) => {
+router.put("/:userId", (req, res) => {
   const { userId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -54,17 +55,39 @@ router.put("/:userId", fileUploader.single("image"), (req, res) => {
   }
 
     const { username, description, tags, location, videos } = req.body
-    const image = req.file && req.file.path;
+
     let usernameToLowerCase = username.toLowerCase();
 
     console.log(req.file)
 
 
 
+
   User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
+
 
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
+});
+//---------------------------------------------------------------------------
+//--------------------------UPLOAD IMAGE FOR USER----------------------------
+//---------------------------------------------------------------------------
+
+
+
+
+router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) => {
+  // console.log("file is: ", req.file)
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+  
+  res.json({ fileUrl: req.file.path });
 });
 
 //---------------------------------------------------------------------------
