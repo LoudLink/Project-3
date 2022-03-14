@@ -19,16 +19,29 @@ export default function Signup({ authenticate }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   
-  
+  function check(j) {
+    console.log("caca",form.tags.length)
+    
+      
+  }
 
   function handleInputChange(event) {
+
+    if(form.tags.length > 2){
+      form.tags.pop()
+    alert("Please select only 3")
+  }
+
     const { name, value } = event.target;
     if(event.target.name === "tags") {
-      const selected = [...event.target.options]
-      .filter(option => option.selected)
+      
+    const selected = [...event.target.options]
+    .filter(option => option.selected)
       .map(option => option.value);
-      console.log("TAGS: ", selected)
-    return setForm({...form, [name]: selected})   }
+      
+      
+      console.log("TAGS: ", selected, "LENGHT: ", selected.length)
+      return setForm({...form, [name]: selected})   }
     return setForm({ ...form, [name]: value });
   }
 
@@ -92,8 +105,8 @@ export default function Signup({ authenticate }) {
         />
 
         <label htmlFor="input-tags">Select up to 5 tags that define you</label>
-        <select onChange={handleInputChange} name="tags" multiple>
-            {Options.map((e)=>(<option value={e}>{e}</option>))}
+        <select  onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
+            {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}
         </select>
 
         {error && (

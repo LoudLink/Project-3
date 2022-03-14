@@ -6,10 +6,12 @@ import { useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Navbar from "../components/Navbar/Navbar";
+import IsPrivate from "../components/IsPrivate/IsPrivate";
+
 
 function AnnouncementDetailPage(props){
     const { id } = useParams()
-
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -41,9 +43,12 @@ function AnnouncementDetailPage(props){
               alt="arrow back"
               className="goBackBtn"
             />
-            <Link exact= "true" to="/main">
+            {isLoggedIn ? <Link exact= "true" to="/main">
               Go back
-            </Link>
+            </Link> : <Link exact= "true" to="/">
+              Go back
+            </Link> }
+            
           </div>
         <h2>WISH TO APLLY TO THIS ANNOUNCEMENT</h2>
         <img src={announcement.image} alt={announcement.title} />

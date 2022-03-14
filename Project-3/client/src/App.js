@@ -27,6 +27,7 @@ import AllEvents from "./pages/AllEvents";
 import AllAnnouncements from "./pages/AllAnnouncements";
 import AllUsers from "./pages/AllUsers";
 import ProfileDetailPage from "./pages/ProfileDetailPage";
+import IsPrivate from "./components/IsPrivate/IsPrivate";
 
 export default function App() {
 /*
@@ -80,20 +81,20 @@ export default function App() {
       
       <Routes>
 
-        <Route exact path="/announcements/create-announcement" element={<CreateAnnouncementPage/>}/>
+        <Route exact path="/announcements/create-announcement" element={<IsPrivate> <CreateAnnouncementPage/> </IsPrivate>}/>
         <Route exact path="/events/:id/edit" element={<EditEventPage/>}/>
         <Route exact path="/events/:id" element={<EventDetailPage/>}/>
-        <Route exact path="/events/create-event" element={<CreateEventPage/>}/>
-        <Route exact path="/profile/:id/edit" element={<EditProfilePage/>}/>
-        <Route exact path="/users/:id" element={<ProfileDetailPage/>}/>
-        <Route exact path="/profile" element={<ProfilePage/>}/>
+        <Route exact path="/events/create-event" element={<IsPrivate> <CreateEventPage/> </IsPrivate>}/>
+        <Route exact path="/profile/:id/edit" element={<IsPrivate> <EditProfilePage/> </IsPrivate>}/>
+        <Route exact path="/users/:id" element={<IsPrivate> <ProfileDetailPage/> </IsPrivate>}/>
+        <Route exact path="/profile" element={<IsPrivate> <ProfilePage/> </IsPrivate>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/login" element={<LogIn/>}/>
-        <Route exact path="/main" element={<MainPage/>}/>
+        <Route exact path="/main" element={<IsPrivate> <MainPage/> </IsPrivate>}/>
         <Route exact path="/events" element={<AllEvents/>}/>
         <Route exact path="/announcements" element={<AllAnnouncements/>}/>
         <Route exact path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
-        <Route exact path="/users" element={<AllUsers/>}/>
+        <Route exact path="/users" element={<IsPrivate> <AllUsers/> </IsPrivate>}/>
         <Route exact path="/" element={<HomePage/>}/>
 
         <Route path="/*" element={ <ErrorPage /> } />
