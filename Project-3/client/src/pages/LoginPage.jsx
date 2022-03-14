@@ -3,6 +3,7 @@ import { AuthContext } from "../context/auth.context"
 import { login } from "../services/auth";
 import { useNavigate, Link } from "react-router-dom";
 
+
 import "./SignupPage";
 
 import * as PATHS from "../utils/paths";
@@ -13,6 +14,8 @@ export default function LogIn({ authenticate }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const { userImg } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -28,7 +31,8 @@ export default function LogIn({ authenticate }) {
 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
 
-      .then((response) => {        
+      .then((response) => {   
+        console.log(response.data)     
 
         storeToken(response.data.authToken);
         authenticateUser();
