@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
-const fileUploader = require("../config/cloudinary.config");
+const fileUploader = require("../config/cloudinary.config")
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL USERS--------------------------------
 //---------------------------------------------------------------------------
@@ -27,7 +27,6 @@ router.get("/:userId", (req, res) => {
   }
 
   User.findById(userId)
-  .populate("ownEvents")
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
 });
@@ -35,6 +34,7 @@ router.get("/:userId", (req, res) => {
 //---------------------------------------------------------------------------
 //--------------------------EDIT SPECIFIED USER------------------------------
 //---------------------------------------------------------------------------
+
 
 router.put("/:userId", fileUploader.single("image"), (req, res) => {
   const { userId } = req.params;
@@ -44,10 +44,13 @@ router.put("/:userId", fileUploader.single("image"), (req, res) => {
     return;
   }
     const { username, description, tags, location, videos } = req.body
-    console.log(req.body)
     const image = req.file && req.file.path;
     let usernameToLowerCase = username.toLowerCase();
-    
+
+    console.log(req.file)
+
+
+
   User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, videos }, { new: true })
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));

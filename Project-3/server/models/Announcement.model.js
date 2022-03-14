@@ -3,7 +3,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 const AnnouncementSchema = new Schema({
   title: { type: String, required: true },
-  image: [{ type: Schema.ObjectId, ref: "User" }],
+  image: { type: String},
   description: { type: String, maxlength: 400 },
   owner: [{ type: Schema.Types.ObjectId, ref: "User" }],
   participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
