@@ -134,3 +134,13 @@ a:hover {
   width: 0;
 }
 
+.tags {
+  border: 1px solid rgb(133, 6, 6);
+  width: fit-content;
+  border-radius: 20px;
+  background-color: rgb(236, 120, 104);
+}
+
+.gap {
+  gap: 5px;
+}

@@ -87,17 +87,18 @@ function handleImgUpload(e){
   return (
     <div>
       <form onSubmit={handleSubmit} className="auth__form">
-        <div>
-          <label>Username:</label>
+        
+          <label htmlFor="input-username">Username:</label>
           <input
+            id="input-username"
             type="text"
             name="username"
             value={user.username}
             onChange={handleChange}
-          ></input>
-        </div>
+          />
         
-        <div>
+        
+        
           <label>Image:</label>
           {user.image ? <img src={user.image} alt="EAHIVABVA" /> : <p>No image yet</p>}
           <input
@@ -105,8 +106,8 @@ function handleImgUpload(e){
             name="image"
             onChange={handleImgUpload}
           ></input>
-        </div>
-        <div>
+        
+        
           <label>Description:</label>
           <input
             type="text"
@@ -114,10 +115,10 @@ function handleImgUpload(e){
             value={user.description}
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
+        
+        
           <label>Tags:</label>
-          <select name="tags" onChange={handleChange} multiple='multiple'>
+          <select name="tags" onChange={handleChange} multiple='multiple' size="8">
             {Options.map((e)=>(<option key={e} value={e}>{e}</option>))}
           </select>
           <label>Location:</label>
@@ -127,31 +128,22 @@ function handleImgUpload(e){
             value={user.location}
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
+        
+        
           <label>Videos:</label>
           <input
             type="text"
             name="videos"
             onChange={handleChange}
           ></input>
-        </div>
-        <div>
-          <label>Your Announcements:</label>
-          {user.ownAnnouncements}
-        </div>
-        <div>
-          <label>Announcements:</label>
-          {user.announcements}
-        </div>
-        <div>
-          <label>Events:</label>
-          {user.events}
-        </div>
+        
         <button type="submit" className="button__submit">
           Submit
         </button>
       </form>
+
+
+     
       <Navbar />
     </div>
   );
