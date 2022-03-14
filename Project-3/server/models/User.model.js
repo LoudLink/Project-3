@@ -10,7 +10,7 @@ const userSchema = new Schema(
     description: {type: String, maxlength: 400},
     tags:{type: [String], default: []},
     location: {type: String},
-    videos: {type: String},
+    videos: {type: [String]},
     ownAnnouncements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
     announcements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
     ownEvents:[{type: Schema.Types.ObjectId, ref:'Event', default: []}]

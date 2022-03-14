@@ -25,13 +25,16 @@ function EditProfilePage(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
+
     if(user.videos){
       let start = ""
         for (let i = 0; i < user.videos.length; i++){
+          
             if(user.videos[i] === "=") {
                 start = i + 1
                 break
             }
+            
         }
         user.videos = user.videos.slice(start, start + 11)
       }
@@ -45,7 +48,7 @@ function EditProfilePage(props) {
           email: "",
           description: "",
           tags: "",
-          videos: ""
+          videos: []
 
         }));
         navigate("/profile");

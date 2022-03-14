@@ -62,7 +62,9 @@ router.put("/:userId", (req, res) => {
 
 
 
-  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, description, tags, location, videos }, { new: true })
+
+  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
+
 
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
@@ -114,6 +116,16 @@ router.delete("/:userId", (req, res) => {
   )
   )
  
+})
+
+router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
+
+  let userId = req.params.userId
+  let videoId = req.params.videoId
+  User.findByIdAndUpdate(userId, {$pullAll: {videos: [videoId]}}, {new : true})
+  .then((response) => {res.json(response)})
+
+  
 })
 
 module.exports = router;
