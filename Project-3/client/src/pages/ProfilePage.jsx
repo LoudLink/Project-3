@@ -138,6 +138,7 @@ function ProfilePage(props) {
                ))} 
                </p>}
                <h3>Announcements</h3>
+               {user.announcements}
                <h3>Your announcements</h3>
                {user.ownAnnouncements.map((anno)=>(
                  <div>
