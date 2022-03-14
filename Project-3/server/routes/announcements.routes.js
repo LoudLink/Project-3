@@ -20,23 +20,31 @@ router.get("/", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.post("/:id", (req, res) => {
-const {title, description, announcementDate, expirationDate, tags} = req.body;
-let titleToLowerCase = title.toLowerCase();
+  const { title, description, announcementDate, expirationDate, tags, location } =
+    req.body;
+    let image = ""
+  let titleToLowerCase = title.toLowerCase();
 
   Announcement.create({
     owner: req.params.id,
-    title: titleToLowerCase, 
-    description, 
-    announcementDate,
+    title: titleToLowerCase,
+    image,
+    description,
+    announcementDate, 
     expirationDate,
-    tags
+    tags,
+    location
   })
-    .then(newEvent => {
-      console.log("announcementId", newEvent._id.toString())
-      console.log("userId", req.params)
-      
-      return User.findByIdAndUpdate(req.params.id, { $push: { ownAnnouncements: newEvent._id.toString() } }, {new : true})
-    })  
+    .then((newEvent) => {
+      console.log("announcementId", newEvent._id.toString());
+      console.log("userId", req.params);
+
+      return User.findByIdAndUpdate(
+        req.params.id,
+        { $push: { ownAnnouncements: newEvent._id.toString() } },
+        { new: true }
+      );
+    })
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
@@ -47,8 +55,6 @@ let titleToLowerCase = title.toLowerCase();
 
 router.get("/:announcementId", (req, res) => {
   const { announcementId } = req.params;
-
-  
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -64,19 +70,22 @@ router.get("/:announcementId", (req, res) => {
 //--------------------------EDIT SPECIFIED ANNOUNCEMENT----------------------
 //---------------------------------------------------------------------------
 
-
 router.put("/:announcementId", (req, res) => {
-const { announcementId } = req.params;
+  const { announcementId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  const {title, description, eventDate, expirationDate, tags} = req.body;
+  const { title, description, eventDate, expirationDate, tags } = req.body;
   let titleToLowerCase = title.toLowerCase();
-  
-  Announcement.findByIdAndUpdate(announcementId, { title: titleToLowerCase, description, eventDate, expirationDate, tags }, { new: true })
+
+  Announcement.findByIdAndUpdate(
+    announcementId,
+    { title: titleToLowerCase, description, eventDate, expirationDate, tags },
+    { new: true }
+  )
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
@@ -102,42 +111,33 @@ router.delete("/:announcementId", (req, res) => {
 //--------------------------PUSHING ARTISTS/ANNOUNCEMENTS ARRAYS-------------
 //---------------------------------------------------------------------------
 
+router.post("/:id/apply/:an", (req, res) => {
+  const { id, an } = req.params;
+  let flag = false;
 
-router.post("/:id/apply/:an", (req,res)=>{
+  User.findById(id).then((user) => {
+    if (user.announcements.length === 0) {
+      User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
+        res.status(200).json({ message: "applied successfully" })
+      );
+    } else {
+      user.announcements.map((ano) => {
+        if (ano.toString() === an) flag = true;
+      });
 
-  const {id, an} = req.params
-  let flag = false
+      if (flag === false) {
+        User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
+          res.status(200).json({ message: "applied successfully" })
+        );
 
-  User.findById(id)
-  .then((user)=>{
-    if(user.announcements.length === 0){
-      User.findByIdAndUpdate(id, { $push: { announcements: an}})
-      .then(res.status(200).json({message: "applied successfully"}))}
-    else{
-      user.announcements.map((ano)=>{
-
-        if(ano.toString() === an) flag = true
-      })
-
-        if (flag === false){ 
-        User.findByIdAndUpdate(id, { $push: { announcements: an}})
-        .then(res.status(200).json({message: "applied successfully"}))
-
-        Announcement.findByIdAndUpdate(an, {$push: {participants : id}})
-        .then(console.log("SOMETHING"))
-        }
-
-        else {console.log("you've alredy applied")}
-      
-
+        Announcement.findByIdAndUpdate(an, {
+          $push: { participants: id },
+        }).then(console.log("SOMETHING"));
+      } else {
+        console.log("you've alredy applied");
+      }
     }
-
-
-    }
-  )
-  
-
-  
-})
+  });
+});
 
 module.exports = router;

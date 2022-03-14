@@ -1,10 +1,14 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Options } from "../utils/tags";
 
 function CreateAnnouncementPage(props) {
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [imageUrl, setImageUrl] = useState("");
   const [announcement, setAnnouncement] = useState({
     title: "",
     description: "",
@@ -24,33 +28,54 @@ function CreateAnnouncementPage(props) {
     location,
     tags,
   } = announcement;
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+
+  
+
+  // console.log(user);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
-    return setAnnouncement({ ...announcement, [name]: value });
+    return setAnnouncement({ ...announcement, [name]: value}, );
   }
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`)
+      .then((response) => {
+        setImageUrl(response.data.image);
+        // console.log(`
+        //   "response.data.image", ${response.data.image}
+        //   "imageURL",  ${imageUrl}`)
+      })
+      .catch((error) => console.log(error))
+    }, [user._id, imageUrl]);
+
+    console.log(`
+    "imageURL",  ${imageUrl}`)
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    const eventDetails = {
+
+    const announcementDetails = {
       title,
       description,
-      image,
+      image: imageUrl ,
       announcementDate,
       expirationDate,
       location,
       tags,
     };
 
+
+     console.log("EVENTS DETAILs", typeof(announcementDetails.image) )
+
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}`,
-        eventDetails
+        announcementDetails
       )
       .then((response) => {
+        console.log("RESPONSEresponse", response);
+
         navigate("/announcements");
       });
   }
@@ -87,18 +112,6 @@ function CreateAnnouncementPage(props) {
           name="description"
           placeholder="Description"
           value={description}
-          onChange={handleInputChange}
-          required
-          minLength="8"
-        />
-
-        <label htmlFor="input-image">Image</label>
-        <input
-          id="input-image"
-          type="file"
-          name="image"
-          placeholder="image"
-          value={image}
           onChange={handleInputChange}
           required
           minLength="8"
@@ -142,7 +155,7 @@ function CreateAnnouncementPage(props) {
           value={location}
           onChange={handleInputChange}
           required
-          minLength="8"
+          minLength="4"
         />
 
         {error && (

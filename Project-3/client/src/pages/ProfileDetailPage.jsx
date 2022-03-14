@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import YoutubeEmbed from "../components/Youtube/youtube";
+
+
 
 
 function ProfileDetailPage(props) {
@@ -22,7 +25,7 @@ function ProfileDetailPage(props) {
         const storedToken = localStorage.getItem("authToken");
             axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
             .then((res)=>{
-                console.log(res)
+                console.log("DATA HERE", res.data)
                 setUser(res.data)        
             })
     }
@@ -40,7 +43,10 @@ function ProfileDetailPage(props) {
            <p>{user.tags}</p>
            <p>{user.location}</p>
            <h3>Videos</h3>
-           <p>user videos</p>
+           <p>user videos
+            {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
+               
+           </p>
            <h3>Announcements</h3>
            <h4>Your announcements</h4>
            <h3>Events</h3>

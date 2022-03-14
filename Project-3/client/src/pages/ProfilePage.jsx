@@ -1,36 +1,53 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+import Navbar from "../components/Navbar/Navbar";
+import { Link, useNavigate } from "react-router-dom";
+import AnnouncementCard from "../components/Announcements/AnnouncementCard";
+
+import YoutubeEmbed from "../components/Youtube/youtube";
 
 function ProfilePage(props) {
+  const [video, setVideo] = useState({});
 
-    const navigate = useNavigate();
-    
-    const [user, setUser] = useState({
-        image: "",
-        username: "",
-        description: "",
-        tags: [],
-        location: "",
-        videos: "",
-        ownAnnouncments: "",
-        announcements: "",
-        ownEvents: ""
-    });
-    
-    const getUser = () => {
-        const storedToken = localStorage.getItem("authToken");
-        
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
-        .then(response => {
-            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
-            .then((res)=>{setUser(res.data)})
-            .catch(error => console.log(error))
-        })
-    }
-    
-    useEffect(() => {getUser()}, [])
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    image: "",
+    username: "",
+    description: "",
+    tags: [],
+    location: "",
+    videos: [],
+    ownAnnouncements: [],
+    announcements: [],
+    ownEvents: [],
+  });
+
+  const getUser = () => {
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        axios
+          .get(
+            `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
+          )
+          .then((res) => {
+            setUser(res.data);
+          })
+
+          .catch((error) => console.log(error));
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
 
     function removeToken() {
         localStorage.removeItem("authToken")
@@ -87,7 +104,7 @@ function ProfilePage(props) {
                <p>{user.tags}</p>
                <p>{user.location}</p>
                <h3>Videos</h3>
-               <p>user videos</p>
+               {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
                <h3>Events</h3>
@@ -98,6 +115,7 @@ function ProfilePage(props) {
             <Navbar />
         </div>
     );
+
 }
 
 export default ProfilePage;

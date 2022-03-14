@@ -71,11 +71,6 @@
     box-shadow: 0 0 15px 5px white;
   }
 
-  p {
-    color: white;
-    margin: 0;
-    font-size: 13px;
-  }
 
   .flex {
     display: flex;

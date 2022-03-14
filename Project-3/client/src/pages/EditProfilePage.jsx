@@ -23,6 +23,19 @@ function EditProfilePage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    let start = ""
+        for (let i = 0; i < user.videos.length; i++){
+            if(user.videos[i] === "=") {
+                start = i + 1
+                break
+            }
+        }
+        user.videos = user.videos.slice(start, start + 11)
+
+
+
+
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, user)
       .then((response) => {
@@ -31,7 +44,9 @@ function EditProfilePage(props) {
           username: "",
           email: "",
           description: "",
-          tags: '',
+          tags: "",
+          videos: ""
+
         }));
         navigate("/profile");
       })
@@ -88,7 +103,11 @@ function EditProfilePage(props) {
         </div>
         <div>
           <label>Videos:</label>
-          {user.videos}
+          <input
+            type="text"
+            name="videos"
+            onChange={handleChange}
+          ></input>
         </div>
         <div>
           <label>Your Announcements:</label>
