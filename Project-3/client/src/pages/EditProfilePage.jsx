@@ -134,6 +134,7 @@ function handleImgUpload(e){
           <input
             type="text"
             name="videos"
+            placeholder="Insert a Youtube URL"
             onChange={handleChange}
           ></input>
         

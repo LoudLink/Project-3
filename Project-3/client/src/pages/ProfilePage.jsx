@@ -124,7 +124,7 @@ function ProfilePage(props) {
                <p>{user.description}</p>
                <div className="flex-row gap">
                 {user.tags.map((tag) => 
-                  (<p key={tag} className="tags">&nbsp; {tag} &nbsp;</p>)
+                  (<p key={tag} className="tags">&nbsp; #{tag} &nbsp;</p>)
                 )}
                </div>
                <p>{user.location}</p>
