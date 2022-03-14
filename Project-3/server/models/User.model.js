@@ -6,7 +6,7 @@ const userSchema = new Schema(
     username: {type: String, required: true, unique: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    image: {type: String, default:"https://cdn-icons.flaticon.com/png/512/668/premium/668709.png?token=exp=1647272218~hmac=8321cfe7f0b22b5f1ac94b749bfa5297"},
+    image: {type: String, default:"https://res.cloudinary.com/loudlink/image/upload/v1647284975/loudlink/default_profile_img_n1o8pi.png"},
     description: {type: String, maxlength: 400},
     tags:{type: [String], default: []},
     location: {type: String},
