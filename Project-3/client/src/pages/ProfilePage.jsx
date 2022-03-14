@@ -93,6 +93,16 @@ function ProfilePage(props) {
         .catch(error => console.log("Error while deleting user: ",error))
     }
 
+    function deleteVideo(vid){
+        const deletedvid = vid.target.value
+        axios
+          .delete(
+            `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
+          ).then((response)=>{
+            setUser(response.data)
+          })
+    }
+
     return (
 
         <div>
@@ -107,7 +117,14 @@ function ProfilePage(props) {
                <p>{user.tags}</p>
                <p>{user.location}</p>
                <h3>Videos</h3>
-               {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
+               {user.videos.length === 0 ? <p>no videos to display</p> : 
+               <p>{user.videos.map((vid)=>(
+                <div>
+               <YoutubeEmbed embedId= {vid} />
+               <button onClick={deleteVideo} value={vid}>Delete this video</button>
+               </div>
+               ))} 
+               </p>}
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
                {user.ownAnnouncements.map((anno)=>(anno.title))}

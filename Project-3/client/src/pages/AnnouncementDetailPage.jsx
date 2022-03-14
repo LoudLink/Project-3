@@ -23,7 +23,7 @@ function AnnouncementDetailPage(props){
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
           .then((response) => setEvent(response.data))
-          .catch((error) => console.log(error));
+          .catch(setEvent(false));
       }, [id]);
 
       function apply(){        
@@ -34,6 +34,8 @@ function AnnouncementDetailPage(props){
       }
       console.log(announcement)
       return(
+        <div>
+        {!announcement  ? <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1> :
         <div>
           <div className="flex-center">
             <img
@@ -58,6 +60,8 @@ function AnnouncementDetailPage(props){
           <button onClick={apply}>
             Apply to this announcement 
           </button>
+      </div> 
+      }
           <Navbar />
       </div>
       )
