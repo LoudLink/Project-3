@@ -54,7 +54,7 @@ router.put("/:userId", (req, res) => {
     return;
   }
 
-    const { username, description, tags, location, videos } = req.body
+    const { username, description, tags, location, videos, image } = req.body
 
     let usernameToLowerCase = username.toLowerCase();
 
