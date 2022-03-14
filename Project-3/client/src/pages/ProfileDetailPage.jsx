@@ -25,7 +25,7 @@ function ProfileDetailPage(props) {
         const storedToken = localStorage.getItem("authToken");
             axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
             .then((res)=>{
-                console.log(res)
+                console.log("DATA HERE", res.data)
                 setUser(res.data)        
             })
     }
@@ -44,14 +44,7 @@ function ProfileDetailPage(props) {
            <p>{user.location}</p>
            <h3>Videos</h3>
            <p>user videos
-            {user.videos.length === 0 &&
-                <p>no videos to display</p>
-            }
-            {
-            user.videos.length !== 0 &&
-            <p><YoutubeEmbed embedId= {user.videos} /></p>     
-
-            }
+            {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
                
            </p>
            <h3>Announcements</h3>
