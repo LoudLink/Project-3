@@ -3,6 +3,7 @@ import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Options } from "../utils/tags";
+import Navbar from "../components/Navbar/Navbar";
 
 function CreateAnnouncementPage(props) {
   const [error, setError] = useState(null);
@@ -88,7 +89,7 @@ function CreateAnnouncementPage(props) {
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact to="/main">
+        <Link exact= "true" to="/main">
           Go back
         </Link>
       </div>
@@ -169,6 +170,7 @@ function CreateAnnouncementPage(props) {
           Submit
         </button>
       </form>
+      <Navbar />
     </div>
   );
 }

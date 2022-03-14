@@ -16,7 +16,7 @@ function UserCard(props) {
                 <ul className='flex '>
                     {props.profile.tags.map((tag)=><li key={tag}>{tag}</li>)}
                 </ul>
-                <Link exact to={`/users/${props.profile._id}`}>Read More</Link>
+                <Link exact= "true" to={`/users/${props.profile._id}`}>Read More</Link>
             </div>
         </div>
         

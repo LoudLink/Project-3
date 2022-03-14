@@ -41,7 +41,7 @@ function AnnouncementDetailPage(props){
               alt="arrow back"
               className="goBackBtn"
             />
-            <Link exact to="/main">
+            <Link exact= "true" to="/main">
               Go back
             </Link>
           </div>

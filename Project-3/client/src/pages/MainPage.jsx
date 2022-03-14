@@ -18,9 +18,12 @@ function MainPage(props) {
       <Link to="/announcements">
         <button>all adds</button>
       </Link>
+      
       <div className="dividersMain flex-row">
         <Announcements />
       </div>
+      
+        
       <Link to="/events">
         <button>all events</button>
       </Link>
