@@ -18,10 +18,10 @@ function Navbar(props) {
             <div className='dropup'>
                 <img src="../../../plus.png" alt="home" className='drop-btn nav-icon' onClick={popUp}/>
                 <div>
-                  <div className='droup-content' id="popUp">
+                  {/*<div className='droup-content' id="popUp">
                       <Link exact= "true" to="/announcements/create-announcement">Create a new announcement</Link>
                       <Link exact= "true" to="/events/create-event">Create a new event</Link>
-                  </div>
+                  </div>*/}
                 </div>
             </div>    
             

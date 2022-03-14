@@ -57,12 +57,7 @@ function EditProfilePage(props) {
       .catch((err) => console.log(err));
   }
 
-  function check(j) {
-    console.log("caca",user.tags.length)
-    
-      
-  }
-
+  
   function handleInputChange(event) {
     const { name, value } = event.target;
     if(event.target.name === "tags") {
@@ -133,7 +128,7 @@ function handleImgUpload(e){
         
         <label htmlFor="input-tags">Select up to 5 tags that define you</label>
         <select  onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
-            {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}
+            {Options.map((e)=>(<option value={e}>{e}</option>))}
         </select>
           <label>Location:</label>
           <input
