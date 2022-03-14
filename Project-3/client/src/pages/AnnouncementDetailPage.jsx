@@ -15,7 +15,8 @@ function AnnouncementDetailPage(props){
 
     const [announcement, setEvent] = useState({
         title: "",
-        description: ""
+        description: "",
+        participants: [],
     })
 
 
@@ -54,7 +55,7 @@ function AnnouncementDetailPage(props){
         <p>At: {announcement.location}</p>
         <p>Posted on: {new Date(announcement.announcementDate).toDateString()}</p>
         <p>Apply before: {new Date(announcement.expirationDate).toDateString()}</p>
-        {/* <p>PARTICIPANTS: { announcement.participants.length === 0 ? <p>Nobody has apply to this announcement yet</p> : <p>Already {announcement.participants.length} apply to this announcement </p>}</p> */}
+        <p>PARTICIPANTS: { announcement.participants.length === 0 ? <p>Nobody has apply to this announcement yet</p> : <p>Already {announcement.participants.length} apply to this announcement </p>}</p>
           <button onClick={apply}>
             Apply to this announcement 
           </button>
