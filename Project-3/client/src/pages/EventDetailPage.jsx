@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
+
 
 function EventDetailPage(props) {
   const { id } = useParams();
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
 
   const [event, setEvent] = useState({
     title: "",
@@ -16,25 +20,29 @@ function EventDetailPage(props) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`)
       .then((response) => setEvent(response.data))
-      .catch((error) => console.log(error));
+      .catch(setEvent(false));
   }, []);
 
-  console.log(event)
-
+  console.log(event);
 
   return (
     <div>
-      <div className="flex-center">
-        <img
-          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
-          alt="arrow back"
-          className="goBackBtn"
-        />
-        <Link exact to="/main">
-          Go back
-        </Link>
-      </div>
-      
+    {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
+    <div>
+    <div className="flex-center">
+            <img
+              src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+              alt="arrow back"
+              className="goBackBtn"
+            />
+            {isLoggedIn ? <Link exact= "true" to="/main">
+              Go back
+            </Link> : <Link exact= "true" to="/">
+              Go back
+            </Link> }
+            
+          </div>
+
       <img src={event.image} alt={event.title} />
       <h3>{event.title}</h3>
       {/*<p>Hosted by: {event.owner[0]}</p>*/}
@@ -46,9 +54,14 @@ function EventDetailPage(props) {
       <p>At: {event.location}</p>
       <p>How much: {event.price}</p>
       <div>
-          <Link exact to={`/events/${id}/edit`}>Edit this event</Link>
+
+          <Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>
+
       </div>
-      <Navbar />
+
+    </div>
+     }
+    <Navbar />
     </div>
   );
 }

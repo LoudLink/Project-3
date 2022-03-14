@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Options } from "../utils/tags";
+import Navbar from "../components/Navbar/Navbar";
 
 function CreateEventPage(props) {
   const [event, setEvent] = useState({
@@ -70,7 +71,7 @@ function CreateEventPage(props) {
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact to="/main">
+        <Link exact= "true" to="/main">
           {" "}
           Go back
         </Link>
@@ -156,6 +157,7 @@ function CreateEventPage(props) {
           Submit
         </button>
       </form>
+      <Navbar />
     </div>
   );
 }

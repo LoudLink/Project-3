@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 import Navbar from "../components/Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import AnnouncementCard from "../components/Announcements/AnnouncementCard";
@@ -8,6 +7,7 @@ import AnnouncementCard from "../components/Announcements/AnnouncementCard";
 import YoutubeEmbed from "../components/Youtube/youtube";
 
 function ProfilePage(props) {
+
   const [video, setVideo] = useState({});
 
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function ProfilePage(props) {
 
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
+        headers: { Authorization: `Bearer ${storedToken}` }
       })
       .then((response) => {
         axios
@@ -39,8 +39,7 @@ function ProfilePage(props) {
           .then((res) => {
             setUser(res.data);
           })
-
-          .catch((error) => console.log(error));
+          .catch((err) => console.log(err));
       });
   };
 
@@ -71,9 +70,9 @@ function ProfilePage(props) {
           return setUser(null);
         });
         */
+      
         removeToken()
         navigate("/")
-        
         
       }
 
@@ -82,8 +81,11 @@ function ProfilePage(props) {
 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
-            axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
-            .then(() => {
+            console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
+            axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,  {headers: { Authorization: `Bearer ${storedToken}`}})
+            .then((deletedUser) => {
+                console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
+                console.log("delted user front:", deletedUser)
                 removeToken();
                 navigate("/")
             })
@@ -91,7 +93,18 @@ function ProfilePage(props) {
         .catch(error => console.log("Error while deleting user: ",error))
     }
 
+    function deleteVideo(vid){
+        const deletedvid = vid.target.value
+        axios
+          .delete(
+            `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
+          ).then((response)=>{
+            setUser(response.data)
+          })
+    }
+
     return (
+
         <div>
             <div>
                 <Link to={`/profile/${user._id}/edit`}><button>Edit profile</button></Link>
@@ -104,16 +117,26 @@ function ProfilePage(props) {
                <p>{user.tags}</p>
                <p>{user.location}</p>
                <h3>Videos</h3>
-               {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
+               {user.videos.length === 0 ? <p>no videos to display</p> : 
+               <p>{user.videos.map((vid)=>(
+                <div>
+               <YoutubeEmbed embedId= {vid} />
+               <button onClick={deleteVideo} value={vid}>Delete this video</button>
+               </div>
+               ))} 
+               </p>}
                <h3>Announcements</h3>
-               <h4>Your announcements</h4>
+               <h3>Your announcements</h3>
+               {user.ownAnnouncements.map((anno)=>(anno.title))}
                <h3>Events</h3>
+               {user.ownEvents.map((e)=>(<p>{e.title}</p>))}
                <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>
+             
             </div>
-            
             <Navbar />
         </div>
+
     );
 
 }

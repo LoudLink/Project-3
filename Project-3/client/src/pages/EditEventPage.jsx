@@ -64,7 +64,7 @@ function EventEditPage(props) {
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact to={`/events/${id}`}>
+        <Link exact= "true" to={`/events/${id}`}>
           Go back
         </Link>
       </div>

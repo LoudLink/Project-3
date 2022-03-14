@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
-
 const Announcement = require("../models/Announcement.model");
 const Event = require("../models/Event.model");
 const fileUploader = require("../config/cloudinary.config");
+
 
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL USERS--------------------------------
@@ -34,7 +34,8 @@ router.get("/:userId", (req, res) => {
 
   User.findById(userId)
 
-    .populate("ownEvents")
+    .populate("ownAnnouncements")
+    .populate('ownEvents')
 
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
@@ -58,10 +59,7 @@ router.put("/:userId", (req, res) => {
     let usernameToLowerCase = username.toLowerCase();
 
 
-
-
-  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, description, image, tags, location, videos }, { new: true })
-    
+  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
 });
@@ -94,167 +92,30 @@ router.delete("/:userId", (req, res) => {
     return;
   }
 
-  let countAnno = 0;
-  let countEve = 0;
-  const userIdCopy = userId;
-
-  function deleteAnnouncements() {
-    Announcement.find()
-    .populate("owner")
-    .then((anno) => {
-      anno.map((annito) => {
-        if(annito.owner.toString().includes(userIdCopy)){
-          Announcement.findByIdAndDelete(annito._id)
-          .then(
-            console.log("Announcement deleted")
-          )
-        }
-        else {
-          countAnno += 1;
-          console.log("Announcements checked: ", countAnno);
-        }
-      })
-    })
-  }
-
-  function deleteEvents() {
-    Event.find()
-    .populate("owner")
-    .then((eve) => {
-      eve.map((evito) => {
-        if(evito.owner.toString().includes(userIdCopy)){
-          Event.findByIdAndDelete(evito._id)
-          .then(
-            console.log("Event deleted")
-          )
-        }
-        else {
-          countEve += 1;
-          console.log("Events checked: ", countEve);
-        }
-      })
-    })
-  }
-
-  function deleteUser() {
-    User.findByIdAndDelete(userId)
-                          .then(() => {
-                            res.status(200).json({
-                              message: `User with ${userId} is removed successfully.`,
-                            });
-                          })
-                          .catch((err) => res.json(err))
-                        
-  }
-
-  function deleteAnnouncementsAndEvents() {
-    deleteAnnouncements()
-    deleteEvents();
-  }
-
-  deleteAnnouncementsAndEvents()
-  setTimeout(() => {
-    deleteUser()
-  }, 1000)
+  User.findById(userId)
+  .then((user) => 
+  Event.deleteMany({_id: {$in: user.ownEvents}})
+  .then((_) => 
+  Announcement.deleteMany({_id: {$in: user.ownAnnouncements}}))
+  .then((_) => 
+  User.findByIdAndDelete(userId)
+  .then((deletedUser)=> {
+    res.json(deletedUser)
+  })
+  .catch(err=>console.log(err))
+  )
+  )
+ 
 })
 
-  /*
-  Announcement.find()
-    .populate("owner")
-    .then((anno) => {
-      Promise.all(
-        anno.map((annito) => {
-          if (annito.owner.toString().includes(userId)) {
-            Announcement.findByIdAndDelete(annito._id).then(
-              Event.find()
-                .populate("owner")
-                .then((eve) => {
-                  eve.map((evito) => {
-                    if (evito.owner.toString().includes(userId)) {
-                      Event.findByIdAndDelete(evito._id).then(
-                        User.findByIdAndDelete(userId)
-                          .then(() => {
-                            res.status(200).json({
-                              message: `User with ${userId} is removed successfully.`,
-                            });
-                          })
-                          .catch((err) => res.json(err))
-                      );
-                    }
-                  });
-                })
-            );
-          } 
-          
-          else {
-            countAnno += 1;
-            console.log("Announcements checked: ", countAnno);
-          }
-        })
-      ).then(
-        Event.find()
-          .populate("owner")
-          .then((eve) => {
-            Promise.all(
-              eve.map((evito) => {
-                if (evito.owner.toString().includes(userId)) {
-                  Event.findByIdAndDelete(evito._id).then(
-                    User.findByIdAndDelete(userId)
-                      .then(() => {
-                        res.status(200).json({
-                          message: `User with ${userId} is removed successfully.`,
-                        });
-                      })
-                      .catch((err) => res.json(err))
-                  );
-                } else {
-                  countEve += 1;
-                  console.log("Events checked: ", countEve);
-                }
-              })
-            )
-            .then(
-              User.findByIdAndDelete(userId)
-                .then(() => {
-                  res.status(200).json({
-                    message: `User with ${userId} is removed successfully.`,
-                  });
-                })
-                .catch((err) => res.json(err))
-            );
-          })
-      );
-    });
-});
+router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
 
-*/
+  let userId = req.params.userId
+  let videoId = req.params.videoId
+  User.findByIdAndUpdate(userId, {$pullAll: {videos: [videoId]}}, {new : true})
+  .then((response) => {res.json(response)})
 
-/*Announcement.find()
-    .populate("owner")
-    .then((anno) => {
-      anno.map((annito) => {
-        if (annito.owner.toString().includes(userId)) {
-          Announcement.findByIdAndDelete(annito._id).then(
-            Event.find()
-              .populate("owner")
-              .then((eve) => {
-                eve.map((evito) => {
-                  if (evito.owner.toString().includes(userId)) {
-                    Event.findByIdAndDelete(evito._id).then(
-                      User.findByIdAndDelete(userId)
-                        .then(() => {
-                          res.status(200).json({
-                            message: `User with ${userId} is removed successfully.`,
-                          });
-                        })
-                        .catch((err) => res.json(err))
-                    );
-                  }
-                });
-              })
-          );
-        }
-      });
-    }); */
+  
+})
 
 module.exports = router;

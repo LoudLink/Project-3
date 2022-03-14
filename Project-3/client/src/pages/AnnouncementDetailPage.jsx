@@ -6,10 +6,12 @@ import { useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Navbar from "../components/Navbar/Navbar";
+import IsPrivate from "../components/IsPrivate/IsPrivate";
+
 
 function AnnouncementDetailPage(props){
     const { id } = useParams()
-
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ function AnnouncementDetailPage(props){
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
           .then((response) => setEvent(response.data))
-          .catch((error) => console.log(error));
+          .catch(setEvent(false));
       }, [id]);
 
       function apply(){        
@@ -36,15 +38,20 @@ function AnnouncementDetailPage(props){
       console.log(announcement)
       return(
         <div>
+        {!announcement  ? <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1> :
+        <div>
           <div className="flex-center">
             <img
               src="../../ios-arrow-back-logo-icon-png-svg (1).png"
               alt="arrow back"
               className="goBackBtn"
             />
-            <Link exact to="/main">
+            {isLoggedIn ? <Link exact= "true" to="/main">
               Go back
-            </Link>
+            </Link> : <Link exact= "true" to="/">
+              Go back
+            </Link> }
+            
           </div>
         <h2>WISH TO APLLY TO THIS ANNOUNCEMENT</h2>
         <img src={announcement.image} alt={announcement.title} />
@@ -59,6 +66,8 @@ function AnnouncementDetailPage(props){
           <button onClick={apply}>
             Apply to this announcement 
           </button>
+      </div> 
+      }
           <Navbar />
       </div>
       )
