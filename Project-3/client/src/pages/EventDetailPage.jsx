@@ -34,6 +34,7 @@ function EventDetailPage(props) {
           Go back
         </Link>
       </div>
+      
       <img src={event.image} alt={event.title} />
       <h3>{event.title}</h3>
       {/*<p>Hosted by: {event.owner[0]}</p>*/}
