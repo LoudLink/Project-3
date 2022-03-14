@@ -54,7 +54,7 @@ function ProfilePage(props) {
 
   if (isLoading) return <Spinner />;
 
-  console.log(isLoading)
+  // console.log(isLoading)
 
     function removeToken() {
         localStorage.removeItem("authToken")
@@ -89,11 +89,11 @@ function ProfilePage(props) {
 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
-            console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
+            //console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
             axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,  {headers: { Authorization: `Bearer ${storedToken}`}})
             .then((deletedUser) => {
-                console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
-                console.log("delted user front:", deletedUser)
+                //console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
+                //console.log("delted user front:", deletedUser)
                 removeToken();
                 navigate("/")
             })

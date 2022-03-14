@@ -14,7 +14,7 @@ function Users(props) {
         setUsers(response.data.filter((user) => user._id !== currentUser._id));
       })
       .catch((err) => console.log("CAGADAAAAAAAA", err));
-  }, [currentUser._id]);
+  }, [currentUser?._id]);
 
   return (
     <div>
