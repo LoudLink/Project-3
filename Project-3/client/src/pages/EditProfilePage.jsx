@@ -37,6 +37,7 @@ function EditProfilePage(props) {
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, user)
       .then((response) => {
+        console.log(response)
         setUser((user) => ({
           ...user,
           username: "",
