@@ -14,25 +14,24 @@ function MainPage(props) {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="mainPage flex-column margin-top">
+    <div className="flex-column background">
       <ScrollUpBtn />
       <Link to="/users">
-        <button>all profiles</button>
+        <button>All profiles</button>
       </Link>
       <div className="dividersMain flex-row">
         <Users />
       </div>
+
       <Link to="/announcements">
-        <button>all adds</button>
+        <button>All adds</button>
       </Link>
-      
       <div className="dividersMain flex-row">
         <Announcements />
       </div>
-      
         
       <Link to="/events">
-        <button>all events</button>
+        <button>All events</button>
       </Link>
       <div className="dividersMain flex-row">
         <Events />

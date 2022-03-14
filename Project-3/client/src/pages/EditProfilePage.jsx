@@ -2,10 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./auth.css";
 import { Options } from "../utils/tags";
-import './EditProfilePage.css'
 
 
 function EditProfilePage(props) {
@@ -86,6 +85,10 @@ function handleImgUpload(e){
 
   return (
     <div>
+      <div className="flex-center">
+        <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
+        <Link exact= "true" to="/main"> Go back</Link>
+      </div>
       <form onSubmit={handleSubmit} className="auth__form">
         
           <label htmlFor="input-username">Username:</label>
@@ -97,10 +100,7 @@ function handleImgUpload(e){
             onChange={handleChange}
           />
         
-        
-        
-          <label>Image:</label>
-          {user.image ? <img src={user.image} alt="EAHIVABVA" /> : <p>No image yet</p>}
+          {user.image ? <img src={user.image} alt={user.username} /> : <p>No image yet</p>}
           <input
             type="file"
             name="image"
