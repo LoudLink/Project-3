@@ -3,13 +3,16 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import AnnouncementCard from "../components/Announcements/AnnouncementCard";
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 
 import YoutubeEmbed from "../components/Youtube/youtube";
+import Spinner from "../components/Spinner/Spinner";
 
 function ProfilePage(props) {
 
   const [video, setVideo] = useState({});
-
+  const {isLoading} = useContext(AuthContext)
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -23,6 +26,8 @@ function ProfilePage(props) {
     announcements: [],
     ownEvents: [],
   });
+
+  
 
   const getUser = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -47,6 +52,9 @@ function ProfilePage(props) {
     getUser();
   }, []);
 
+  if (isLoading) return <Spinner />;
+
+  console.log(isLoading)
 
     function removeToken() {
         localStorage.removeItem("authToken")
@@ -114,7 +122,11 @@ function ProfilePage(props) {
                <p>{user.username}</p>
                <p>{user.email}</p>
                <p>{user.description}</p>
-               <p>{user.tags}</p>
+               <div className="flex-row gap">
+                {user.tags.map((tag) => 
+                  (<p key={tag} className="tags">&nbsp; {tag} &nbsp;</p>)
+                )}
+               </div>
                <p>{user.location}</p>
                <h3>Videos</h3>
                {user.videos.length === 0 ? <p>no videos to display</p> : 

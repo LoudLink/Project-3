@@ -7,7 +7,7 @@ const userSchema = new Schema(
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     image: {type: String, default:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png"},
-    description: {type: String, maxlength: 400},
+    description: {type: String, maxlength: 400, default:"Hi! I'm new in LoudLink and ready to hear from you :)"},
     tags:{type: [String], default: []},
     location: {type: String},
     videos: {type: [String]},
