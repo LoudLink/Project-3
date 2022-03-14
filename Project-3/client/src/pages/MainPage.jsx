@@ -4,8 +4,15 @@ import Users from "../components/Users/Users";
 import Navbar from "../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+import Spinner from "../components/Spinner/Spinner";
 
 function MainPage(props) {
+
+  const { isLoading } = useContext(AuthContext);
+  if (isLoading) return <Spinner />;
+
   return (
     <div className="mainPage flex-column margin-top">
       <ScrollUpBtn />

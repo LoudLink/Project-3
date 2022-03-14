@@ -6,8 +6,9 @@ function ErrorPage(){
 
     return(
         <div>
-        <h1> This page does not exist</h1>
-        <button><Link exact to={"/main"}>GO BACK</Link></button>
+        <h2> Oopsie! Where are you trying to go sneaky weasel? </h2>
+        <h2>This page does not exist... at least for now!</h2>
+        <button><Link exact to={"/"}>GO BACK</Link></button>
         </div>
 
     )
