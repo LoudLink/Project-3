@@ -87,9 +87,13 @@ body {
   width: 32px;
 }
 
+.goback{
+  margin-top: 3rem;
+}
 a {
   text-decoration: none;
   color: black;
+  
 }
 
 a:hover {
@@ -126,6 +130,7 @@ a:hover {
 .dividersMain {
   height: auto;
   overflow-x: hidden;
+  margin-top: 5rem;
 }
 
 .dividersMain>div::-webkit-scrollbar {

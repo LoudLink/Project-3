@@ -40,7 +40,7 @@ export default function Signup({ authenticate }) {
       .map(option => option.value);
       
       
-      console.log("TAGS: ", selected, "LENGHT: ", selected.length)
+      
       return setForm({...form, [name]: selected})   }
     return setForm({ ...form, [name]: value });
   }

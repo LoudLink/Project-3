@@ -57,10 +57,19 @@ function EditProfilePage(props) {
       .catch((err) => console.log(err));
   }
 
-  function handleChange(event) {
-    const key = event.target.name;
-    const value = event.target.value;
-    setUser((user) => ({ ...user, [key]: value }));
+  
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    if(event.target.name === "tags") {
+      
+      const selected = [...event.target.options]
+      .filter(option => option.selected)
+        .map(option => option.value);
+        
+        
+        
+        return setUser({...user, [name]: selected})   }
+      return setUser({ ...user, [name]: value });
   }
 
 
@@ -94,7 +103,7 @@ function handleImgUpload(e){
             type="text"
             name="username"
             value={user.username}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         
         
@@ -113,20 +122,20 @@ function handleImgUpload(e){
             type="text"
             name="description"
             value={user.description}
-            onChange={handleChange}
+            onChange={handleInputChange}
           ></input>
         
         
-          <label>Tags:</label>
-          <select name="tags" onChange={handleChange} multiple='multiple' size="8">
-            {Options.map((e)=>(<option key={e} value={e}>{e}</option>))}
-          </select>
+        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
+        <select  onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
+            {Options.map((e)=>(<option value={e}>{e}</option>))}
+        </select>
           <label>Location:</label>
           <input
             type="text"
             name="location"
             value={user.location}
-            onChange={handleChange}
+            onChange={handleInputChange}
           ></input>
         
         
@@ -134,7 +143,7 @@ function handleImgUpload(e){
           <input
             type="text"
             name="videos"
-            onChange={handleChange}
+            onChange={handleInputChange}
           ></input>
         
         <button type="submit" className="button__submit">

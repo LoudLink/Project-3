@@ -138,8 +138,15 @@ function ProfilePage(props) {
                ))} 
                </p>}
                <h3>Announcements</h3>
+               {user.announcements}
                <h3>Your announcements</h3>
-               {user.ownAnnouncements.map((anno)=>(anno.title))}
+               {user.ownAnnouncements.map((anno)=>(
+                 <div>
+                    <p>{anno.title}</p>
+                    <img src={anno.image} alt='photo_event'></img>
+                 </div>
+                 )
+                 )}
                <h3>Events</h3>
                {user.ownEvents.map((e)=>(<p>{e.title}</p>))}
                <button onClick={handleLogout}>Logout</button>
