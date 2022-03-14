@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 import Navbar from "../components/Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import AnnouncementCard from "../components/Announcements/AnnouncementCard";
@@ -8,6 +7,7 @@ import AnnouncementCard from "../components/Announcements/AnnouncementCard";
 import YoutubeEmbed from "../components/Youtube/youtube";
 
 function ProfilePage(props) {
+
   const [video, setVideo] = useState({});
 
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function ProfilePage(props) {
 
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
+        headers: { Authorization: `Bearer ${storedToken}` }
       })
       .then((response) => {
         axios
@@ -70,9 +70,9 @@ function ProfilePage(props) {
           return setUser(null);
         });
         */
+      
         removeToken()
         navigate("/")
-        
         
       }
 
