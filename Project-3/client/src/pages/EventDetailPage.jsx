@@ -31,7 +31,7 @@ function EventDetailPage(props) {
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact to="/main">
+        <Link exact= "true" to="/main">
           Go back
         </Link>
       </div>
@@ -47,9 +47,9 @@ function EventDetailPage(props) {
       <p>At: {event.location}</p>
       <p>How much: {event.price}</p>
       <div>
-        <Link exact to={`/events/${id}/edit`}>
-          Edit this event
-        </Link>
+
+          <Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>
+
       </div>
 
     </div>

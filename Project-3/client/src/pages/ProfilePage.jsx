@@ -81,8 +81,11 @@ function ProfilePage(props) {
 
         axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {headers: { Authorization: `Bearer ${storedToken}`}})
         .then(response => {
-            axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`)
-            .then(() => {
+            console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
+            axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,  {headers: { Authorization: `Bearer ${storedToken}`}})
+            .then((deletedUser) => {
+                console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
+                console.log("delted user front:", deletedUser)
                 removeToken();
                 navigate("/")
             })
@@ -107,6 +110,7 @@ function ProfilePage(props) {
                {!user.videos ? <p>no videos to display</p> : <p><YoutubeEmbed embedId= {user.videos} /></p>}
                <h3>Announcements</h3>
                <h4>Your announcements</h4>
+               {user.ownAnnouncements.map((anno)=>(anno.title))}
                <h3>Events</h3>
                <button onClick={handleLogout}>Logout</button>
                <button onClick={deleteUser}>Delete Account</button>

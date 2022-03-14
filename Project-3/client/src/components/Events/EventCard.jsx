@@ -15,7 +15,7 @@ function EventCard(props) {
                 <img src={props.event.image} alt='event-pic'></img>
                 <p>{props.event.description}</p>
                 <p>{props.event.owner[0]}</p>
-                <Link exact to={`/events/${props.event._id}`}>Read More</Link>
+                <Link exact= "true" to={`/events/${props.event._id}`}>Read More</Link>
             </div>
         </div>
     );

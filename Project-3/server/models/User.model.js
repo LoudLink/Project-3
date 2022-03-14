@@ -8,12 +8,12 @@ const userSchema = new Schema(
     password: {type: String, required: true},
     image: {type: String, default:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png"},
     description: {type: String, maxlength: 400},
-    tags:[String],
+    tags:{type: [String], default: []},
     location: {type: String},
     videos: {type: String},
-    ownAnnouncements: [{type: Schema.Types.ObjectId, ref:'Announcement'}],
-    announcements: [{type: Schema.Types.ObjectId, ref:'Announcement'}],
-    ownEvents:[{type: Schema.Types.ObjectId, ref:'Event'}]
+    ownAnnouncements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
+    announcements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
+    ownEvents:[{type: Schema.Types.ObjectId, ref:'Event', default: []}]
   }
 );
 

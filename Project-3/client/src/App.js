@@ -79,6 +79,7 @@ export default function App() {
     <Banner />
       
       <Routes>
+
         <Route exact path="/announcements/create-announcement" element={<CreateAnnouncementPage/>}/>
         <Route exact path="/events/:id/edit" element={<EditEventPage/>}/>
         <Route exact path="/events/:id" element={<EventDetailPage/>}/>
@@ -96,6 +97,7 @@ export default function App() {
         <Route exact path="/" element={<HomePage/>}/>
 
         <Route path="/*" element={ <ErrorPage /> } />
+
     
       </Routes>
     </div>
