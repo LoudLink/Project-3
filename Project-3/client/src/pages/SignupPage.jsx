@@ -13,7 +13,7 @@ export default function Signup({ authenticate }) {
     username: "",
     password: "",
     email: "",
-    tags: ""
+    tags: []
   });
   const { username, password, email, tags } = form;
   const [error, setError] = useState(null);
@@ -23,6 +23,12 @@ export default function Signup({ authenticate }) {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
+    if(event.target.name === "tags") {
+      const selected = [...event.target.options]
+      .filter(option => option.selected)
+      .map(option => option.value);
+      console.log("TAGS: ", selected)
+    return setForm({...form, [name]: selected})   }
     return setForm({ ...form, [name]: value });
   }
 
@@ -46,7 +52,7 @@ export default function Signup({ authenticate }) {
     <div className="margin-top">
     <div className="flex-center">
       <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-      <Link exact to="/"> Go back</Link>
+      <Link exact= "true" to="/"> Go back</Link>
     </div>
       <h2>SIGN UP</h2>
       <form onSubmit={handleFormSubmission} className="auth__form">

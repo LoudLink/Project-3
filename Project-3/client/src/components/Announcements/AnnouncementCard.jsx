@@ -13,7 +13,7 @@ function AnnouncementCard(props) {
                 <img src={props.announcement.image} alt='announcement-pic'></img>
                 <p>{props.announcement.description}</p>
                 <p>{props.announcement.owner[0]}</p>
-                <Link exact to={`/announcements/${props.announcement._id}`}>Read More</Link>
+                <Link exact= "true" to={`/announcements/${props.announcement._id}`}>Read More</Link>
                 
             </div>
         </div>

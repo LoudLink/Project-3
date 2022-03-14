@@ -78,21 +78,21 @@ export default function App() {
     <Banner />
       
       <Routes>
-        <Route exact path="/announcements/create-announcement" element={<CreateAnnouncementPage/>}/>
-        <Route exact path="/events/:id/edit" element={<EditEventPage/>}/>
-        <Route exact path="/events/:id" element={<EventDetailPage/>}/>
-        <Route exact path="/events/create-event" element={<CreateEventPage/>}/>
-        <Route exact path="/profile/:id/edit" element={<EditProfilePage/>}/>
-        <Route exact path="/users/:id" element={<ProfileDetailPage/>}/>
-        <Route exact path="/profile" element={<ProfilePage/>}/>
-        <Route exact path="/signup" element={<Signup/>}/>
-        <Route exact path="/login" element={<LogIn/>}/>
-        <Route exact path="/main" element={<MainPage/>}/>
-        <Route exact path="/events" element={<AllEvents/>}/>
-        <Route exact path="/announcements" element={<AllAnnouncements/>}/>
-        <Route exact path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
-        <Route exact path="/users" element={<AllUsers/>}/>
-        <Route exact path="/" element={<HomePage/>}/>
+        <Route exact= "true" path="/announcements/create-announcement" element={<CreateAnnouncementPage/>}/>
+        <Route exact= "true" path="/events/:id/edit" element={<EditEventPage/>}/>
+        <Route exact= "true" path="/events/:id" element={<EventDetailPage/>}/>
+        <Route exact= "true" path="/events/create-event" element={<CreateEventPage/>}/>
+        <Route exact= "true" path="/profile/:id/edit" element={<EditProfilePage/>}/>
+        <Route exact= "true" path="/users/:id" element={<ProfileDetailPage/>}/>
+        <Route exact= "true" path="/profile" element={<ProfilePage/>}/>
+        <Route exact= "true" path="/signup" element={<Signup/>}/>
+        <Route exact= "true" path="/login" element={<LogIn/>}/>
+        <Route exact= "true" path="/main" element={<MainPage/>}/>
+        <Route exact= "true" path="/events" element={<AllEvents/>}/>
+        <Route exact= "true" path="/announcements" element={<AllAnnouncements/>}/>
+        <Route exact= "true" path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
+        <Route exact= "true" path="/users" element={<AllUsers/>}/>
+        <Route exact= "true" path="/" element={<HomePage/>}/>
     
       </Routes>
     </div>
