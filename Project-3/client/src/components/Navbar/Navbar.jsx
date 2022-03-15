@@ -1,4 +1,4 @@
-import React, { useEffect, useContext,useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import { AuthContext } from "../../context/auth.context";
@@ -27,6 +27,8 @@ useEffect(() => {
 
 
 
+  let [navbar, setNavbar] = useState("")
+
   const popBtn = document.getElementById("popUp");
 
 
@@ -36,7 +38,7 @@ useEffect(() => {
   }
 
     return (
-        <div className='navbar flex-row flex-center'>      
+        <div className='navbar flex-row flex-evenly '>      
             <div className='dropup'>
                 <img src="../../../plus.png" alt="home" className='drop-btn nav-icon' onClick={popUp}/>
                 <div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import YoutubeEmbed from "../components/Youtube/youtube";
 
@@ -39,6 +39,10 @@ function ProfileDetailPage(props) {
         <h1>THIS USER DOES NOT EXISTS</h1>
       ) : (
         <div>
+          <div className="flex-center">
+            <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
+            <Link exact= "true" to="/main"> Go back</Link>
+          </div>
           <img width={50} src={user.image} alt="Your avatar goes here" />
           <p>{user.username}</p>
           <p>{user.email}</p>
@@ -64,6 +68,7 @@ function ProfileDetailPage(props) {
         </div>
       )}
       <Navbar />
+      
     </div>
   );
 }

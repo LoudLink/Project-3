@@ -1,11 +1,13 @@
 .eventCard{
     display: flex;
-    width: 150px;
-    border:2px solid green;
+    width: fit-content;
+    border:2px solid rgb(0, 0, 0);
     border-radius:15px;
     margin-bottom: 2rem;
     align-items: center;
     justify-content: center;
+    margin: 7px;
+    background-color: white;
 }
 .eventCard img{
     width: 100px;
@@ -20,4 +22,9 @@
 .card p{
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+.eventCard:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 5px 5px rgb(121, 121, 121);
 }

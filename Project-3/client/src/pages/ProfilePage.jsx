@@ -13,10 +13,11 @@ import Spinner from "../components/Spinner/Spinner";
 function ProfilePage(props) {
 
   const [video, setVideo] = useState({});
-  const {isLoading} = useContext(AuthContext)
+  let {isLoading} = useContext(AuthContext)
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
+    
     image: "",
     username: "",
     description: "",
@@ -25,7 +26,7 @@ function ProfilePage(props) {
     videos: [],
     ownAnnouncements: [],
     announcements: [],
-    ownEvents: [],
+    ownEvents: []
   });
 
   
@@ -53,9 +54,9 @@ function ProfilePage(props) {
     getUser();
   }, []);
 
-  if (isLoading) return <Spinner />;
+  
 
-  // console.log(isLoading)
+  
 
     function removeToken() {
         localStorage.removeItem("authToken")
@@ -112,18 +113,18 @@ function ProfilePage(props) {
           })
     }
 
-    return (
+    return (user._id ?
 
         <div>
             
             <div>
-               <img width={50} src={user.image} alt="Your avatar goes here" /> 
+               <img className="profilePic" src={user.image} alt="Your avatar goes here" /> 
                <p>{user.username}</p>
                <p>{user.email}</p>
                <p>{user.description}</p>
-               <div className="flex-row gap">
+               <div className="flex-row center gap">
                 {user.tags.map((tag) => 
-                  (<p key={tag} className="tags">&nbsp; {tag} &nbsp;</p>)
+                  (<p key={tag} className="tags">&nbsp; #{tag} &nbsp;</p>)
                 )}
                </div>
                <p>{user.location}</p>
@@ -164,9 +165,10 @@ function ProfilePage(props) {
                <button onClick={deleteUser}>Delete Account</button>
              
             </div>
-            <Navbar />
+            <Navbar />  
         </div>
-
+      :
+      <Spinner />
     );
 
 }
