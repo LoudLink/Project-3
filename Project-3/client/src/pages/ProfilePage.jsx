@@ -147,7 +147,11 @@ function ProfilePage(props) {
           </p>
         )}
         <h3>Announcements</h3>
-        {user.announcements}
+        {user.announcements.map((anno)=>
+          <div className="anuncio">
+              <p>{anno.title}</p>
+            </div>
+          )}
         <h3>Your announcements</h3>
         <div className="anuncio-row">
           {user.ownAnnouncements.map((anno) => (
