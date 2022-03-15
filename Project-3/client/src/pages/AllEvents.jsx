@@ -38,9 +38,8 @@ function AllEvents(props) {
             <h1>Check all the events</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Link to='/events/create-event'><button>Create Event</button></Link>
             <Navbar />
-            <div>
+            <div className='flex-center-justify'>
                 {eventsFiltered.map((event)=>(
                     <EventCard key={event._id} event={event} />
                 ))}
