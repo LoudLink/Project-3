@@ -32,6 +32,7 @@ function EventEditPage(props) {
 
   function handleFormSubmission(e) {
     e.preventDefault();
+
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`, event)
       .then((response) => {
@@ -52,8 +53,28 @@ function EventEditPage(props) {
 
   function handleInputChange(e) {
     e.preventDefault();
-    const {name, value} = e.target;
-    setEvent((Event) => ({ ...Event, [name]: value }));
+    const { name, value } = e.target;
+    setEvent((event) => ({ ...event, [name]: value }));
+  }
+
+  function handleImgUpload(e) {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadImgForm = new FormData();
+
+    uploadImgForm.append("image", e.target.files[0]);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URL}/api/events/${id}/img-upload`,
+        uploadImgForm
+      )
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setEvent((oldEvent) => ({ ...oldEvent, image: response.data.fileUrl }));
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   }
 
   return (
@@ -64,7 +85,7 @@ function EventEditPage(props) {
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact= "true" to={`/events/${id}`}>
+        <Link exact="true" to={`/events/${id}`}>
           Go back
         </Link>
       </div>
@@ -90,6 +111,15 @@ function EventEditPage(props) {
           required
           minLength="8"
         />
+
+        <label>Image:</label>
+        {event.image ? (
+          <img src={event.image} alt="eventpic" />
+        ) : (
+          <p>No image yet</p>
+        )}
+        <input type="file" name="image" onChange={handleImgUpload}></input>
+
 
         <label htmlFor="input-date">Date</label>
         <input

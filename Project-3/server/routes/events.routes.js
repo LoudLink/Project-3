@@ -4,6 +4,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Event = require("../models/Event.model");
 const User = require("../models/User.model");
+const fileUploader = require("../config/cloudinary.config");
 
 //---------------------------------------------------------------------------
 //--------------------------DISPLAY ALL EVENTS-------------------------------
@@ -65,7 +66,7 @@ router.get("/:eventId", (req, res) => {
 
 router.put("/:eventId", (req, res) => {
   const { eventId } = req.params;
-  console.log("KAKAKAKKAA",req.body)
+  
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
@@ -79,6 +80,21 @@ router.put("/:eventId", (req, res) => {
 
     .then((updatedEvent) => res.status(200).json(updatedEvent))
     .catch((error) => res.json(error));
+});
+
+//---------------------------------------------------------------------------
+//--------------------------UPLOAD IMAGE FOR EVENT----------------------------
+//---------------------------------------------------------------------------
+
+
+router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) => {
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  res.json({ fileUrl: req.file.path });
 });
 
 //---------------------------------------------------------------------------
