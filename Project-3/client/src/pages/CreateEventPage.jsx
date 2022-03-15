@@ -1,12 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Options } from "../utils/tags";
 import Navbar from "../components/Navbar/Navbar";
 
 function CreateEventPage(props) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [event, setEvent] = useState({
     title: "",
     description: "",
@@ -22,8 +24,8 @@ function CreateEventPage(props) {
   const {
     title,
     description,
-    image,
     date,
+    image,
     schedule,
     artists,
     location,
@@ -31,7 +33,7 @@ function CreateEventPage(props) {
     tags,
   } = event;
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  
   const { user } = useContext(AuthContext);
 
   function handleInputChange(e) {
@@ -61,6 +63,26 @@ function CreateEventPage(props) {
       .then((response) => {
         navigate("/events");
       });
+  }
+
+  function handleImgUpload(e) {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadImgForm = new FormData();
+
+    uploadImgForm.append("image", e.target.files[0]);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URL}/api/events/${id}/img-upload`,
+        uploadImgForm
+      )
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   }
 
   return (
@@ -98,6 +120,14 @@ function CreateEventPage(props) {
           required
           minLength="8"
         />
+
+        <label>Image:</label>
+        {event.image ? (
+          <img src={event.image} alt="eventpic" />
+        ) : (
+          <p>No image yet</p>
+        )}
+        <input type="file" name="image" onChange={handleImgUpload}></input>
 
         <label htmlFor="input-date">Date</label>
         <input

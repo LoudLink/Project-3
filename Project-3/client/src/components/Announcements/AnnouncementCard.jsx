@@ -10,7 +10,7 @@ function AnnouncementCard(props) {
         <div className='announcementCard'>
             <div className='card'>
                 <h2>{capitalize(props.announcement.title)}</h2>
-                <img src={props.announcement.image} alt='announcement-pic'></img>
+                <img src={props.announcement.image} alt='announcement-pic' className='miAnuncio'></img>
                 <p>{props.announcement.description}</p>
                 <p>{props.announcement.owner[0]}</p>
                 <Link exact= "true" to={`/announcements/${props.announcement._id}`}>Read More</Link>

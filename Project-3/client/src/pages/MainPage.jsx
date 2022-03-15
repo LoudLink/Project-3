@@ -16,8 +16,8 @@ function MainPage(props) {
   return (
     <div className="flex-column background">
       <ScrollUpBtn />
-      <Link to="/users">
-        <button>All profiles</button>
+      <Link to="/users" className="userrall">
+        <button>all profiles</button>
       </Link>
       <div className="dividersMain flex-row">
         <Users />

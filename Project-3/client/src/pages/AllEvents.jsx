@@ -33,14 +33,13 @@ function AllEvents(props) {
         <div className='margin-top'>
             <div className="flex-center">
                 <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-                <Link exact= "true" to="/main"> Go back</Link>
+                <Link exact= "true" to="/main" className='goback'> Go back</Link>
             </div>
             <h1>Check all the events</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Link to='/events/create-event'><button>Create Event</button></Link>
             <Navbar />
-            <div>
+            <div className='flex-center-justify'>
                 {eventsFiltered.map((event)=>(
                     <EventCard key={event._id} event={event} />
                 ))}

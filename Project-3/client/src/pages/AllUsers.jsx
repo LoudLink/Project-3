@@ -31,13 +31,13 @@ function AllProfiles(props) {
         <div>
             <div className="flex-center">
                 <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-                <Link exact= "true" to="/main"> Go back</Link>
+                <Link exact= "true" to="/main" className='goback'> Go back</Link>
             </div>
                 <h1>Check all the profiles</h1>
                 <ScrollUpBtn />
                 <Searchbar filter={search}/>
                 <Navbar />
-            <div>
+            <div className='flex-center-justify'>
                 {filteredUsers.map((user)=>(
                     <UserCard key={user._id} profile={user}/>
                 ))}

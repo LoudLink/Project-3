@@ -1,15 +1,17 @@
 .banner {
     display: flex;
     justify-content: center;
-    z-index: 1000;
+   
+    position: fixed;
     background-color: rgb(182, 3, 3);
     width: 100%;
     height: 93.2px;
+    
   }
   
   .banner h1 {
     border: 4px solid black;
     width: 200px;
-    position: fixed;
-    z-index: 99;
+    position: sticky;
+    top:0;
   }
