@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import EventCard from '../components/Events/EventCard'
 import { Link } from 'react-router-dom';
 import Events from '../components/Events/Events'
@@ -7,10 +7,13 @@ import Navbar from '../components/Navbar/Navbar';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import Searchbar from '../components/Searchbar/Searchbar';
 import UserCard from '../components/UserCard/UserCard';
+import { AuthContext } from '../context/auth.context';
 
 function AllEvents(props) {
     const[events,setEvents]=useState([])
     const[eventsFiltered,setFilteredEvents]=useState([])
+    const{user}=useContext(AuthContext)
+    
 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
@@ -42,6 +45,7 @@ function AllEvents(props) {
 
 
     return (
+        
         <div className='margin-top'>
             <div className="flex-center">
                 <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
@@ -50,8 +54,8 @@ function AllEvents(props) {
             <h1>Check all the events</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} searchTags={searchTags} />
-            
-            user_id ?(<Navbar />):(<p></p>)
+
+            {user === null ?(<p></p>):(<Navbar />)}
             
             <div className='flex-center-justify'>
                 {eventsFiltered.map((event)=>(
