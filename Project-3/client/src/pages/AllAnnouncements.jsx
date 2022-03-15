@@ -27,6 +27,17 @@ function AllAnnouncements(props) {
         setFilteredAnnouncements(newList)
     }
 
+    function searchTags(tagsArr){
+        if(tagsArr.length){
+            const newList = announcements.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
+
+        console.log("newList: ", newList)
+        setFilteredAnnouncements(newList)}
+        else {
+            setFilteredAnnouncements(announcements)
+        }
+    }
+
     return (
         <div className='margin-top'>
             <div className="flex-center">
@@ -35,7 +46,7 @@ function AllAnnouncements(props) {
             </div>
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
-            <Searchbar filter={search} />
+            <Searchbar  filter={search} searchTags={searchTags} />
             <Navbar />
             <div className='flex-center-justify'>
                 {announcementsFiltered.map((announcement)=>(

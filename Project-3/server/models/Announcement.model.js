@@ -7,6 +7,7 @@ const AnnouncementSchema = new Schema({
   description: { type: String, maxlength: 400 },
   owner: [{ type: Schema.Types.ObjectId, ref: "User" }],
   participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  accepted: [{ type: Schema.Types.ObjectId, ref: "User" }],
   announcementDate: { type: Date },
   expirationDate: { type: Date },
   active: { type: Boolean },
