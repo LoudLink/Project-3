@@ -12,7 +12,7 @@ function EventCard(props) {
         <div className='eventCard'>
             <div className='card'>
                 <h2>{capitalize(props.event.title)}</h2>
-                <img src={props.event.image} alt='event-pic'></img>
+                <img src={props.event.image} alt='event-pic' className='miAnuncio'></img>
                 <p>{props.event.description}</p>
                 <p>{props.event.owner[0]}</p>
                 <Link exact= "true" to={`/events/${props.event._id}`}>Read More</Link>
