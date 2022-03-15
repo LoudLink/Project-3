@@ -79,6 +79,7 @@ function ProfilePage(props) {
         
       }
 
+
   function deleteUser() {
     const storedToken = localStorage.getItem("authToken");
 

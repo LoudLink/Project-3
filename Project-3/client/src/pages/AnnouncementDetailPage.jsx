@@ -102,6 +102,13 @@ function AnnouncementDetailPage(props){
             <p>{artist.username}</p>
           ))}
         </p>
+          
+          <p>
+          <Link exact={true} to={`/announcements/${id}/edit`}>
+          <button>Edit announcement</button>
+          </Link>
+          </p>
+        
 
 
 
