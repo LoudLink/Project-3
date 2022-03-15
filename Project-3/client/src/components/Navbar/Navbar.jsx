@@ -1,3 +1,4 @@
+
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
@@ -46,16 +47,17 @@ useEffect(() => {
                       <Link exact= "true" to="/announcements/create-announcement">Create a new announcement</Link>
                       <Link exact= "true" to="/events/create-event">Create a new event</Link>
                   </div>*/}
+
                 </div>
             </div>    
             
             <Link exact= "true" to="/main"><img src="../../../home-icon.png" alt="home" className='nav-icon'/> </Link>
 
+
             <Link exact= "true" to="/profile"><img src={image} alt="profile" className='nav-icon'/></Link>
 
         </div>
     );
-
 }
 
 export default Navbar;
