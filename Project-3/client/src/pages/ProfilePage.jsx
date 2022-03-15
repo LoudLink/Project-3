@@ -75,14 +75,10 @@ function ProfilePage(props) {
 
       
         removeToken()
-   
         navigate("/")
         
       }
 
-
-
-  
 
   function deleteUser() {
     const storedToken = localStorage.getItem("authToken");
@@ -119,7 +115,7 @@ function ProfilePage(props) {
       .then((response) => {
         setUser(response.data);
       });
-  }
+    }
 
   return user._id ? (
     <div>

@@ -18,10 +18,17 @@ function Users(props) {
   return (
     <div>
       {events.length ? (
-        events.map((event) => (
-          <div>
-            <EventCard key={event._id} event={event} />
-          </div>
+        events.map((event,indx) => (
+          indx<=4 ?
+          (<div key={event._id}>
+              <EventCard event={event} />
+          </div>)
+          : indx === events.length-1 ?
+             (<div>
+                <Link to='/events'><img src="../../../flecha-correcta.png" alt='flecha rota'></img></Link>
+             </div>)
+             :
+             (<p></p>)
         ))
       ) : (
         <div id="noMoreContent">

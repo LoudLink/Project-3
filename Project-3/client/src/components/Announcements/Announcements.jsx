@@ -19,12 +19,19 @@ function Announcements() {
   return (
     <div>
       {announcements.length ? (
-        announcements.map((announcement) => (
-          <div key={announcement._id}>
-            <AnnouncementCard
-              announcement={announcement}
-            />
-          </div>
+        announcements.map((announcement,indx) => (
+          indx<=4 ?
+          (<div key={announcement._id}>
+              <AnnouncementCard announcement={announcement} />
+          </div>)
+          : indx === announcements.length-1 ?
+             (<div>
+                <Link to='/announcements'><img src="../../../flecha-correcta.png" alt='flecha rota'></img></Link>
+             </div>)
+             :
+             (<p></p>)
+          
+          
         ))
       ) : (
         <div id="noMoreContent">
