@@ -27,6 +27,34 @@ function AllAnnouncements(props) {
         setFilteredAnnouncements(newList)
     }
 
+    function searchTags(tagsArr){
+        
+/*         console.log(arr)
+        const newList=arr.map((tag)=>{
+            return announcements.filter((anno)=>{
+                return anno.title.toLowerCase() === tag.toLowerCase()})
+        })
+
+         */
+        if(tagsArr.length){
+            const newList = announcements.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
+
+        console.log("newList: ", newList)
+        setFilteredAnnouncements(newList)}
+        else {
+            setFilteredAnnouncements(announcements)
+        }
+
+        /*for(let i=0;i<arr.length;i++){
+            const newList=announcements.slice().filter((anno)=>{
+                return anno.title.slice().toLowerCase()===arr[i].slice().toLowerCase()
+            })
+            final.push(newList)
+            setFilteredAnnouncements(final)
+            console.log(final)
+        }*/
+    }
+
     return (
         <div className='margin-top'>
             <div className="flex-center">
@@ -35,7 +63,7 @@ function AllAnnouncements(props) {
             </div>
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
-            <Searchbar filter={search} />
+            <Searchbar  filter={search} searchTags={searchTags} />
             <Navbar />
             <div className='flex-center-justify'>
                 {announcementsFiltered.map((announcement)=>(
