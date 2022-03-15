@@ -134,6 +134,7 @@ function CreateEventPage(props) {
           id="input-date"
           type="date"
           name="date"
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
