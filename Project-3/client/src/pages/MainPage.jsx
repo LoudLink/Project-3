@@ -16,7 +16,7 @@ function MainPage(props) {
   return (
     <div className="mainPage flex-column margin-top">
       <ScrollUpBtn />
-      <Link to="/users">
+      <Link to="/users" className="userrall">
         <button>all profiles</button>
       </Link>
       <div className="dividersMain flex-row">

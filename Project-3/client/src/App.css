@@ -99,6 +99,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.userrall{
+  margin-top: 7rem;
+}
 
 .flex-center {
   display: flex;
@@ -131,7 +134,7 @@ a:hover {
 .dividersMain {
   height: auto;
   overflow-x: hidden;
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
 .dividersMain>div::-webkit-scrollbar {
