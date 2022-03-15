@@ -11,6 +11,7 @@ const User = require("../models/User.model");
 
 router.get("/", (req, res) => {
   Announcement.find()
+  .populate("owner")
     .then((announcement) => res.json(announcement))
     .catch((error) => res.json(error));
 });

@@ -32,6 +32,9 @@ function EventDetailPage(props) {
   console.log(event);
 
   return (
+
+    event._id ?
+
     <div>
     {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
     <div>
@@ -43,7 +46,9 @@ function EventDetailPage(props) {
             />
             {isLoggedIn ? <Link exact= "true" to="/main">
               Go back
-            </Link> : <Link exact= "true" to="/">
+            </Link> 
+            : 
+            <Link exact= "true" to="/">
               Go back
             </Link> }
             
@@ -58,7 +63,7 @@ function EventDetailPage(props) {
 
       <p>Time: {event.schedule}</p>
       <p>At: {event.location}</p>
-      <p>How much: {event.price}</p>
+      <p>How much: {event.price}€</p>
       <div>
 
           <Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>
@@ -69,6 +74,10 @@ function EventDetailPage(props) {
      }
     {isLoggedIn && <Navbar />  }
     </div>
+
+    :
+
+    <Spinner />
   );
 }
 

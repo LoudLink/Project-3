@@ -82,6 +82,7 @@ function ProfilePage(props) {
         */
       
         removeToken()
+        setUser(null)
         navigate("/")
         
       }
@@ -113,7 +114,9 @@ function ProfilePage(props) {
           })
     }
 
-    return (user._id ?
+    return (
+      
+      user._id ?
 
         <div>
             

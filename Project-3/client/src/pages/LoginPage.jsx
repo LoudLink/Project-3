@@ -19,7 +19,7 @@ export default function LogIn({ authenticate }) {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, isLoggedIn } = useContext(AuthContext);
 
   const handleUsername = (e) => setUsername(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -45,6 +45,8 @@ export default function LogIn({ authenticate }) {
   };
   
   return (
+
+    
     <div className="margin-top ">
 
       <div className="flex-center">
@@ -69,7 +71,11 @@ export default function LogIn({ authenticate }) {
       <p>Don't have an account yet?</p>
 
       <Link to={"/signup"}> Sign Up</Link>
+    
     </div>
+
+    
   )
+
 }
 

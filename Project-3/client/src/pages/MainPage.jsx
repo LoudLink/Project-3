@@ -10,14 +10,14 @@ import Spinner from "../components/Spinner/Spinner";
 
 function MainPage(props) {
 
-  const { isLoading } = useContext(AuthContext);
-  if (isLoading) return <Spinner />;
+  
 
   return (
+
     <div className="flex-column background">
       <ScrollUpBtn />
       <Link to="/users" className="userrall">
-        <button>all profiles</button>
+        <button>All profiles</button>
       </Link>
       <div className="dividersMain flex-row">
         <Users />

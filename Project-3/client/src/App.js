@@ -71,7 +71,7 @@ export default function App() {
 
   }*/
 
-  const { isLoading } = useContext(AuthContext);
+  const { isLoading, isLoggedIn } = useContext(AuthContext);
 
   
     
@@ -92,7 +92,7 @@ export default function App() {
         <Route exact= "true" path="/users/:id" element={<IsPrivate> <ProfileDetailPage/> </IsPrivate>}/>
         <Route exact= "true" path="/profile" element={<IsPrivate> <ProfilePage/> </IsPrivate>}/>
         <Route exact= "true" path="/signup" element={<Signup/>}/>
-        <Route exact= "true" path="/login" element={<LogIn/>}/>
+        <Route exact= "true" path="/login" element={<IsPrivate /> ? <LogIn/> : <MainPage /> }/>
         <Route exact= "true" path="/main" element={<IsPrivate> <MainPage/> </IsPrivate>}/>
         <Route exact= "true" path="/events" element={<AllEvents/>}/>
         <Route exact= "true" path="/announcements" element={<AllAnnouncements/>}/>

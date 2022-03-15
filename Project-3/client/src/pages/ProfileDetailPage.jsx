@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import Spinner from "../components/Spinner/Spinner";
 import YoutubeEmbed from "../components/Youtube/youtube";
 
 function ProfileDetailPage(props) {
@@ -34,6 +35,9 @@ function ProfileDetailPage(props) {
   }, []);
 
   return (
+
+    user._id ?
+
     <div>
       {!user ? (
         <h1>THIS USER DOES NOT EXISTS</h1>
@@ -70,6 +74,8 @@ function ProfileDetailPage(props) {
       <Navbar />
       
     </div>
+    :
+    <Spinner />
   );
 }
 

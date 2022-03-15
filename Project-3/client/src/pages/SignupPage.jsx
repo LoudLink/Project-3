@@ -62,6 +62,7 @@ export default function Signup({ authenticate }) {
   }
 
   return (
+    
     <div className="margin-top">
     <div className="flex-center">
       <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>

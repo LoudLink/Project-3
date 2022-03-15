@@ -4,18 +4,25 @@ import { Link } from 'react-router-dom';
 
 function AnnouncementCard(props) {
     function capitalize(str){
+
         return str[0].toUpperCase()+str.slice(1)
+
     }
+
+    console.log(props.announcement.owner[0])
+
     return (
         <div className='announcementCard'>
-            <div className='card'>
-                <h2>{capitalize(props.announcement.title)}</h2>
+        <Link exact= "true" to={`/announcements/${props.announcement._id}`}>
+            <div>
                 <img src={props.announcement.image} alt='announcement-pic' className='miAnuncio'></img>
-                <p>{props.announcement.description}</p>
-                <p>{props.announcement.owner[0]}</p>
-                <Link exact= "true" to={`/announcements/${props.announcement._id}`}>Read More</Link>
-                
             </div>
+            <div>
+                <h2>&nbsp;{capitalize(props.announcement.title)}&nbsp;</h2>
+                <p>{props.announcement.location}&nbsp;<b>Created by:</b> {capitalize(props.announcement.owner[0].username)}</p>
+            </div>    
+                </Link>
+            
         </div>
     );
 }
