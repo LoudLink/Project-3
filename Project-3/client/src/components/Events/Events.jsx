@@ -26,7 +26,7 @@ function Users(props) {
       ) : (
         <div id="noMoreContent">
           <p>There are no events to show!</p>
-          <Link exact to="/events/create-event">
+          <Link exact= "true" to="/events/create-event">
             Create a new event
           </Link>
           {/* <img src="../../images/" alt="pic" width="400" height="240" /> */}

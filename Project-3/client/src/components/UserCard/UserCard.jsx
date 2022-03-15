@@ -12,10 +12,7 @@ function UserCard(props) {
         <div className='UserCard'>
             <div className='card'>
                 <h2>{capitalize(props.profile.username)}</h2>
-                <img src={props.profile.image} alt='profile-pic'></img>
-                <ul className='flex '>
-                    {props.profile.tags.map((tag)=><li key={tag}>{tag}</li>)}
-                </ul>
+                <img src={props.profile.image} alt='profile-pic' className='miAnuncio'></img>
                 <Link exact= "true" to={`/users/${props.profile._id}`}>Read More</Link>
             </div>
         </div>

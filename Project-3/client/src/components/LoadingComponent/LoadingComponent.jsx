@@ -3,14 +3,14 @@ import { AuthContext } from "../../context/auth.context";
 import { Navigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 
-function IsPrivate( { children } ) {
+function LoadingComponent( { children } ) {
   
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
+  const { isLoading } = useContext(AuthContext);
 
   // If the authentication is still loading 
   if (isLoading) return <Spinner />;
 
-  if (!isLoggedIn) {
+  if (!isLoading) {
   // If the user is not logged in 
     return <Navigate to="/login" />;
   } else {
@@ -19,4 +19,4 @@ function IsPrivate( { children } ) {
   }
 }
 
-export default IsPrivate;
+export default LoadingComponent;

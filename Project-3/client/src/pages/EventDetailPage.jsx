@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import Spinner from "../components/Spinner/Spinner";
 
 
 function EventDetailPage(props) {
@@ -16,12 +17,17 @@ function EventDetailPage(props) {
     image: undefined,
   });
 
+  
+
   useEffect(() => {
+    if (isLoading) return <Spinner />;
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`)
       .then((response) => setEvent(response.data))
       .catch(setEvent(false));
   }, []);
+
+  
 
   console.log(event);
 
@@ -61,7 +67,7 @@ function EventDetailPage(props) {
 
     </div>
      }
-    <Navbar />
+    {isLoggedIn && <Navbar />  }
     </div>
   );
 }
