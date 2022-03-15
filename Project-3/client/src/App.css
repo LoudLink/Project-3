@@ -156,10 +156,13 @@ a:hover {
   height: auto;
   overflow-x: hidden;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
+
 .miAnuncio{
   margin-top: 1rem;
 }
+
 .anuncio{
   border: 1px solid black;
   width: fit-content;
@@ -203,11 +206,6 @@ a:hover {
 .center {
   display: flex;
   justify-content: center;
-}
-
-.profilePic {
-  margin-top: 20px;
-  height: 200px;
 }
 
 input {
