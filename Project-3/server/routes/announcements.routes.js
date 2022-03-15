@@ -60,8 +60,12 @@ router.get("/:announcementId", (req, res) => {
     return;
   }
 
-  Announcement.findById(announcementId).then((announcement) =>
-    res.status(200).json(announcement)
+  Announcement.findById(announcementId)
+  .populate("participants")
+  .populate("accepted")
+  .then((announcement) =>{
+    //console.log("HERE COMES THE POP",announcement.participants[0])
+    res.status(200).json(announcement)}
   );
 });
 
@@ -134,7 +138,9 @@ router.post("/:id/apply/:an", (req, res) => {
 
       if (flag === false) {
         User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
-          Announcement.findByIdAndUpdate(an, {$push: { participants: [id] }}, {new:true})
+          Announcement.findByIdAndUpdate(an, {$push: { participants: id }}, {new:true})
+            .populate("participants")
+            .populate("accepted")
             .then((response)=>{res.json(response)})
         );
       } else {
@@ -154,6 +160,8 @@ router.put("/:an/confirm/:art", (req, res) =>{
   Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})
   .then(
     Announcement.findByIdAndUpdate(announcement, {$push: {accepted: [artist]}}, {new :true})
+    .populate("participants")
+    .populate("accepted")
     .then((response)=>{res.json(response)})
   )
 })
