@@ -138,7 +138,7 @@ router.post("/:id/apply/:an", (req, res) => {
 
     } else {
       user.announcements.map((ano) => {
-        if (ano.toString() === an) flag = false;
+        if (ano.toString() === an) flag = true;
       });
 
       if (flag === false) {
