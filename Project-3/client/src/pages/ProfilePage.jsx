@@ -139,15 +139,24 @@ function ProfilePage(props) {
                <h3>Announcements</h3>
                {user.announcements}
                <h3>Your announcements</h3>
+               <div className="anuncio-row">
                {user.ownAnnouncements.map((anno)=>(
-                 <div>
+                 <div className="anuncio">
                     <p>{anno.title}</p>
-                    <img src={anno.image} alt='photo_event'></img>
+                    <img src={anno.image} alt='photo_event' className="miAnuncio"></img>
                  </div>
                  )
                  )}
+                 </div>
                <h3>Events</h3>
-               {user.ownEvents.map((e)=>(<p>{e.title}</p>))}
+               <div className="anuncio-row">
+               {user.ownEvents.map((e)=>(
+                 <div className="anuncio">
+                    <p>{e.title}</p>
+                    <img src={e.image} alt='foto-event' className="miAnuncio"></img>
+                 </div>
+                 ))}
+                 </div>
                <div>
                 <Link to={`/profile/${user._id}/edit`} className='editprof'><button>Edit profile</button></Link>
               </div>
