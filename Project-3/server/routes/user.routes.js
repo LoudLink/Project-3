@@ -34,9 +34,7 @@ router.get("/:userId", (req, res) => {
 
   User.findById(userId)
 
-    .populate("ownAnnouncements")
-    .populate('ownEvents')
-
+    .populate('ownAnnouncements ownEvents announcements')    
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
 });

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
@@ -12,17 +11,17 @@ function Navbar(props) {
 
 
 useEffect(() => { 
-  axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user?._id}`)
+  axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`)
   .then((response) => {
     userImg(response.data.image)
-    console.log("RESPONSE!!!",response)
+    //console.log("RESPONSE!!!",response)
     // setUsers(response.data.filter((user) => user._id === currentUser._id));
-    console.log("THE CURRENT USER IN THE DB", users)
-    console.log("THE IMAGE OF THE CURRENT USER IN THE DB", users?.image)
+    //console.log("THE CURRENT USER IN THE DB", users)
+    //console.log("THE IMAGE OF THE CURRENT USER IN THE DB", users.image)
 
   })
   .catch((err) => console.log("CAGADAAAAAAAA", err));
-},[user?._id, userImg, users] );
+},[user._id, userImg, users] );
 
 
 
