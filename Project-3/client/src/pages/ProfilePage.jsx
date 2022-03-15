@@ -73,14 +73,6 @@ function ProfilePage(props) {
         });
         */
 
-      
-        removeToken()
-   
-        navigate("/")
-        
-      }
-
-
     removeToken();
     navigate("/");
   }
@@ -96,7 +88,6 @@ function ProfilePage(props) {
         //console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
         axios
           .delete(
-
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,
             { headers: { Authorization: `Bearer ${storedToken}` } }
           )
@@ -109,7 +100,6 @@ function ProfilePage(props) {
       })
       .catch((error) => console.log("Error while deleting user: ", error));
   }
-
 
   function deleteVideo(vid) {
     const deletedvid = vid.target.value;

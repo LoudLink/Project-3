@@ -23,6 +23,7 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import { useContext } from "react";
 import { AuthContext } from "./context/auth.context";
 import Spinner from "./components/Spinner/Spinner";
+import mapboxgl from '!mapbox-gl'
 
 export default function App() {
 /*
