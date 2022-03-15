@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 import ErrorPage from "./pages/ErrorPage"
 import AnnouncementDetailPage from "./pages/AnnouncementDetailPage"
+import EditAnnouncementPage from "./pages/EditAnnouncementPage"
 import EditEventPage from "./pages/EditEventPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import EditProfilePage from './pages/EditProfilePage'
@@ -97,6 +98,7 @@ export default function App() {
         <Route exact= "true" path="/events" element={<AllEvents/>}/>
         <Route exact= "true" path="/announcements" element={<AllAnnouncements/>}/>
         <Route exact= "true" path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
+        <Route exact= "true" path="/announcements/:id/edit" element={<EditAnnouncementPage/>}/>
         <Route exact= "true" path="/users" element={<IsPrivate> <AllUsers/> </IsPrivate>}/>
         <Route exact= "true" path="/" element={<HomePage/>}/>
 

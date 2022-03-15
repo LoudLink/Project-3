@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-//import { populate } from "../../../server/models/Event.model";
 import { useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
@@ -14,6 +13,12 @@ function AnnouncementDetailPage(props){
     const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
+
+
+
+
+
+
 
     const [announcement, setEvent] = useState({
         title: "",
@@ -32,9 +37,7 @@ function AnnouncementDetailPage(props){
 
       function apply(){        
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
-        .then((res) => {
-          setEvent(res.data)
-        })
+        .then((res) => setEvent(res.data))
       }
 
       function acceptParticipant(participant){
@@ -88,17 +91,24 @@ function AnnouncementDetailPage(props){
 
         <p>
         {announcement.participants.map((participant)=>(
-          <p>{participant} Pending for approval 
-          <button onClick={acceptParticipant} value={participant}>Confirm</button>
+          <p>Pending for approval  <br></br>{participant.username} 
+          <button onClick={acceptParticipant} value={participant._id}>Confirm</button>
           </p>
         ))}
         </p>
 
         <p>CONFIRMED ARTISTS:
           {announcement.accepted.map((artist)=>(
-            <p>{artist}</p>
+            <p>{artist.username}</p>
           ))}
         </p>
+          
+          <p>
+          <Link exact={true} to={`/announcements/${id}/edit`}>
+          <button>Edit announcement</button>
+          </Link>
+          </p>
+        
 
 
 
