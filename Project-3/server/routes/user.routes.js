@@ -118,6 +118,8 @@ router.delete("/:userId", (req, res) => {
  
 })
 
+///////////DELETE VIDEO/////////////
+
 router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
 
   let userId = req.params.userId
