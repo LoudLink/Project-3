@@ -11,7 +11,7 @@ function Users(props) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users`)
       .then((response) => {
-        setUsers(response.data.filter((user) => user._id !== currentUser._id));
+        setUsers(response.data.filter((user) => user._id !== currentUser?._id));
       })
       .catch((err) => console.log("CAGADAAAAAAAA", err));
   }, [currentUser?._id]);
@@ -19,8 +19,11 @@ function Users(props) {
   return (
     <div>
       {users.map((user) => (
-        <UserCard key={user._id} profile={user} />
-      ))}
+        <div key={user._id}>
+          <UserCard profile={user} />
+        </div>
+      ))
+      }
     </div>
   );
 }

@@ -118,9 +118,15 @@ router.post("/:id/apply/:an", (req, res) => {
 
   User.findById(id).then((user) => {
     if (user.announcements.length === 0) {
-      User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
+      User.findByIdAndUpdate(id, { $push: { announcements: an }}).then(
         res.status(200).json({ message: "applied successfully" })
       );
+
+      Announcement.findByIdAndUpdate(an, {
+        $push: { participants: id },
+      }).then(console.log("SOMETHING"));
+
+
     } else {
       user.announcements.map((ano) => {
         if (ano.toString() === an) flag = true;
@@ -128,17 +134,30 @@ router.post("/:id/apply/:an", (req, res) => {
 
       if (flag === false) {
         User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
-          res.status(200).json({ message: "applied successfully" })
+          Announcement.findByIdAndUpdate(an, {$push: { participants: [id] }}, {new:true})
+            .then((response)=>{res.json(response)})
         );
-
-        Announcement.findByIdAndUpdate(an, {
-          $push: { participants: id },
-        }).then(console.log("SOMETHING"));
       } else {
         console.log("you've alredy applied");
       }
     }
   });
 });
+
+//---------------------------------------------------------------------------
+//--------------------------ACCEPTING PARTICIPANTS---------------------------
+//---------------------------------------------------------------------------
+
+router.put("/:an/confirm/:art", (req, res) =>{
+  let announcement = req.params.an
+  let artist = req.params.art
+  Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})
+  .then(
+    Announcement.findByIdAndUpdate(announcement, {$push: {accepted: [artist]}}, {new :true})
+    .then((response)=>{res.json(response)})
+  )
+})
+
+
 
 module.exports = router;

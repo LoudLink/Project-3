@@ -19,6 +19,7 @@ function AnnouncementDetailPage(props){
         title: "",
         description: "",
         participants: [],
+        accepted: []
     })
 
 
@@ -31,11 +32,23 @@ function AnnouncementDetailPage(props){
 
       function apply(){        
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
-        .then(() => {
-          navigate("/main")
+        .then((res) => {
+          setEvent(res.data)
         })
       }
-      console.log(announcement)
+
+      function acceptParticipant(participant){
+        const artist = participant.target.value
+        axios
+          .put(
+            `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
+          ).then((response)=>{
+            setEvent(response.data)
+          })
+      }
+
+
+
       return(
         <div>
         {!announcement  ? <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1> :
@@ -62,10 +75,34 @@ function AnnouncementDetailPage(props){
         <p>At: {announcement.location}</p>
         <p>Posted on: {new Date(announcement.announcementDate).toDateString()}</p>
         <p>Apply before: {new Date(announcement.expirationDate).toDateString()}</p>
-        <p>PARTICIPANTS: { announcement.participants.length === 0 ? <p>Nobody has apply to this announcement yet</p> : <p>Already {announcement.participants.length} apply to this announcement </p>}</p>
-          <button onClick={apply}>
-            Apply to this announcement 
-          </button>
+        <p>PENDING: 
+        { announcement.participants.length === 0 ? 
+        <p>Nobody has apply to this announcement yet</p> 
+        : <p>Already {announcement.participants.length} 
+        apply to this announcement </p>}
+        <button onClick={apply}>APPLY</button>
+        </p>
+
+
+
+
+        <p>
+        {announcement.participants.map((participant)=>(
+          <p>{participant} Pending for approval 
+          <button onClick={acceptParticipant} value={participant}>Confirm</button>
+          </p>
+        ))}
+        </p>
+
+        <p>CONFIRMED ARTISTS:
+          {announcement.accepted.map((artist)=>(
+            <p>{artist}</p>
+          ))}
+        </p>
+
+
+
+
       </div> 
       }
           <Navbar />

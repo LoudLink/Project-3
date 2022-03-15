@@ -2,6 +2,10 @@ body {
   margin-bottom: 80px;
 }
 
+.margin-top {
+  margin-top: 93.2px;
+}
+
 .App {
   text-align: center;
 }
@@ -47,13 +51,14 @@ body {
   display: flex;
   flex-direction: column;
   height: 350px;
-  background-color: aquamarine;
+  background-image: url("../public/front-page.png");
+  background-size: cover;
   position: sticky;
   overflow: hidden;
   transition: 0.4s;
-  top: -280px;
+  top: -255px;
   width: 100%;
-  z-index: 99;
+  z-index: 3;
 }
 
 .homePageLinks {
@@ -66,9 +71,20 @@ body {
   align-items: flex-end;
 }
 
+h2 {
+  margin: 0;
+}
+
 .homePageBottom {
-  height: 3000px;
-  background-color: yellowgreen;
+  background-color: #282c34;
+}
+
+.background {
+  background-color: #282c34;
+}
+
+.red-bg {
+  background-color: #074369;
 }
 
 /*REMEMBER TO REMOVE THE MARGIN TOP CLASS */
@@ -81,6 +97,10 @@ body {
   justify-content: center;
   gap: 2rem;
   padding-top:2rem;
+}
+
+.columns>div {
+
 }
 
 .goBackBtn {
@@ -120,8 +140,9 @@ a:hover {
   justify-content: center;
 }
 
-.flex-center {
+.flex-evenly {
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .flex-row>div{
@@ -135,6 +156,34 @@ a:hover {
   height: auto;
   overflow-x: hidden;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.miAnuncio{
+  margin-top: 1rem;
+}
+
+.anuncio{
+  border: 1px solid black;
+  width: fit-content;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+.anuncio p{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.anuncio-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:5px;
+}
+.flex-center-justify{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: unset;
+  margin-top: 1rem;
 }
 
 .dividersMain>div::-webkit-scrollbar {
@@ -152,4 +201,13 @@ a:hover {
 
 .gap {
   gap: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  margin: 10px 0;
 }

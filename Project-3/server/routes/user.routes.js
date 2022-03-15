@@ -55,12 +55,18 @@ router.put("/:userId", (req, res) => {
     return;
   }
 
-    const { username, description, tags, location, image, videos } = req.body
+    const { username, description, tags, location, videos, image } = req.body
 
     let usernameToLowerCase = username.toLowerCase();
 
+    console.log(req.file)
+
+
+
 
   User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
+
+
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
 });
@@ -72,11 +78,15 @@ router.put("/:userId", (req, res) => {
 
 
 router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) => {
+  // console.log("file is: ", req.file)
  
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;
   }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
   
   res.json({ fileUrl: req.file.path });
 });
@@ -108,6 +118,8 @@ router.delete("/:userId", (req, res) => {
   )
  
 })
+
+///////////DELETE VIDEO/////////////
 
 router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
 

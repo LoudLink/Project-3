@@ -36,13 +36,13 @@ function AllAnnouncements(props) {
             <h1>Check all the announcements</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} />
-            <Link exact= "true" to="/announcements/create-announcement"><button>Create an announcement</button></Link>
             <Navbar />
-            <div>
+            <div className='flex-center-justify'>
                 {announcementsFiltered.map((announcement)=>(
                     <AnnouncementCard key={announcement._id} announcement={announcement}/>
                 ))}
             </div>
+            <Link exact= "true" to="/announcements/create-announcement"><button>Create an announcement</button></Link>
             <Navbar />
         </div>
     );

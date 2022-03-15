@@ -20,9 +20,8 @@ function Announcements() {
     <div>
       {announcements.length ? (
         announcements.map((announcement) => (
-          <div>
+          <div key={announcement._id}>
             <AnnouncementCard
-              key={announcement._id}
               announcement={announcement}
             />
           </div>
@@ -30,7 +29,7 @@ function Announcements() {
       ) : (
         <div id="noMoreContent">
           <p>There are no announcements to show!</p>
-          <Link exact to="/announcements/create-announcement">Create a new announcement</Link>
+          <Link exact= "true" to="/announcements/create-announcement">Create a new announcement</Link>
           {/* <img src="../../images/" alt="pic" width="400" height="240" /> */}
         </div>
       )}
