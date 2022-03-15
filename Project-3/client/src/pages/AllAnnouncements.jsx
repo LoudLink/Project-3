@@ -28,14 +28,6 @@ function AllAnnouncements(props) {
     }
 
     function searchTags(tagsArr){
-        
-/*         console.log(arr)
-        const newList=arr.map((tag)=>{
-            return announcements.filter((anno)=>{
-                return anno.title.toLowerCase() === tag.toLowerCase()})
-        })
-
-         */
         if(tagsArr.length){
             const newList = announcements.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
 
@@ -44,15 +36,6 @@ function AllAnnouncements(props) {
         else {
             setFilteredAnnouncements(announcements)
         }
-
-        /*for(let i=0;i<arr.length;i++){
-            const newList=announcements.slice().filter((anno)=>{
-                return anno.title.slice().toLowerCase()===arr[i].slice().toLowerCase()
-            })
-            final.push(newList)
-            setFilteredAnnouncements(final)
-            console.log(final)
-        }*/
     }
 
     return (
