@@ -1,3 +1,4 @@
+/*
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'; 
 
@@ -25,3 +26,4 @@ export default function Mapbox(props){
     </div>
   )
 }
+*/

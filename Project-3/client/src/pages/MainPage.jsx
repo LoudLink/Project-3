@@ -37,7 +37,7 @@ function MainPage(props) {
       <div className="dividersMain flex-row">
         <Events />
       </div>
-      <Mapbox />
+      {/*<Mapbox />*/}
       <Navbar />
     </div>
   );

@@ -123,18 +123,22 @@ router.post("/:id/apply/:an", (req, res) => {
 
   User.findById(id).then((user) => {
     if (user.announcements.length === 0) {
-      User.findByIdAndUpdate(id, { $push: { announcements: an }}).then(
-        res.status(200).json({ message: "applied successfully" })
+      User.findByIdAndUpdate(id, { $push: { announcements: an }})
+      .then(
+        Announcement.findByIdAndUpdate(an, {
+          $push: { participants: id },
+        })
+        .populate("participants")
+        .populate("accepted")
+        .then((response)=>{res.json(response)})
       );
 
-      Announcement.findByIdAndUpdate(an, {
-        $push: { participants: id },
-      }).then(console.log("SOMETHING"));
+
 
 
     } else {
       user.announcements.map((ano) => {
-        if (ano.toString() === an) flag = true;
+        if (ano.toString() === an) flag = false;
       });
 
       if (flag === false) {
