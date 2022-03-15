@@ -37,10 +37,12 @@ function AllProfiles(props) {
                 <ScrollUpBtn />
                 <Searchbar filter={search}/>
                 <Navbar />
-            <div className='flex-center-justify'>
+            <div className='dividersMain flex-row'>
+            <div>
                 {filteredUsers.map((user)=>(
                     <UserCard key={user._id} profile={user}/>
                 ))}
+                </div>
             </div>
             <Navbar />
         </div>
