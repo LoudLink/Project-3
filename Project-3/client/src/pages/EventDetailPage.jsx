@@ -9,7 +9,7 @@ import Spinner from "../components/Spinner/Spinner";
 
 function EventDetailPage(props) {
   const { id } = useParams();
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
+  const { isLoggedIn, isLoading,user } = useContext(AuthContext);
 
   const [event, setEvent] = useState({
     title: "",
@@ -28,8 +28,9 @@ function EventDetailPage(props) {
   }, []);
 
   
+  console.log('EVENTTTT',event)
+  console.log('USERRRRRRR',user._id);
 
-  console.log(event);
 
   return (
 
@@ -66,7 +67,7 @@ function EventDetailPage(props) {
       <p>How much: {event.price}€</p>
       <div>
 
-          <Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>
+          {user._id=== event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
 
       </div>
 

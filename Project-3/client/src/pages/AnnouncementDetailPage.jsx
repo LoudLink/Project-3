@@ -15,29 +15,25 @@ function AnnouncementDetailPage(props){
     const navigate = useNavigate();
 
 
-
-
-
-
-
-    const [announcement, setEvent] = useState({
+    const [announcement, setAnnouncement] = useState({
         title: "",
         description: "",
         participants: [],
-        accepted: []
+        accepted: [],
+        owner:[]
     })
 
 
     useEffect(() => {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-          .then((response) => setEvent(response.data))
-          .catch(setEvent(false));
+          .then((response) => setAnnouncement(response.data))
+          .catch(setAnnouncement(false));
       }, [id]);
 
       function apply(){        
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
-        .then((res) => setEvent(res.data))
+        .then((res) => setAnnouncement(res.data))
       }
 
       function acceptParticipant(participant){
@@ -46,11 +42,9 @@ function AnnouncementDetailPage(props){
           .put(
             `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
           ).then((response)=>{
-            setEvent(response.data)
+            setAnnouncement(response.data)
           })
       }
-
-
 
       return(
         <div>
@@ -83,7 +77,7 @@ function AnnouncementDetailPage(props){
         <p>Nobody has apply to this announcement yet</p> 
         : <p>Already {announcement.participants.length} 
         apply to this announcement </p>}
-        <button onClick={apply}>APPLY</button>
+        {user._id === announcement.owner[0] ?(<p></p>):(<button onClick={apply}>APPLY</button>)}
         </p>
 
 
@@ -92,7 +86,7 @@ function AnnouncementDetailPage(props){
         <p>
         {announcement.participants.map((participant)=>(
           <p>Pending for approval  <br></br>{participant.username} 
-          <button onClick={acceptParticipant} value={participant._id}>Confirm</button>
+          {user._id===announcement.owner[0] ? (<button onClick={acceptParticipant} value={participant._id}>Confirm</button>):(<p></p>)}
           </p>
         ))}
         </p>
@@ -104,9 +98,7 @@ function AnnouncementDetailPage(props){
         </p>
           
           <p>
-          <Link exact={true} to={`/announcements/${id}/edit`}>
-          <button>Edit announcement</button>
-          </Link>
+          {user._id===announcement.owner[0] ?(<Link exact={true} to={`/announcements/${id}/edit`}><button>Edit announcement</button></Link>):(<p></p>)}
           </p>
         
 
