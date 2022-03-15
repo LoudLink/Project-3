@@ -22,10 +22,6 @@ function MainPage(props) {
       <div className="dividersMain flex-row">
         <Users />
       </div>
-
-      <Link to="/announcements">
-        <button>All adds</button>
-      </Link>
       <div className="dividersMain flex-row">
         <Announcements />
       </div>
