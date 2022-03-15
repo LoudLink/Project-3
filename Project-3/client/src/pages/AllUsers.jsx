@@ -26,6 +26,16 @@ function AllProfiles(props) {
         })
     setFilteredUsers(newList)
     }
+    function searchTags(tagsArr){
+        if(tagsArr.length){
+            const newList = users.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
+
+        console.log("newList: ", newList)
+        setFilteredUsers(newList)}
+        else {
+            setFilteredUsers(users)
+        }
+    }
 
     return (
         <div>
@@ -35,7 +45,7 @@ function AllProfiles(props) {
             </div>
                 <h1>Check all the profiles</h1>
                 <ScrollUpBtn />
-                <Searchbar filter={search}/>
+                <Searchbar filter={search} searchTags={searchTags}/>
                 <Navbar />
             <div className='dividersMain flex-row'>
             <div>
