@@ -101,6 +101,7 @@ function CreateAnnouncementPage(props) {
           type="date"
           name="announcementDate"
           value={announcementDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
@@ -112,6 +113,7 @@ function CreateAnnouncementPage(props) {
           type="date"
           name="expirationDate"
           value={expirationDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
