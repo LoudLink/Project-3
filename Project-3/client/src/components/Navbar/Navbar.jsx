@@ -40,6 +40,15 @@ useEffect(() => {
     return (
 
         <div className='navbar flex-row flex-evenly '>
+
+<div class="btn-group dropup">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropup
+  </button>
+  <ul class="dropdown-menu">
+    <p>PABLOOOOOO</p>
+  </ul>
+</div>
             
             <img src="../../../plus.png" alt="home" className='drop-btn nav-icon' onClick={popUp}/>    
 
