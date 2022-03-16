@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Spinner from "../components/Spinner/Spinner";
-//import Mapbox from "../components/Mapbox/Mapbox";
+import Mapbox from "../components/Mapbox/Mapbox";
 
 
 function EventDetailPage(props) {
@@ -60,19 +60,19 @@ function EventDetailPage(props) {
           </div>
 
       
-      <div>
-          <img src={event.image} alt={event.title} />
-          <h3>{event.title}</h3>
-            {/*<p>Hosted by: {event.owner[0]}</p>*/}
-          <p>{event.description}</p>
-          <p>When: {new Date(event.date).toDateString()}</p>
-          <p>Time: {event.schedule}</p>
-          <p>At: {event.location}</p>
-          <p>How much: {event.price}€</p>
-        <div>
-          {user?._id === event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
+      <div className="text-start m-3">
+          <img src={event.image} alt={event.title} className="img-thumbnail"/>
+          <h3 className="display-6"><b>{capitalize(event.title)}</b></h3>
+            <p><b>Hosted by:</b> {event.owner[0].username}</p>
+          <p className="lead">{capitalize(event.description)}</p>
+          <p><b>When:</b> {new Date(event.date).toDateString()}</p>
+          <p><b>Time:</b> {event.schedule}</p>
+          <p><b>At:</b> {event.location}</p>
+          <p><b>How much:</b> {event.price}€</p>
+          <div className="text-center">
+          {user?._id === event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}><button className="btn btn-warning">Edit this event</button></Link>):(<p></p>)}
         </div>
-        {/*<Mapbox/>*/}
+        <Mapbox />
       </div>
     
       {isLoggedIn && <Navbar />  }

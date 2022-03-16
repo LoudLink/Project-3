@@ -105,7 +105,7 @@ export default function Signup({ authenticate }) {
           value={password}
           onChange={handleInputChange}
           required
-          minLength="8"
+          minLength="6"
         />
         <label for="input-password">Password</label>
         </div>

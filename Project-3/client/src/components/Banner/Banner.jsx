@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import "./Banner.css"
 import { Link } from 'react-router-dom';
 import ScrollUpBtn from '../ScrollUpBtn/ScrollUpBtn';
+import { AuthContext } from '../../context/auth.context';
 
 function Banner() {
+
+    const {isLoggedIn} = useContext(AuthContext);
 
     useEffect(()=>{
         
         const imageLogo = document.getElementById("LLLogo");
-        const imageLogoSmall = document.getElementById("LLLogo-s");
-        const thisDiv = document.getElementById('thisDiv');
-        const logBtn = document.getElementById('logBtn');
-        const signBtn = document.getElementById('signBtn');
+        
         
         function scrollBanner() {
             if (document.body.scrollTop > 400 || document.documentElement.scrollTop  > 400) {
@@ -30,9 +30,8 @@ function Banner() {
     return (
         <div className='navbar-nav navbar-light navbar-expand-lg bg-danger p-4 sticky-top text-center shadow-lg'>
         <div className='text-center' id="thisDiv">
-            <img id="LLLogo" src='../../../LoudLink Logo.png' alt="logo" className='hlogo' />
-            <Link id="signBtn" exact="true" to={"/signup"} className=" display-6 text-center text-white displayNone btn btn-dark m-2">Signup</Link> 
-            <Link id="logBtn" exact="true" to={"/login"} className=" display-6 text-center text-white displayNone btn btn-dark m-2">Login</Link>
+        {isLoggedIn ? (<Link exact="true" to="/main"> <img id="LLLogo" src='../../../LoudLink Logo.png' alt="logo" className='hlogo' /></Link>) : (<Link exact="true" to="/"><img id="LLLogo" src='../../../LoudLink Logo.png' alt="logo" className='hlogo' /></Link>)}
+            
             </div>
             <ScrollUpBtn />
         </div>
