@@ -132,23 +132,18 @@ function CreateAnnouncementPage(props) {
           minLength="8"
         />
         <label for="inputDescription">Description</label>
-        </div>
+        </div>        
 
-
+          <div className="form-floating mb-3">
         
-
-        <label>Image:</label>
         {announcement.image ? (
-          <img src={announcement.image} alt="eventpic" />
+          <img src={announcement.image} alt="eventpic" className="img-thumbnail"/>
         ) : (
           <p>No image yet</p>
         )}
-        <input type="file" name="image" onChange={handleImgUpload}></input>
-
-        <label htmlFor="input-date">Date</label>
-
-        <label htmlFor="input-announcementDate">Date</label>
-        <div class="form-floating mb-3">
+          
+        <input type="file" name="image" onChange={handleImgUpload} className="form-control-sm form-control"></input>
+        </div>
 
           <div className="form-floating mb-3">
         
@@ -181,17 +176,17 @@ function CreateAnnouncementPage(props) {
         <label htmlFor="input-expirationDate">Expiration Date</label>
         </div>
 
-        <div className="form-floating mb-3">
+        
 
         
-        <select id="input-tags" className="form-control" onChange={handleInputChange} name="tags" multiple>
+        <select id="input-tags" size="5" className="form-control" onChange={handleInputChange} name="tags" multiple>
           {Options.map((e) => (
             <option value={e}>{e}</option>
           ))}
         </select>
-        <label for="input-tags" className="text-end">Select up to 5 tags that define you</label>
+        
 
-        </div>
+        
 
         <div className="form-floating mb-3">
 
