@@ -26,10 +26,16 @@ function AnnouncementDetailPage(props){
           })
           .catch(setAnnouncement(false));
       }, [id]);
+
+
+
       function apply(){
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
         .then((res) => setAnnouncement(res.data))
       }
+
+
+
       function acceptParticipant(participant){
         const artist = participant.target.value
         axios
@@ -40,6 +46,15 @@ function AnnouncementDetailPage(props){
           })
           .catch();
       }
+
+    function removeArtist(remove){
+      console.log("remove from this ID", id)
+      const removedArt = remove.target.value
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/delete/${removedArt}`)
+      .then(console.log("wwee"))
+    }
+
+  
   function capitalize(str) {
     return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
@@ -80,6 +95,7 @@ function AnnouncementDetailPage(props){
             <p className="card-text">
               <b>Where:</b> {announcement.location}
             </p>
+
             <p className="card-text">
               <b>Posted on:</b>{" "}
               {new Date(announcement.announcementDate).toDateString()}
@@ -128,7 +144,12 @@ function AnnouncementDetailPage(props){
           <p>
             CONFIRMED ARTISTS:
             {announcement.accepted.map((artist) => (
+              <div>
+              <Link exact={true} to={`/users/${artist._id}`}>
               <p>{artist.username}</p>
+              </Link>
+              <button onClick={removeArtist} value={artist._id}>Remove artits</button>
+              </div>
             ))}
           </p>
           <p>

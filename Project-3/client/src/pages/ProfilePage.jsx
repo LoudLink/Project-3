@@ -15,6 +15,7 @@ function ProfilePage(props) {
   let { isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [ownerEvent,setOwnerEvent]=useState('')
   const [user, setUser] = useState({
     image: "",
     username: "",
@@ -41,16 +42,28 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
           )
           .then((res) => {
-            console.log("HERE IS THE PROBLEM", res.data);
+            console.log("AQUI ESTAMOS AHORA",res.data)
             setUser(res.data);
           })
           .catch((err) => console.log(err));
       });
   };
 
+  
+
   useEffect(() => {
     getUser();
   }, []);
+
+  function getOwner(id){
+
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
+      .then((res)=>{
+        setOwnerEvent(res.data.username)
+      })
+    }
+  
+
 
   function removeToken() {
     localStorage.removeItem("authToken");
@@ -225,6 +238,8 @@ function ProfilePage(props) {
           <Link exact={true} to={`/announcements/${anno._id}`}>
           <button>
               <p key={anno.id}>{anno.title}</p>
+              <p key={anno.id}>{getOwner(anno.owner)}{ownerEvent}</p>
+
           </button>
           </Link>
             </div>
