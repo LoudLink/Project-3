@@ -10,7 +10,9 @@ const { isAuthenticated } = require("./../middleware/jwt.middleware.js");
 const router = express.Router();
 const saltRounds = 5;
 
-
+//---------------------------------------------------------------------------
+//-------------------------------SIGNUP--------------------------------------
+//---------------------------------------------------------------------------
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
@@ -85,6 +87,10 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+//---------------------------------------------------------------------------
+//-------------------------------LOGIN---------------------------------------
+//---------------------------------------------------------------------------
+
 // POST  /auth/login - Verifies username and password and returns a JWT
 router.post("/login", (req, res, next) => {
   const { username, password } = req.body;
@@ -102,7 +108,7 @@ router.post("/login", (req, res, next) => {
       
       if (!foundUser) {
         // If the user is not found, send an error response
-        res.status(401).json({ message: "User not found." });
+        res.status(401).json({ message: "Unable to authenticate the user" }); //User not found.
         return;
       }
 
