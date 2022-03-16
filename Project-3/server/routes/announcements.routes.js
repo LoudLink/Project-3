@@ -156,7 +156,7 @@ router.post("/:id/apply/:an", (req, res) => {
 
     } else {
       user.announcements.map((ano) => {
-        if (ano.toString() === an) flag = true;
+        if (ano.toString() === an) flag = false;
       });
 
       if (flag === false) {
@@ -182,6 +182,9 @@ router.post("/:id/apply/:an", (req, res) => {
 router.put("/:an/confirm/:art", (req, res) =>{
   let announcement = req.params.an
   let artist = req.params.art
+
+  console.log("ANNOUNCEMENT", announcement)
+  console.log("ARTIST", artist)
   /*
   Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})
   .then(
