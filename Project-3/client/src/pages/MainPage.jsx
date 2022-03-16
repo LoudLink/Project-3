@@ -7,6 +7,7 @@ import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import Spinner from "../components/Spinner/Spinner";
+import Mapbox from "../components/Mapbox/Mapbox";
 
 function MainPage(props) {
 
@@ -22,6 +23,7 @@ function MainPage(props) {
           <Users />
         </div>
       </div>
+
       
       <hr className="mt-0"></hr>
     <div className="text-start ms-3"><h3 className="display-6">ANNOUNCEMENTS</h3></div>
@@ -30,6 +32,7 @@ function MainPage(props) {
         <div className="dividersMain1 flex-row">
           <Announcements />
         </div>
+
       </div>
       <hr className="shadow p-3 mb-5 bg-body rounded"></hr>
       
@@ -39,7 +42,9 @@ function MainPage(props) {
       <div className="dividersMain flex-row">
         <Events />
       </div>
+
       </div>
+
       <Navbar />
     </div>
   );

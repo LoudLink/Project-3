@@ -1,54 +1,52 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-//import { populate } from "../../../server/models/Event.model";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
+
+import { useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import Navbar from "../components/Navbar/Navbar";
 import IsPrivate from "../components/IsPrivate/IsPrivate";
 
-function AnnouncementDetailPage(props) {
-  const { id } = useParams();
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
-  const [announcement, setEvent] = useState({
-    title: "",
-    description: "",
-    participants: [],
-    accepted: [],
-  });
+function AnnouncementDetailPage(props){
+    const { id } = useParams()
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-      .then((response) => setEvent(response.data))
-      .catch(setEvent(false));
-  }, [id]);
 
-  function apply() {
-    axios
-      .post(
-        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`
-      )
-      .then((res) => {
-        setEvent(res.data);
-      });
-  }
+    const [announcement, setAnnouncement] = useState({
+        title: "",
+        description: "",
+        participants: [],
+        accepted: [],
+        owner:[]
+    })
 
-  function acceptParticipant(participant) {
-    const artist = participant.target.value;
-    axios
-      .put(
-        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
-      )
-      .then((response) => {
-        setEvent(response.data);
-      });
-  }
 
+    useEffect(() => {
+        axios
+          .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
+          .then((response) => setAnnouncement(response.data))
+          .catch(setAnnouncement(false));
+      }, [id]);
+
+      function apply(){        
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
+        .then((res) => setAnnouncement(res.data))
+      }
+
+      function acceptParticipant(participant){
+        const artist = participant.target.value
+        axios
+          .put(
+            `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
+          ).then((response)=>{
+            setAnnouncement(response.data)
+          })
+      }
+  
   function capitalize(str) {
     return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
@@ -58,6 +56,8 @@ function AnnouncementDetailPage(props) {
       {!announcement ? (
         <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1>
       ) : (
+     
+
         <div>
           <div className="flex-center mt-2 mb-2">
             <img
@@ -98,6 +98,7 @@ function AnnouncementDetailPage(props) {
               {new Date(announcement.announcementDate).toDateString()}
             </p>
 
+
             <p className="tags card-text">&nbsp;{announcement.tags}&nbsp;</p>
           </div>
           <hr class="dropdown-divider"></hr>
@@ -122,6 +123,25 @@ function AnnouncementDetailPage(props) {
             <b>Apply before:</b>{" "}
             {new Date(announcement.expirationDate).toDateString()}
           </p>
+
+        <p>
+        {announcement.participants.map((participant)=>(
+          <p>Pending for approval  <br></br>{participant.username} 
+          {user._id===announcement.owner[0] ? (<button onClick={acceptParticipant} value={participant._id}>Confirm</button>):(<p></p>)}
+          </p>
+        ))}
+        </p>
+
+        <p>CONFIRMED ARTISTS:
+          {announcement.accepted.map((artist)=>(
+            <p>{artist.username}</p>
+          ))}
+        </p>
+          
+          <p>
+          {user._id===announcement.owner[0] ?(<Link exact={true} to={`/announcements/${id}/edit`}><button>Edit announcement</button></Link>):(<p></p>)}
+          </p>
+        
 
           <p>
             {announcement.participants.map((participant) => (

@@ -6,12 +6,20 @@ import Events from '../components/Events/Events'
 import Navbar from '../components/Navbar/Navbar';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import Searchbar from '../components/Searchbar/Searchbar';
+
+import UserCard from '../components/UserCard/UserCard';
+
 import { AuthContext } from '../context/auth.context';
 
 function AllEvents(props) {
     const[events,setEvents]=useState([])
     const[eventsFiltered,setFilteredEvents]=useState([])
+
     const {isLoggedIn} = useContext(AuthContext);
+
+    const{user}=useContext(AuthContext)
+    
+
 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
@@ -29,9 +37,21 @@ function AllEvents(props) {
         })
         setFilteredEvents(newList)
     }
+    function searchTags(tagsArr){
+        if(tagsArr.length){
+            const newList = events.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
+
+        console.log("newList: ", newList)
+        setFilteredEvents(newList)}
+        else {
+            setFilteredEvents(events)
+        }
+    }
+
 
 
     return (
+
         <div>
             <div className="flex-center mt-2 mb-2">
         <img
@@ -51,15 +71,21 @@ function AllEvents(props) {
       </div>
             <h1>Check all the events</h1>
             <ScrollUpBtn />
-            <Searchbar filter={search} />
+            <Searchbar filter={search} searchTags={searchTags} />
             
             <div className="flex-column">
+            
+
+            
+            
+            
+
                 {eventsFiltered.map((event)=>(
                     <EventCard key={event._id} event={event} />
                 ))}
             </div>
             <Link to='/events/create-event'><button className="btn btn-warning">Create Event</button></Link>
-            <Navbar />
+            {user === null ?(<p></p>):(<Navbar />)}
         </div>
     );
 }

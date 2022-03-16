@@ -116,6 +116,7 @@ function CreateAnnouncementPage(props) {
           className="form-control"
           name="announcementDate"
           value={announcementDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
         />
@@ -131,6 +132,7 @@ function CreateAnnouncementPage(props) {
           name="expirationDate"
           className="form-control"
           value={expirationDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
         />

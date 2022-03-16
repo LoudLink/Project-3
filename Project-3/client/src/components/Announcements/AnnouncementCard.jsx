@@ -5,13 +5,8 @@ import { Link } from 'react-router-dom';
 function AnnouncementCard(props) {
 
     function capitalize(str){
-
-      
         return str? str[0].toUpperCase()+str.slice(1) : ""
-
     }
-
-    console.log(props.announcement.owner[0])
 
     return (
         
