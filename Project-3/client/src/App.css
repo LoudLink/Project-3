@@ -2,6 +2,7 @@
 
 body {
   margin-bottom: 80px;
+  word-wrap: break-word;
 }
 
 
@@ -148,12 +149,10 @@ a:hover {
   align-items: center;
 }
 
-.flex-row>div{
+.flex-row> div{
   display: flex;
   flex-direction: row;
   overflow: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
 }
 
 .dividersMain {

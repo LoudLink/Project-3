@@ -101,7 +101,7 @@ function AnnouncementDetailPage(props){
 
             <p className="tags card-text">&nbsp;{announcement.tags}&nbsp;</p>
           </div>
-          <hr class="dropdown-divider"></hr>
+          <hr className="dropdown-divider"></hr>
           <p>
             PENDING:
             {announcement.participants.length === 0 ? (
@@ -146,10 +146,10 @@ function AnnouncementDetailPage(props){
           <p>
             {announcement.participants.map((participant) => (
               <p>
-                {participant} Pending for approval
+                {participant.username} Pending for approval
                 <button
                   onClick={acceptParticipant}
-                  value={participant}
+                  value={participant._id}
                   className="btn btn-succes"
                 >
                   Confirm
@@ -161,7 +161,7 @@ function AnnouncementDetailPage(props){
           <p>
             CONFIRMED ARTISTS:
             {announcement.accepted.map((artist) => (
-              <p>{artist}</p>
+              <p>{artist.username}</p>
             ))}
           </p>
         </div>

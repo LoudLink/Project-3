@@ -14,5 +14,24 @@
   }
 
 .hlogo {
-  
+  width: 300px;
+  transition: 0.4s;
+  text-align: center;
+}
+.hlogo-s {
+  width: 200px;
+  transition: 0.4s
+}
+
+.logoFlex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.display {
+  display: block;
+}
+
+.displayNone {
+  display: none;
 }
