@@ -301,13 +301,7 @@ function ProfilePage(props) {
             </h3>
             <img src="../../arrow-down.png" alt="arrow down" style={{width:10}}></img>
 
-          <Link exact={true} to={`/announcements/${anno._id}`}>
-          <button>
-              <p key={anno.id}>{anno.title}</p>
-              <p key={anno.id}>{getOwner(anno.owner)}{ownerEvent}</p>
-
-          </button>
-          </Link>
+          
 
             </div>
             
@@ -321,7 +315,7 @@ function ProfilePage(props) {
                   <p>{anno.title}</p>
                   <p>
                     <b>Created by: </b>
-                    {anno.owner[0]}
+                    {getOwner(anno.owner)}{capitalize(ownerEvent)}
                   </p>
 
                   <Link exact={true} to={`/announcements/${anno._id}`} className="link-info">See more!</Link>
