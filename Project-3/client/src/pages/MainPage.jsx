@@ -7,7 +7,6 @@ import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import Spinner from "../components/Spinner/Spinner";
-import Mapbox from "../components/Mapbox/Mapbox";
 
 function MainPage(props) {
 

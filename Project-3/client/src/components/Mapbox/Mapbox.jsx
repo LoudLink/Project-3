@@ -9,7 +9,7 @@ export default function Mapbox(props) {
   const map = useRef(null);
   const [lng, setLng] = useState(2.1686);
   const [lat, setLat] = useState(41.3874);
-  const [zoom, setZoom] = useState(5);
+  const [zoom, setZoom] = useState(12);
 
 
   useEffect(() => {

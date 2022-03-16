@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 var ObjectId = require("mongoose").Types.ObjectId;
 const Announcement = require("../models/Announcement.model");
 const User = require("../models/User.model");
+const fileUploader = require("../config/cloudinary.config");
 
 //---------------------------------------------------------------------------
 //--------------------------GET ALL ANNOUNCEMENTS---------------------------
@@ -54,6 +55,7 @@ router.post("/:id", (req, res) => {
 //---------------------------------------------------------------------------
 
 router.get("/:announcementId", (req, res) => {
+
   const { announcementId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
@@ -74,7 +76,7 @@ router.get("/:announcementId", (req, res) => {
 //--------------------------EDIT SPECIFIED ANNOUNCEMENT----------------------
 //---------------------------------------------------------------------------
 
-router.put("/:announcementId", (req, res) => {
+router.put("/:announcementId/edit", (req, res) => {
   const { announcementId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
@@ -82,34 +84,49 @@ router.put("/:announcementId", (req, res) => {
     return;
   }
 
-  const { title, description, eventDate, expirationDate, tags } = req.body;
+  const { title, description, announcementDate, expirationDate, tags, location, image } = req.body;
   let titleToLowerCase = title.toLowerCase();
 
   Announcement.findByIdAndUpdate(
     announcementId,
-    { title: titleToLowerCase, description, eventDate, expirationDate, tags },
+    { title: titleToLowerCase, description, announcementDate, expirationDate, tags, image, location },
     { new: true }
   )
     .then((updatedAnnouncement) => res.status(200).json(updatedAnnouncement))
     .catch((error) => res.json(error));
 });
 
+//---------------------------------------------------------------------------
+//--------------------------UPLOAD IMAGE FOR ANNOUNCEMENT----------------------------
+//---------------------------------------------------------------------------
+
+
+router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) => {
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  res.json({ fileUrl: req.file.path });
+});
 
 
 //---------------------------------------------------------------------------
 //--------------------------DELETE SPECIFIED ANNOUNCEMENT--------------------
 //---------------------------------------------------------------------------
 
-router.delete("/:announcementId", (req, res) => {
-  const { announId } = req.params;
+router.delete("/:announcementId/edit", (req, res) => {
+  const {announcementId}  = req.params;
+  console.log("trying to delete", announcementId)
 
-  if (!mongoose.Types.ObjectId.isValid(announId)) {
+  if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  Announcement.findByIdAndDelete(announId)
-    .then((deletedAnnouncement) => res.status(400).json(deletedAnnouncement))
+  Announcement.findByIdAndDelete(announcementId)
+    .then((deletedAnnouncement) => res.status(400).json(deletedAnnouncement), {new:true})
     .catch((error) => res.json(error));
 });
 
@@ -121,16 +138,17 @@ router.post("/:id/apply/:an", (req, res) => {
   const { id, an } = req.params;
   let flag = false;
 
-  User.findById(id).then((user) => {
+  User.findById(id)
+  .then((user) => {
     if (user.announcements.length === 0) {
       User.findByIdAndUpdate(id, { $push: { announcements: an }})
-      .then(
+      .then((__)=>
         Announcement.findByIdAndUpdate(an, {
-          $push: { participants: id },
-        })
+          $push: { participants: id }}, {new: true}
+        )
         .populate("participants")
         .populate("accepted")
-        .then((response)=>{res.json(response)})
+        .then((response)=>res.json(response))
       );
 
 
@@ -138,15 +156,17 @@ router.post("/:id/apply/:an", (req, res) => {
 
     } else {
       user.announcements.map((ano) => {
-        if (ano.toString() === an) flag = true;
+        if (ano.toString() === an) flag = false;
       });
 
       if (flag === false) {
-        User.findByIdAndUpdate(id, { $push: { announcements: an } }).then(
+        User.findByIdAndUpdate(id, { $push: { announcements: an } })
+
+        .then(()=>
           Announcement.findByIdAndUpdate(an, {$push: { participants: id }}, {new:true})
             .populate("participants")
             .populate("accepted")
-            .then((response)=>{res.json(response)})
+            .then((response)=>res.json(response))
         );
       } else {
         console.log("you've alredy applied");
@@ -162,13 +182,42 @@ router.post("/:id/apply/:an", (req, res) => {
 router.put("/:an/confirm/:art", (req, res) =>{
   let announcement = req.params.an
   let artist = req.params.art
+
+  console.log("ANNOUNCEMENT", announcement)
+  console.log("ARTIST", artist)
+  /*
   Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})
   .then(
     Announcement.findByIdAndUpdate(announcement, {$push: {accepted: [artist]}}, {new :true})
-    .populate("participants")
-    .populate("accepted")
-    .then((response)=>{res.json(response)})
+    .then(  User.findByIdAndUpdate(artist, {$pullAll: {announcements : [announcement]}}, {new : true})
+      //.populate("accepted participants")
+      .then(
+        User.findByIdAndUpdate(artist, {$push: {acceptedAnnouncements: [announcement]}}, {new:true})
+        .then((response)=>{res.json(response)})
+    )
+  
+    
+    )
   )
+*/
+  User.findByIdAndUpdate(artist, {$pullAll: {announcements : [announcement]}}, {new : true})
+      .populate("acceptedAnnouncements")
+      .then(()=>
+        User.findByIdAndUpdate(artist, {$push: {acceptedAnnouncements: announcement}}, {new:true})
+        .populate("acceptedAnnouncements")
+
+
+        .then(()=>Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}} , {new:true})
+          .then(()=>
+            Announcement.findByIdAndUpdate(announcement, {$push: {accepted: [artist]}}, {new :true})
+            .populate("participants")
+            .populate("accepted")
+            .then((response)=>res.json(response))
+          )))
+  
+
+
+
 })
 
 

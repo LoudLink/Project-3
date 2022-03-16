@@ -72,6 +72,8 @@ function CreateEventPage(props) {
 
     uploadImgForm.append("image", e.target.files[0]);
 
+    console.log("WHAT IS THIS ID IN THE EVENTS", id)
+
     axios
       .post(
         `${process.env.REACT_APP_SERVER_URL}/api/events/${id}/img-upload`,
