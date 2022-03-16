@@ -58,6 +58,7 @@ function AnnouncementDetailPage(props){
   function capitalize(str) {
     return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
+  
   return (
     <div>
       {!announcement ? (
@@ -162,9 +163,13 @@ function AnnouncementDetailPage(props){
             )}
           </p>
           <p key="lkasjd">
+          {user._id === announcement.owner[0] ? (
             <Link exact={true} to="/events/create-event" state ={announcement}>
               <button>MAKE AN EVENT OUT OF THIS ANNOUNCEMNT</button>
             </Link>
+            ):(
+              <p></p>
+            )}
           </p>
         </div>
       )}
