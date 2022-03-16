@@ -13,10 +13,12 @@ function AnnouncementDetailPage(props){
     const { id } = useParams()
     const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
+
     const navigate = useNavigate();
 
 
     const [announcement, setAnnouncement] = useState({
+
         title: "",
         description: "",
         participants: [],
@@ -28,13 +30,24 @@ function AnnouncementDetailPage(props){
     useEffect(() => {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-          .then((response) => setAnnouncement(response.data))
-          .catch(setAnnouncement(false));
+
+          .then((response) => {
+            setAnnouncement(response.data)
+          })
+          .catch(setAnnouncement({
+            title: "",
+            description: "",
+            participants: [],
+            accepted: []
+         }));
+
       }, [id]);
 
       function apply(){        
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
+
         .then((res) => setAnnouncement(res.data))
+
       }
 
       function acceptParticipant(participant){
@@ -45,6 +58,7 @@ function AnnouncementDetailPage(props){
           ).then((response)=>{
             setAnnouncement(response.data)
           })
+          .catch();
       }
   
   function capitalize(str) {
@@ -82,6 +96,8 @@ function AnnouncementDetailPage(props){
               className="img-fluid img-detail"
             />
           </div>
+
+
 
           <div className="text-start ms-4 mt-4">
             <h2 className="card-title">{capitalize(announcement.title)}</h2>
@@ -131,6 +147,7 @@ function AnnouncementDetailPage(props){
           </p>
         ))}
         </p>
+
           <p>
             Apply before: {new Date(announcement.expirationDate).toDateString()}
           </p>

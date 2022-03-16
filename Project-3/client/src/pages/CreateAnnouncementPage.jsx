@@ -1,7 +1,7 @@
 import { React, useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { Options } from "../utils/tags";
 import Navbar from "../components/Navbar/Navbar";
 
@@ -9,6 +9,8 @@ function CreateAnnouncementPage(props) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+
+  const { id } = useParams();
 
   const [announcement, setAnnouncement] = useState({
     title: "",
@@ -34,6 +36,7 @@ function CreateAnnouncementPage(props) {
     const { name, value } = e.target;
     return setAnnouncement({ ...announcement, [name]: value });
   }
+  
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`)
@@ -47,6 +50,7 @@ function CreateAnnouncementPage(props) {
   }, [user._id]);
 
   function handleFormSubmission(e) {
+    
     e.preventDefault();
     axios
       .post(
@@ -56,6 +60,28 @@ function CreateAnnouncementPage(props) {
       .then((response) => {
         navigate("/announcements");
       });
+  }
+
+  function handleImgUpload(e) {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadImgForm = new FormData();
+
+    uploadImgForm.append("image", e.target.files[0]);
+
+    console.log("WHAT IS THIS ID", id)
+
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/img-upload`,
+        uploadImgForm
+      )
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setAnnouncement((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   }
 
   return (
@@ -108,6 +134,17 @@ function CreateAnnouncementPage(props) {
         <label for="inputDescription">Description</label>
         </div>
 
+        <label>Image:</label>
+        {announcement.image ? (
+          <img src={announcement.image} alt="eventpic" />
+        ) : (
+          <p>No image yet</p>
+        )}
+        <input type="file" name="image" onChange={handleImgUpload}></input>
+
+        <label htmlFor="input-date">Date</label>
+
+        <label htmlFor="input-announcementDate">Date</label>
         <div class="form-floating mb-3">
         
         <input
