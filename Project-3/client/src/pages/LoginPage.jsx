@@ -65,13 +65,13 @@ export default function LogIn({ authenticate }) {
 
       <form onSubmit={handleLoginSubmit} className="auth__form">
 
-      <div class="form-floating">
+      <div className="form-floating">
 
         <input id="inputUsername" className="form-control" type="text" name="username" value={username} onChange={handleUsername} />
         <label for="inoutUsername">Username:</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input id="inputPassword" className="form-control" type="password" name="password" value={password} onChange={handlePassword} />
         <label for="inputPassword">Password:</label>

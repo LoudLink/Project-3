@@ -100,7 +100,7 @@ function CreateAnnouncementPage(props) {
 
       <form onSubmit={handleFormSubmission} className="auth__form">
 
-      <div class="form-floating">
+      <div className="form-floating">
       
         <input
           type="text"
@@ -118,7 +118,7 @@ function CreateAnnouncementPage(props) {
         </div>
 
 
-  <div class="form-floating mb-3">
+  <div className="form-floating mb-3">
         
         <input
           id="inputDescription"
@@ -132,20 +132,20 @@ function CreateAnnouncementPage(props) {
           minLength="8"
         />
         <label for="inputDescription">Description</label>
-        </div>
+        </div>        
 
-        <label>Image:</label>
+          <div className="form-floating mb-3">
+        
         {announcement.image ? (
-          <img src={announcement.image} alt="eventpic" />
+          <img src={announcement.image} alt="eventpic" className="img-thumbnail"/>
         ) : (
           <p>No image yet</p>
         )}
-        <input type="file" name="image" onChange={handleImgUpload}></input>
+          
+        <input type="file" name="image" onChange={handleImgUpload} className="form-control-sm form-control"></input>
+        </div>
 
-        <label htmlFor="input-date">Date</label>
-
-        <label htmlFor="input-announcementDate">Date</label>
-        <div class="form-floating mb-3">
+          <div className="form-floating mb-3">
         
         <input
           id="inputAnnouncementDate"
@@ -161,7 +161,7 @@ function CreateAnnouncementPage(props) {
 
         </div>
 
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
         
         <input
           id="input-expirationDate"
@@ -176,19 +176,19 @@ function CreateAnnouncementPage(props) {
         <label htmlFor="input-expirationDate">Expiration Date</label>
         </div>
 
-        <div class="form-floating mb-3">
+        
 
         
-        <select id="input-tags" className="form-control" onChange={handleInputChange} name="tags" multiple>
+        <select id="input-tags" size="5" className="form-control" onChange={handleInputChange} name="tags" multiple>
           {Options.map((e) => (
             <option value={e}>{e}</option>
           ))}
         </select>
-        <label for="input-tags" className="text-end">Select up to 5 tags that define you</label>
+        
 
-        </div>
+        
 
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
 
         
         <input

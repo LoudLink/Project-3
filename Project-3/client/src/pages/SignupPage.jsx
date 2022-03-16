@@ -79,7 +79,7 @@ export default function Signup({ authenticate }) {
 
       <form onSubmit={handleFormSubmission} className="auth__form">
 
-      <div class="form-floating">
+      <div className="form-floating">
 
         <input
           id="input-username"
@@ -94,7 +94,7 @@ export default function Signup({ authenticate }) {
         <label for="input-username">Username</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-password"
@@ -110,7 +110,7 @@ export default function Signup({ authenticate }) {
         <label for="input-password">Password</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-email"
@@ -126,7 +126,7 @@ export default function Signup({ authenticate }) {
         <label for="input-email">Email</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <select className="form-control" size="6" onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
             {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}

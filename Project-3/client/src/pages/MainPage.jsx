@@ -27,12 +27,12 @@ function MainPage(props) {
       <hr className="mt-0"></hr>
     <div className="text-start ms-3"><h3 className="display-6">ANNOUNCEMENTS</h3></div>
 
-      <div>
-        <div className="dividersMain1 flex-row">
+      
+        <div className="dividersMain flex-row">
           <Announcements />
         </div>
+      
 
-      </div>
       <hr className="shadow p-3 mb-5 bg-body rounded"></hr>
       
     <div className="text-start ms-3 mt-3"><h3 className="display-6">EVENTS NEAR YOU</h3></div>
