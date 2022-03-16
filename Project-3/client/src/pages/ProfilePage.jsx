@@ -123,13 +123,18 @@ function ProfilePage(props) {
     <div>
       <div>
         <img
-          className="profilePic"
+          className="profileImg m-3"
           src={user.image}
           alt="Your avatar goes here"
         />
-        <p>{user.username}</p>
-        <p>{user.email}</p>
-        <p>{user.description}</p>
+        
+        <p className="display-3">Welcome back {user.username}!</p>
+        <p>{user.location}</p>
+        <p className="lead">You have signed in with this address: {user.email}</p>
+        <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
+        <p className="display-6">How do you describe yourself?</p>
+        <p className=" blockquote">{user.description}</p>
+        </div>
         <div className="flex-row center gap">
           {user.tags.map((tag) => (
             <p key={tag} className="tags">
@@ -137,7 +142,6 @@ function ProfilePage(props) {
             </p>
           ))}
         </div>
-        <p>{user.location}</p>
         <h3>Videos</h3>
         {user.videos.length === 0 ? (
           <p>no videos to display</p>

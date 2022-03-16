@@ -33,24 +33,22 @@ useEffect(() => {
 
 
 
-  function popUp() {
-    popBtn.classList.toggle("show");
-  }
+  
 
     return (
 
         <div className='navbar flex-row flex-evenly '>
 
-<div className="btn-group dropup">
-  <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropup
-  </button>
-  <ul className="dropdown-menu">
-    <p>PABLOOOOOO</p>
-  </ul>
-</div>
+        <div className="btn-group dropup">
+          <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropup
+          </button>
+          <ul className="dropdown-menu">
+            <p>PABLOOOOOO</p>
+          </ul>
+        </div>
             
-            <img src="../../../plus.png" alt="home" className='drop-btn nav-icon' onClick={popUp}/>    
+            {/*<img src="../../../plus.png" alt="home" className='drop-btn nav-icon' onClick={popUp}/>*/}    
 
             
             <Link exact= "true" to="/main"><img src="../../../home-icon.png" alt="home" className='nav-icon'/> </Link>

@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Spinner from "../components/Spinner/Spinner";
-//import Mapbox from "../components/Mapbox/Mapbox";
+import Mapbox from "../components/Mapbox/Mapbox";
 
 
 function EventDetailPage(props) {
@@ -72,7 +72,7 @@ function EventDetailPage(props) {
         <div>
           {user?._id === event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
         </div>
-        {/*<Mapbox/>*/}
+        <Mapbox />
       </div>
     
       {isLoggedIn && <Navbar />  }
