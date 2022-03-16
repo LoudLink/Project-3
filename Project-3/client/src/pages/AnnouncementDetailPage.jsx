@@ -100,9 +100,6 @@ function AnnouncementDetailPage(props){
             <p>
               <b>Do you have the requisites?</b>
             </p>
-            <button onClick={apply} className="btn btn-warning">
-              APPLY
-            </button>
           </p>
           <p className="card-text">
             <b>Apply before:</b>{" "}
@@ -131,7 +128,7 @@ function AnnouncementDetailPage(props){
             {user._id === announcement.owner[0] ? (
               <p></p>
             ) : (
-              <button onClick={apply}>APPLY</button>
+              <button onClick={apply} className="btn btn-warning" >APPLY</button>
             )}
           </p>
 
