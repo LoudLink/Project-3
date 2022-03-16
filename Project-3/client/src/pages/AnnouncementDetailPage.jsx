@@ -134,21 +134,9 @@ function AnnouncementDetailPage(props){
               <button onClick={apply}>APPLY</button>
             )}
           </p>
-          <p>
-            {announcement.participants.map((participant) => (
-              <p>
-                Pending for approval <br></br>
-                {participant.username}
-                {user._id === announcement.owner[0] ? (
-                  <button onClick={acceptParticipant} value={participant._id}>
-                    Confirm
-                  </button>
-                ) : (
-                  <p></p>
-                )}
-              </p>
-            ))}
-          </p>
+
+
+
           <p>
             CONFIRMED ARTISTS:
             {announcement.accepted.map((artist) => (
