@@ -27,9 +27,10 @@ function EventDetailPage(props) {
       .catch(setEvent(false));
   }, []);
 
-  
-  console.log('EVENTTTT',event)
-  console.log('USERRRRRRR',user._id);
+
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
+  }
 
 
   return (
@@ -39,36 +40,40 @@ function EventDetailPage(props) {
     <div>
     {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
     <div>
-    <div className="flex-center">
+    
+          <div className="flex-center mt-2 mb-2">
             <img
               src="../../ios-arrow-back-logo-icon-png-svg (1).png"
               alt="arrow back"
               className="goBackBtn"
             />
-            {isLoggedIn ? <Link exact= "true" to="/main">
-              Go back
-            </Link> 
-            : 
-            <Link exact= "true" to="/">
-              Go back
-            </Link> }
-            
+            {isLoggedIn ? (
+              <Link exact="true" to="/main">
+                Go back
+              </Link>
+            ) : (
+              <Link exact="true" to="/">
+                Go back
+              </Link>
+            )}
           </div>
 
-      <img src={event.image} alt={event.title} />
-      <h3>{event.title}</h3>
-      {/*<p>Hosted by: {event.owner[0]}</p>*/}
-      <p>{event.description}</p>
+      <img src={event.image} alt={event.title} className="img-fluid img-detail"/>
+      <div className="text-start ms-4 mt-4">
+      <h2  className="card-title">{capitalize(event.title)}</h2>
+      <p><b>Hosted by:</b> {event.owner[0].username}</p>
+      <p className="card-text">{event.description}</p>
 
-      <p>When: {new Date(event.date).toDateString()}</p>
+      <p className="card-text"><b>When:</b> {new Date(event.date).toDateString()}</p>
 
-      <p>Time: {event.schedule}</p>
-      <p>At: {event.location}</p>
-      <p>How much: {event.price}€</p>
+      <p className="card-text"><b>Time:</b> {event.schedule}</p>
+      <p className="card-text"><b>At:</b> {event.location}</p>
+      <p className="card-text"><b>How much:</b> {event.price}€</p>
       <div>
 
           {user._id=== event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
 
+      </div>
       </div>
 
     </div>
