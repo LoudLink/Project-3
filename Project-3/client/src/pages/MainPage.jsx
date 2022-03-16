@@ -14,27 +14,31 @@ function MainPage(props) {
 
   return (
 
-    <div className="flex-column background">
+    <div className="background">
       <ScrollUpBtn />
-      <Link to="/users" className="userrall">
-        <button>All profiles</button>
-      </Link>
-      <div className="dividersMain flex-row">
-        <Users />
+      
+      <div className="mt-2">
+        <div className="dividersMain flex-row">
+          <Users />
+        </div>
       </div>
+      
+      <hr className="mt-0"></hr>
+    <div className="text-start ms-3"><h3 className="display-6">ANNOUNCEMENTS</h3></div>
 
-      <Link to="/announcements">
-        <button>All adds</button>
-      </Link>
-      <div className="dividersMain flex-row">
-        <Announcements />
+      <div>
+        <div className="dividersMain1 flex-row">
+          <Announcements />
+        </div>
       </div>
-        
-      <Link to="/events">
-        <button>All events</button>
-      </Link>
+      <hr className="shadow p-3 mb-5 bg-body rounded"></hr>
+      
+    <div className="text-start ms-3 mt-3"><h3 className="display-6">EVENTS NEAR YOU</h3></div>
+     
+     <div>
       <div className="dividersMain flex-row">
         <Events />
+      </div>
       </div>
       <Navbar />
     </div>

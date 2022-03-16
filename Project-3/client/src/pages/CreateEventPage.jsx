@@ -87,94 +87,119 @@ function CreateEventPage(props) {
 
   return (
     <div>
-      <div className="flex-center">
+      <div className="flex-center mt-2 mb-2">
         <img
           src="../../ios-arrow-back-logo-icon-png-svg (1).png"
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact= "true" to="/main">
-          {" "}
+        <Link exact="true" to="/main">
           Go back
         </Link>
       </div>
-      <h2>CREATE EVENT</h2>
+      <h2>CREATE AN EVENT</h2>
+
       <form onSubmit={handleFormSubmission} className="auth__form">
-        <label htmlFor="input-title">Title</label>
+
+      <div class="form-floating">
+        
         <input
           id="input-title"
           type="text"
+          className="form-control"
           name="title"
           placeholder="Choose your title"
           onChange={handleInputChange}
           required
+          minLength="8"
+          maxLength="20"
         />
+        <label for="input-title">Title</label>
+        </div>
 
-        <label htmlFor="input-description">Description</label>
+        <div class="form-floating">
+
         <input
           id="input-description"
           type="description"
           name="description"
+          className="form-control"
           placeholder="What's the event about"
           onChange={handleInputChange}
           required
           minLength="8"
         />
+        <label for="input-description">Description</label>
+        </div>
 
-        <label>Image:</label>
-        {event.image ? (
-          <img src={event.image} alt="eventpic" />
-        ) : (
-          <p>No image yet</p>
-        )}
-        <input type="file" name="image" onChange={handleImgUpload}></input>
+        <div class="form-floating">
 
-        <label htmlFor="input-date">Date</label>
         <input
           id="input-date"
           type="date"
+          className="form-control"
           name="date"
           onChange={handleInputChange}
           required
           minLength="8"
         />
+        <label for="input-date">Date</label>
+        </div>
 
-        <label htmlFor="input-schedule">Schedule</label>
+        <div class="form-floating">
+
         <input
           id="input-schedule"
           type="time"
+          className="form-control"
           name="schedule"
           onChange={handleInputChange}
           required
           minLength="8"
         />
+        <label for="input-schedule">Schedule</label>
+        </div>
 
-        <label htmlFor="input-price">Price</label>
+        <div class="form-floating">
+
         <input
           id="input-price"
           type="price"
           name="price"
+          className="form-control"
           placeholder="In €uros"
           onChange={handleInputChange}
         />
+        <label for="input-price">Price</label>
+        </div>
 
-        <label htmlFor="input-location">Location</label>
+        <div class="form-floating">
+
         <input
           id="input-location"
           type="location"
+          className="form-control"
           name="location"
           placeholder="Where's this happening"
           onChange={handleInputChange}
+          minLength="4"
           required
-          minLength="8"
         />
+        <label for="input-location">Location</label>
+        </div>
 
-        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
-        <select onChange={handleInputChange} name="tags" multiple max="5">
+        <div class="form-floating">
+
+        <select onChange={handleInputChange} name="tags" multiple size="5" className="form-control">
           {Options.map((e) => (
             <option value={e}>{e}</option>
           ))}
         </select>
+        <label for="input-tags">Select up to 5 tags that define you</label>
+        </div>
+        
+        <label>Image:</label>
+        <input id="input-date" type="file" name="image" onChange={handleImgUpload}></input>
 
         {error && (
           <div className="error-block">
@@ -183,7 +208,7 @@ function CreateEventPage(props) {
           </div>
         )}
 
-        <button className="button__submit" type="submit">
+        <button className="btn btn-warning" type="submit">
           Submit
         </button>
       </form>

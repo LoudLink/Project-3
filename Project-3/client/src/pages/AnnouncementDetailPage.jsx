@@ -2,112 +2,153 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 //import { populate } from "../../../server/models/Event.model";
-import { useNavigate} from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../context/auth.context';
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import Navbar from "../components/Navbar/Navbar";
 import IsPrivate from "../components/IsPrivate/IsPrivate";
 
+function AnnouncementDetailPage(props) {
+  const { id } = useParams();
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-function AnnouncementDetailPage(props){
-    const { id } = useParams()
-    const { isLoggedIn, isLoading } = useContext(AuthContext);
-    const {user} = useContext(AuthContext);
-    const navigate = useNavigate();
+  const [announcement, setEvent] = useState({
+    title: "",
+    description: "",
+    participants: [],
+    accepted: [],
+  });
 
-    const [announcement, setEvent] = useState({
-        title: "",
-        description: "",
-        participants: [],
-        accepted: []
-    })
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
+      .then((response) => setEvent(response.data))
+      .catch(setEvent(false));
+  }, [id]);
 
+  function apply() {
+    axios
+      .post(
+        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`
+      )
+      .then((res) => {
+        setEvent(res.data);
+      });
+  }
 
-    useEffect(() => {
-        axios
-          .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-          .then((response) => setEvent(response.data))
-          .catch(setEvent(false));
-      }, [id]);
+  function acceptParticipant(participant) {
+    const artist = participant.target.value;
+    axios
+      .put(
+        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
+      )
+      .then((response) => {
+        setEvent(response.data);
+      });
+  }
 
-      function apply(){        
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
-        .then((res) => {
-          setEvent(res.data)
-        })
-      }
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
+  }
 
-      function acceptParticipant(participant){
-        const artist = participant.target.value
-        axios
-          .put(
-            `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
-          ).then((response)=>{
-            setEvent(response.data)
-          })
-      }
-
-
-
-      return(
+  return (
+    <div>
+      {!announcement ? (
+        <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1>
+      ) : (
         <div>
-        {!announcement  ? <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1> :
-        <div>
-          <div className="flex-center">
+          <div className="flex-center mt-2 mb-2">
             <img
               src="../../ios-arrow-back-logo-icon-png-svg (1).png"
               alt="arrow back"
               className="goBackBtn"
             />
-            {isLoggedIn ? <Link exact= "true" to="/main">
-              Go back
-            </Link> : <Link exact= "true" to="/">
-              Go back
-            </Link> }
-            
+            {isLoggedIn ? (
+              <Link exact="true" to="/main">
+                Go back
+              </Link>
+            ) : (
+              <Link exact="true" to="/">
+                Go back
+              </Link>
+            )}
           </div>
-        <h2>WISH TO APLLY TO THIS ANNOUNCEMENT</h2>
-        <img src={announcement.image} alt={announcement.title} />
-        <h3>{announcement.title}</h3>
+          <div>
+            <img
+              src={announcement.image}
+              alt={announcement.title}
+              className="img-fluid img-detail"
+            />
+          </div>
 
-        <p>About: {announcement.description}</p>
-        <p>{announcement.tags}</p>
-        <p>At: {announcement.location}</p>
-        <p>Posted on: {new Date(announcement.announcementDate).toDateString()}</p>
-        <p>Apply before: {new Date(announcement.expirationDate).toDateString()}</p>
-        <p>PENDING: 
-        { announcement.participants.length === 0 ? 
-        <p>Nobody has apply to this announcement yet</p> 
-        : <p>Already {announcement.participants.length} 
-        apply to this announcement </p>}
-        <button onClick={apply}>APPLY</button>
-        </p>
+          <div className="text-start ms-4 mt-4">
+            <h2 className="card-title">{capitalize(announcement.title)}</h2>
 
+            <p className="card-text">
+              <b>About:</b> {announcement.description}
+            </p>
 
+            <p className="card-text">
+              <b>Where:</b> {announcement.location}
+            </p>
+            <p className="card-text">
+              <b>Posted on:</b>{" "}
+              {new Date(announcement.announcementDate).toDateString()}
+            </p>
 
-
-        <p>
-        {announcement.participants.map((participant)=>(
-          <p>{participant} Pending for approval 
-          <button onClick={acceptParticipant} value={participant}>Confirm</button>
+            <p className="tags card-text">&nbsp;{announcement.tags}&nbsp;</p>
+          </div>
+          <hr class="dropdown-divider"></hr>
+          <p>
+            PENDING:
+            {announcement.participants.length === 0 ? (
+              <p>Nobody has apply to this announcement yet</p>
+            ) : (
+              <p>
+                Already {announcement.participants.length}
+                applied to this announcement{" "}
+              </p>
+            )}
+            <p>
+              <b>Do you have the requisites?</b>
+            </p>
+            <button onClick={apply} className="btn btn-warning">
+              APPLY
+            </button>
           </p>
-        ))}
-        </p>
+          <p className="card-text">
+            <b>Apply before:</b>{" "}
+            {new Date(announcement.expirationDate).toDateString()}
+          </p>
 
-        <p>CONFIRMED ARTISTS:
-          {announcement.accepted.map((artist)=>(
-            <p>{artist}</p>
-          ))}
-        </p>
+          <p>
+            {announcement.participants.map((participant) => (
+              <p>
+                {participant} Pending for approval
+                <button
+                  onClick={acceptParticipant}
+                  value={participant}
+                  className="btn btn-succes"
+                >
+                  Confirm
+                </button>
+              </p>
+            ))}
+          </p>
 
-
-
-
-      </div> 
-      }
-          <Navbar />
-      </div>
-      )
+          <p>
+            CONFIRMED ARTISTS:
+            {announcement.accepted.map((artist) => (
+              <p>{artist}</p>
+            ))}
+          </p>
+        </div>
+      )}
+      <Navbar />
+    </div>
+  );
 }
 
 export default AnnouncementDetailPage;

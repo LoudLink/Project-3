@@ -79,11 +79,7 @@ function ProfilePage(props) {
         navigate("/")
         
       }
-
-
-    removeToken();
-    navigate("/");
-  }
+  
 
   function deleteUser() {
     const storedToken = localStorage.getItem("authToken");

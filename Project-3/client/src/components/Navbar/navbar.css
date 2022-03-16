@@ -5,6 +5,7 @@
     overflow: hidden;
     height: 70px;
     background-color: black;
+    z-index: 999;
 }
   
   /* Add animation (fade in the popBtn) */

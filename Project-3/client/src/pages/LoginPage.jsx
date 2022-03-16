@@ -47,30 +47,45 @@ export default function LogIn({ authenticate }) {
   return (
 
     
-    <div className="margin-top ">
+    <div>
 
-      <div className="flex-center">
-        <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-        <Link exact= "true" to="/" className="goback"> Go back</Link>
+<div className="flex-center mt-2 mb-2">
+        <img
+          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+          alt="arrow back"
+          className="goBackBtn"
+        />
+        <Link exact="true" to="/">
+          Go back
+        </Link>
       </div>
 
       <h1>Login</h1>
 
 
       <form onSubmit={handleLoginSubmit} className="auth__form">
-        <label>Username:</label>
-        <input type="text" name="username" value={username} onChange={handleUsername} />
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
+      <div class="form-floating">
 
-        <button className="button__submit" type="submit">Login</button>
+        <input id="inputUsername" className="form-control" type="text" name="username" value={username} onChange={handleUsername} />
+        <label for="inoutUsername">Username:</label>
+        </div>
+
+        <div class="form-floating">
+
+        <input id="inputPassword" className="form-control" type="password" name="password" value={password} onChange={handlePassword} />
+        <label for="inputPassword">Password:</label>
+        </div>
+
+        <button className="btn btn-warning" type="submit">Login</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
-
+      <br></br>
+      <br></br>
+      <br></br>
       <p>Don't have an account yet?</p>
 
-      <Link to={"/signup"}> Sign Up</Link>
+      <Link to={"/signup"}><button className="btn btn-info">Sign Up</button></Link>
     
     </div>
 
