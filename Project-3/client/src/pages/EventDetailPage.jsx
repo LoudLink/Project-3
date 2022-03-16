@@ -29,13 +29,47 @@ function EventDetailPage(props) {
   }, [id, isLoading]);
 
 
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
+  }
+
 
   return (
 
     event._id ?
 
     <div>
-      {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
+    {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
+    <div>
+    
+          <div className="flex-center mt-2 mb-2">
+            <img
+              src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+              alt="arrow back"
+              className="goBackBtn"
+            />
+            {isLoggedIn ? (
+              <Link exact="true" to="/main">
+                Go back
+              </Link>
+            ) : (
+              <Link exact="true" to="/">
+                Go back
+              </Link>
+            )}
+          </div>
+
+      <img src={event.image} alt={event.title} className="img-fluid img-detail"/>
+      <div className="text-start ms-4 mt-4">
+      <h2  className="card-title">{capitalize(event.title)}</h2>
+      <p><b>Hosted by:</b> {event.owner[0].username}</p>
+      <p className="card-text">{event.description}</p>
+
+      <p className="card-text"><b>When:</b> {new Date(event.date).toDateString()}</p>
+
+      <p className="card-text"><b>Time:</b> {event.schedule}</p>
+      <p className="card-text"><b>At:</b> {event.location}</p>
+      <p className="card-text"><b>How much:</b> {event.price}€</p>
       <div>
         <div className="flex-center">
           <img
@@ -60,8 +94,10 @@ function EventDetailPage(props) {
         </div>
         <Mapbox/>
       </div>
-      }
+      </div>
       {isLoggedIn && <Navbar />  }
+      </div>
+      }
     </div>
     :
     <Spinner />

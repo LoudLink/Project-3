@@ -1,50 +1,54 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
+
+import { useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import Navbar from "../components/Navbar/Navbar";
 import IsPrivate from "../components/IsPrivate/IsPrivate";
 
-function AnnouncementDetailPage(props) {
-  const { id } = useParams();
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
-  const [announcement, setAnnouncement] = useState({
-    title: "",
-    description: "",
-    participants: [],
-    accepted: [],
-    owner: [],
-  });
+function AnnouncementDetailPage(props){
+    const { id } = useParams()
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-      .then((response) => setAnnouncement(response.data))
-      .catch(setAnnouncement(false));
-  }, [id]);
 
-  function apply() {
-    axios
-      .post(
-        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`
-      )
-      .then((res) => setAnnouncement(res.data));
-  }
+    const [announcement, setAnnouncement] = useState({
+        title: "",
+        description: "",
+        participants: [],
+        accepted: [],
+        owner:[]
+    })
 
-  function acceptParticipant(participant) {
-    const artist = participant.target.value;
-    axios
-      .put(
-        `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
-      )
-      .then((response) => {
-        setAnnouncement(response.data);
-      });
+
+    useEffect(() => {
+        axios
+          .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
+          .then((response) => setAnnouncement(response.data))
+          .catch(setAnnouncement(false));
+      }, [id]);
+
+      function apply(){        
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
+        .then((res) => setAnnouncement(res.data))
+      }
+
+      function acceptParticipant(participant){
+        const artist = participant.target.value
+        axios
+          .put(
+            `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/confirm/${artist}`
+          ).then((response)=>{
+            setAnnouncement(response.data)
+          })
+      }
+  
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
 
   return (
@@ -52,8 +56,10 @@ function AnnouncementDetailPage(props) {
       {!announcement ? (
         <h1>THIS ANNOUNCEMENT DOES NOT EXISTS</h1>
       ) : (
+     
+
         <div>
-          <div className="flex-center">
+          <div className="flex-center mt-2 mb-2">
             <img
               src="../../ios-arrow-back-logo-icon-png-svg (1).png"
               alt="arrow back"
@@ -69,16 +75,62 @@ function AnnouncementDetailPage(props) {
               </Link>
             )}
           </div>
-          <h2>WISH TO APLLY TO THIS ANNOUNCEMENT</h2>
-          <img src={announcement.image} alt={announcement.title} />
-          <h3>{announcement.title}</h3>
+          <div>
+            <img
+              src={announcement.image}
+              alt={announcement.title}
+              className="img-fluid img-detail"
+            />
+          </div>
 
-          <p>About: {announcement.description}</p>
-          <p>{announcement.tags}</p>
-          <p>At: {announcement.location}</p>
+          <div className="text-start ms-4 mt-4">
+            <h2 className="card-title">{capitalize(announcement.title)}</h2>
+
+            <p className="card-text">
+              <b>About:</b> {announcement.description}
+            </p>
+
+            <p className="card-text">
+              <b>Where:</b> {announcement.location}
+            </p>
+            <p className="card-text">
+              <b>Posted on:</b>{" "}
+              {new Date(announcement.announcementDate).toDateString()}
+            </p>
+
+
+            <p className="tags card-text">&nbsp;{announcement.tags}&nbsp;</p>
+          </div>
+          <hr class="dropdown-divider"></hr>
           <p>
-            Posted on: {new Date(announcement.announcementDate).toDateString()}
+            PENDING:
+            {announcement.participants.length === 0 ? (
+              <p>Nobody has apply to this announcement yet</p>
+            ) : (
+              <p>
+                Already {announcement.participants.length}
+                applied to this announcement{" "}
+              </p>
+            )}
+            <p>
+              <b>Do you have the requisites?</b>
+            </p>
+            <button onClick={apply} className="btn btn-warning">
+              APPLY
+            </button>
           </p>
+          <p className="card-text">
+            <b>Apply before:</b>{" "}
+            {new Date(announcement.expirationDate).toDateString()}
+          </p>
+
+        <p>
+        {announcement.participants.map((participant)=>(
+          <p>Pending for approval  <br></br>{participant.username} 
+          {user._id===announcement.owner[0] ? (<button onClick={acceptParticipant} value={participant._id}>Confirm</button>):(<p></p>)}
+          </p>
+        ))}
+        </p>
           <p>
             Apply before: {new Date(announcement.expirationDate).toDateString()}
           </p>

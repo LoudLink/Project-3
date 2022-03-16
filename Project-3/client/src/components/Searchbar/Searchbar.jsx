@@ -29,10 +29,12 @@ function handleInputChange(event) {
  }
     return(
         <div>
-            <input type='text' name='name' value={word} onChange={searching} placeholder='Search'/>
-            <select onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
+            <input type='search' name='name' value={word} onChange={searching} placeholder='Search...' className="form-control m-3" style={{width: 360}} />
+            <select onChange={handleInputChange} name="tags" id="userRequest_activity" className="form-select m-3" style={{width: 360}} aria-label="Default select example">
+            <option selected value={""}>Filter by tags:</option>
                 {Options.map((opt)=>(<option value={opt}>{opt}</option>))}
             </select>
+
         </div>
     )
 }

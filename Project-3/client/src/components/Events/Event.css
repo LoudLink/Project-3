@@ -9,20 +9,7 @@
     margin: 7px;
     background-color: white;
 }
-.eventCard img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-.card{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-.card p{
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
+
 
 .eventCard:hover {
     transform: scale(1.01);
