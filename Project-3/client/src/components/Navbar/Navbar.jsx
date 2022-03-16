@@ -41,11 +41,11 @@ useEffect(() => {
 
         <div className='navbar flex-row flex-evenly '>
 
-<div class="btn-group dropup">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+<div className="btn-group dropup">
+  <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Dropup
   </button>
-  <ul class="dropdown-menu">
+  <ul className="dropdown-menu">
     <p>PABLOOOOOO</p>
   </ul>
 </div>

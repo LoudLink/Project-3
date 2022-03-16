@@ -22,15 +22,15 @@ function HomePage() {
     <div className="App">
 
       <div className="homePageLanding carousel slide" id="carouselExampleSlidesOnly" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../../front-page.png" class="d-block w-100" alt="slide-1"  style={{height:250}}/>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="../../front-page.png" className="d-block w-100" alt="slide-1"  style={{height:250}}/>
           </div>
-          <div class="carousel-item">
-            <img src="../../slide-2.jpg" class="d-block w-100" alt="..." style={{height:250}} />
+          <div className="carousel-item">
+            <img src="../../slide-2.jpg" className="d-block w-100" alt="..." style={{height:250}} />
           </div>
-          <div class="carousel-item">
-            <img src="../../slide-3.jpg" class="d-block w-100" alt="..." style={{height:250}} />
+          <div className="carousel-item">
+            <img src="../../slide-3.jpg" className="d-block w-100" alt="..." style={{height:250}} />
           </div>
           <div className="homePageLinks display-6 text-center text-white">
           <Link exact="true" to={"/signup"} className=" display-6 text-center text-white  btn btn-dark">SIGNUP</Link>

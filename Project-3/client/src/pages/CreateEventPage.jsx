@@ -109,7 +109,7 @@ function CreateEventPage(props) {
 
       <form onSubmit={handleFormSubmission} className="auth__form">
 
-      <div class="form-floating">
+      <div className="form-floating">
         
         <input
           id="input-title"
@@ -125,7 +125,7 @@ function CreateEventPage(props) {
         <label for="input-title">Title</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-description"
@@ -140,7 +140,7 @@ function CreateEventPage(props) {
         <label for="input-description">Description</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-date"
@@ -155,7 +155,7 @@ function CreateEventPage(props) {
         <label for="input-date">Date</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-schedule"
@@ -169,7 +169,7 @@ function CreateEventPage(props) {
         <label for="input-schedule">Schedule</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-price"
@@ -182,7 +182,7 @@ function CreateEventPage(props) {
         <label for="input-price">Price</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <input
           id="input-location"
@@ -197,7 +197,7 @@ function CreateEventPage(props) {
         <label for="input-location">Location</label>
         </div>
 
-        <div class="form-floating">
+        <div className="form-floating">
 
         <select onChange={handleInputChange} name="tags" multiple size="5" className="form-control">
           {Options.map((e) => (

@@ -125,9 +125,11 @@ router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
   let videoId = req.params.videoId
   User.findByIdAndUpdate(userId, {$pullAll: {videos: [videoId]}}, {new : true})
   .populate("ownAnnouncements") 
+
   .populate("ownEvents")  
   .populate("announcements")
   .populate("acceptedAnnouncements")
+
   .then((response) => {res.json(response)})
 
   

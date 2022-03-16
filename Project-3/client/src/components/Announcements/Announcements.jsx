@@ -17,11 +17,11 @@ function Announcements() {
   }, []);
 
   return (
-    <div className="height">
+    <div>
       {announcements.length ? (
         announcements.map((announcement,indx) => (
           indx<=4 ?
-          (<div key={announcement._id}>
+          (<div key={announcement._id} className="test">
               <AnnouncementCard announcement={announcement} />
           </div>)
           : indx === announcements.length-1 ?

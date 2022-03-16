@@ -172,13 +172,13 @@ function AnnouncementEditPage(props){
           </div>
         )}
 
-        <button className="button__submit" type="submit">
+        <button className="btn btn-warning mb-4 mt-2" type="submit">
           Submit
         </button>
       </form>
 
 
-      <button className="button__submit" onClick={deleteAnnouncement}>
+      <button className="btn btn-danger" onClick={deleteAnnouncement}>
           Delete this announcement
         </button>
       <Navbar />
