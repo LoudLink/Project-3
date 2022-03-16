@@ -88,15 +88,7 @@ function AnnouncementDetailPage(props){
           </div>
           <hr className="dropdown-divider"></hr>
           <p>
-            PENDING:
-            {announcement.participants.length === 0 ? (
-              <p>Nobody has apply to this announcement yet</p>
-            ) : (
-              <p>
-                Already {announcement.participants.length}
-                applied to this announcement{" "}
-              </p>
-            )}
+           
             <p>
               <b>Do you have the requisites?</b>
             </p>
@@ -112,15 +104,13 @@ function AnnouncementDetailPage(props){
           </p>
         ))}
         </p>
+          
           <p>
-            Apply before: {new Date(announcement.expirationDate).toDateString()}
-          </p>
-          <p>
-            PENDING:
             {announcement.participants.length === 0 ? (
               <p>Nobody has apply to this announcement yet</p>
             ) : (
               <p>
+            PENDING:
               Already {announcement.participants.length}
                 apply to this announcement{" "}
 
@@ -144,7 +134,7 @@ function AnnouncementDetailPage(props){
           <p>
             {user._id === announcement.owner[0] ? (
               <Link exact={true} to={`/announcements/${id}/edit`}>
-                <button>Edit announcement</button>
+                <button className="btn btn-warning">Edit announcement</button>
               </Link>
             ) : (
               <p></p>
