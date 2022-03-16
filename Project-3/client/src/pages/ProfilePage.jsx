@@ -136,8 +136,8 @@ function ProfilePage(props) {
       });
   }
 
-  function capitalize(str){
-    return str? str[0].toUpperCase()+str.slice(1) : ""
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
 
   return user._id ? (
@@ -159,6 +159,8 @@ function ProfilePage(props) {
           <p className=" blockquote">{user.description}</p>
         </div>
 
+        
+
         <h3 className="display-6">Your videos</h3>
         {user.videos.length === 0 ? (
           <p>
@@ -167,22 +169,26 @@ function ProfilePage(props) {
           </p>
         ) : (
           <div className="dividersMain flex-row">
-          <div>
-          <div>
-          <div>
-          <p>
-            {user.videos.map((vid) => (
+            <div>
               <div>
-                <YoutubeEmbed embedId={vid} />
-                <button onClick={deleteVideo} value={vid} className="btn btn-danger mb-3">
-                  Delete this video
-                </button>
+                <div>
+                  <p>
+                    {user.videos.map((vid) => (
+                      <div>
+                        <YoutubeEmbed embedId={vid} />
+                        <button
+                          onClick={deleteVideo}
+                          value={vid}
+                          className="btn btn-danger mt-2 mb-4"
+                        >
+                          Delete this video
+                        </button>
+                      </div>
+                    ))}
+                  </p>
+                </div>
               </div>
-            ))}
-          </p>
-          </div>
-          </div>
-          </div>
+            </div>
           </div>
         )}
 
@@ -195,45 +201,105 @@ function ProfilePage(props) {
               &nbsp; #{tag} &nbsp;
             </p>
           ))}
-        </div>        
+        </div>
 
         <hr className="m-3 shadow-lg p-3 mb-5 bg-body rounded"></hr>
 
+        <div>
+          <p className="display-5">
+            <b>Your LoudLink</b>
+          </p>
+
+          <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
+          <div>
+            <h3
+              className="display-6 collapsed"
+              data-bs-toggle="collapse"
+              href="#collapseYourAnno"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseYourAnno"
+            >
+              Your announcements
+            </h3>
+            <img src="../../arrow-down.png" alt="arrow down" style={{width:10}}></img>
+            </div>
+            
+            {user.ownAnnouncements.length !== 0 ? (
+              user.ownAnnouncements.map((anno) => (
+                <div
+                  className="card ms-3 me-3 mb-1 text-center shadow"
+                  id="collapseYourAnno"
+                >
+                  <p>{capitalize(anno.title)}</p>
+                  <Link
+                    exact="true"
+                    to={`/announcements/${anno._id}`}
+                    className="link-info"
+                  >
+                    See more
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>You didn't publish any announcements yet...</p>
+            )}
+
+            <hr></hr>
+
               <div>
-              <p className="display-5"><b>Your LoudLink</b></p>
-                <div className="card m-3">
-                  
-        <h3 className="display-6">Your announcements</h3>
-        {user.ownAnnouncements.length !== 0 ? (
-          user.ownAnnouncements.map((anno) => (
-            <div className="card ms-3 me-3 mb-1 text-center shadow">
-              <p>{capitalize(anno.title)}</p>
-              <Link exact="true" to={`/announcements/${anno._id}`} className="link-info">See more</Link>
+            <h3
+              className="display-6 collapsed"
+              data-bs-toggle="collapse"
+              href="#collapseYourEvents"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseYourEvents"
+            >
+              Your events
+            </h3>
+            <img src="../../arrow-down.png" alt="arrow down" style={{width:10}}></img>
             </div>
-          ))
-        ) : (
-          <p>You didn't publish any announcements yet...</p>
-        )}
 
-        <hr></hr>
+            {user.ownEvents.length !== 0 ? (
+              user.ownEvents.map((e) => (
+                <div
+                  className="card ms-3 me-3 mb-1 text-center shadow"
+                  id="collapseYourEvents"
+                >
+                  <p>{capitalize(e.title)}</p>
+                  <p>
+                    <b>Date: </b>
+                    {new Date(e.date).toDateString()}
+                  </p>
+                  <Link
+                    exact="true"
+                    to={`/events/${e._id}`}
+                    className="link-info"
+                  >
+                    See more
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>You didn't publish any events yet...</p>
+            )}
 
-        <h3 className="display-6">Your events</h3>
-        {user.ownEvents.length !== 0 ? (
-          user.ownEvents.map((e) => (
-            <div>
-              <p>{e.title}</p>
-              <img src={e.image} alt="photo_event"></img>
-            </div>
-          ))
-        ) : (
-          <p>You didn't publish any events yet...</p>
-        )}
+            <hr></hr>
 
-        <hr></hr>
 
-        <h3 className="display-6">Applied announcements</h3>
-        {user.announcements.length !== 0 ? (user.announcements.map((anno)=>
-          <div className="anuncio">
+              <div>
+            <h3
+              className="display-6 collapsed"
+              data-bs-toggle="collapse"
+              href="#collapseAppliedAnno"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseAppliedAnno"
+            >
+              Applied announcements
+            </h3>
+            <img src="../../arrow-down.png" alt="arrow down" style={{width:10}}></img>
 
           <Link exact={true} to={`/announcements/${anno._id}`}>
           <button>
@@ -242,18 +308,66 @@ function ProfilePage(props) {
 
           </button>
           </Link>
-            </div>
-          )) : (<div><p>You haven't applied to any announcement yet!</p><Link exact="true" to="/announcements" className="link-info">Check other users' announcements here!</Link></div>) }
-        
-        {user.acceptedAnnouncements.length !==0 ? (<h3>Accepted announcements</h3>):(<p></p>)}
-        {user.acceptedAnnouncements.length !==0 ? (user.acceptedAnnouncements.map((anno)=>
-        <div>
-          <p>{anno.title}</p>
-        </div>
-        )) : (<p></p>)}
 
+            </div>
+            
+            {user.announcements.length !== 0 ? (
+              user.announcements.map((anno) => (
+                <div
+                  key={anno.id}
+                  className="card ms-3 me-3 mb-1 text-center shadow"
+                  id="collapseAppliedAnno"
+                >
+                  <p>{anno.title}</p>
+                  <p>
+                    <b>Created by: </b>
+                    {anno.owner[0]}
+                  </p>
+
+                  <Link exact={true} to={`/announcements/${anno._id}`} className="link-info">See more!</Link>
                 </div>
+              ))
+            ) : (
+              <div>
+                <p>You haven't applied to any announcement yet!</p>
+                <Link exact="true" to="/announcements" className="link-info">
+                  Check other users' announcements here!
+                </Link>
               </div>
+            )}
+
+            {user.acceptedAnnouncements.length !== 0 ? (
+              <div>
+              <h3
+                className="display-6 collapsed"
+                data-bs-toggle="collapse"
+                href="#collapseAcceptedAnno"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseAcceptedAnno"
+              >
+                Accepted announcements
+              </h3>
+              <img src="../../arrow-down.png" alt="arrow down" style={{width:10}}></img>
+              </div>
+              
+            ) : (
+              <p></p>
+            )}
+            {user.acceptedAnnouncements.length !== 0 ? (
+              user.acceptedAnnouncements.map((anno) => (
+                <div
+                  className="card ms-3 me-3 mb-1 text-center shadow"
+                  id="collapseAcceptedAnno"
+                >
+                  <p>{anno.title}</p>
+                </div>
+              ))
+            ) : (
+              <p></p>
+            )}
+          </div>
+        </div>
 
         <div>
           <div>
