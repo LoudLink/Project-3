@@ -69,7 +69,6 @@ function AnnouncementEditPage(props){
       }
 
       function deleteAnnouncement(){
-        console.log(id)
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/edit`)
         .then(navigate('/announcements'))
       }

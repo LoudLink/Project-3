@@ -77,6 +77,11 @@ function EventEditPage(props) {
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   }
+  function deleteEvent(){
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}/`)
+    .then()
+    .catch(navigate('/events'))
+  }
 
   return (
     <div>
@@ -189,6 +194,10 @@ function EventEditPage(props) {
         <button className="button__submit" type="submit">
           Submit
         </button>
+        <button className="button__submit" type="submit" onClick={deleteEvent}>
+          Delete
+        </button>
+        
       </form>
       <Navbar />
     </div>
