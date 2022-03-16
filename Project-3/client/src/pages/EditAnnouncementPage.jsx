@@ -128,7 +128,7 @@ function AnnouncementEditPage(props){
           type="date"
           name="date"
           min={new Date().toISOString().slice(0,10)}
-          value={anno.announcementDate && anno.announcementDate.slice(0,10)}
+          value={announcement.announcementDate && announcement.announcementDate.slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
