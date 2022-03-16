@@ -87,7 +87,7 @@ function AnnouncementEditPage(props){
           Go back
         </Link>
       </div>
-      <h2>EDIT EVENT</h2>
+      <h2>EDIT ANNOUNCEMENT</h2>
       <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-title">Title</label>
         <input
@@ -126,9 +126,9 @@ function AnnouncementEditPage(props){
         <input
           id="input-announcementDate"
           type="date"
-          name="announcementDate"
-          value={announcementDate}
+          name="date"
           min={new Date().toISOString().slice(0,10)}
+          value={anno.announcementDate && anno.announcementDate.slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"

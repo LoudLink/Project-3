@@ -26,7 +26,10 @@ function EventEditPage(props) {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`)
-      .then((response) => setEvent(response.data))
+
+      .then((response) => {
+        setEvent(response.data);
+      })
       .catch((error) => console.log(error));
   }, [id]);
 
@@ -70,8 +73,6 @@ function EventEditPage(props) {
         uploadImgForm
       )
       .then((response) => {
-        console.log("response is: ", response);
-
         setEvent((oldEvent) => ({ ...oldEvent, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
@@ -120,13 +121,13 @@ function EventEditPage(props) {
         )}
         <input type="file" name="image" onChange={handleImgUpload}></input>
 
-
         <label htmlFor="input-date">Date</label>
         <input
           id="input-date"
           type="date"
           name="date"
-          value={event.date}
+          min={new Date().toISOString().slice(0, 10)}
+          value={event.date && event.date.slice(0, 10)}
           onChange={handleInputChange}
           required
           minLength="8"

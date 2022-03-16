@@ -7,6 +7,8 @@ import "./auth.css";
 import { Options } from "../utils/tags";
 import "./EditProfilePage.css";
 
+
+
 function EditProfilePage(props) {
   const [user, setUser] = useState({});
   const { id } = useParams();
@@ -142,7 +144,7 @@ function EditProfilePage(props) {
           Submit
         </button>
       </form>
-
+       
       <Navbar />
     </div>
   );

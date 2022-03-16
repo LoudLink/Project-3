@@ -1,23 +1,26 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import Searchbar from '../components/Searchbar/Searchbar';
 import UserCard from '../components/UserCard/UserCard'
 import axios from 'axios';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import {AuthContext} from '../context/auth.context'
+
 
 function AllProfiles(props) {
     const[users,setUsers]=useState([]);
     const[filteredUsers,setFilteredUsers]=useState([]);
+    const { user: currentUser } = useContext(AuthContext);
 
     useEffect(()=>{
     axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users`)
     .then((response)=>{
         setUsers(response.data)
-        setFilteredUsers(response.data)
+        setFilteredUsers(response.data.filter((user) => user._id !== currentUser?._id)) 
     })
     .catch((err)=>console.log('CAGADAAAAAAAA',err))
-},[])
+    },[currentUser?._id])
 
     function search(str){
         const strLength = str.length

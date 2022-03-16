@@ -17,7 +17,7 @@ function Announcements() {
   }, []);
 
   return (
-    <div>
+    <div className="height">
       {announcements.length ? (
         announcements.map((announcement,indx) => (
           indx<=4 ?

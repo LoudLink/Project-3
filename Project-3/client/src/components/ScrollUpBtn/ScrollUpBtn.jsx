@@ -25,7 +25,7 @@ function ScrollUpBtn(props) {
     }
     return (
         <div>
-            <button onClick={topFunction} id="myBtn" title="Go to top">Top</button>
+            <button onClick={topFunction} id="myBtn" title="Go to top" className="btn btn-danger text-lead">Top</button>
         </div>
     );
 }

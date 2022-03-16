@@ -11,11 +11,14 @@ function ErrorPage(){
 
     return(
         <div>
+        <div className="m-5 text-justify">
         <h2> Oopsie! Where are you trying to go sneaky weasel? </h2>
+        <br></br>
         <h2>This page does not exist... at least for now!</h2>
-        <button><Link exact= "true" to={"/"}>GO BACK</Link></button>
         </div>
-
+        
+        <button className="btn btn-warning mt-5"><Link exact= "true" to={"/"}>GO BACK</Link></button>
+        </div>
     )
 
 }

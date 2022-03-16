@@ -58,12 +58,6 @@ router.put("/:userId", (req, res) => {
 
     let usernameToLowerCase = username.toLowerCase();
 
-    console.log(req.file)
-
-
-
-
-
   User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));

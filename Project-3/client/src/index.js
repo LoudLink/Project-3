@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProviderWrapper } from "./context/auth.context"; 
+import { AuthProviderWrapper } from "./context/auth.context";
+//import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 
 ReactDOM.render(

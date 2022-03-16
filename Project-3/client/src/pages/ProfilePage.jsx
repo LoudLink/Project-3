@@ -93,7 +93,6 @@ function ProfilePage(props) {
         //console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
         axios
           .delete(
-
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,
             { headers: { Authorization: `Bearer ${storedToken}` } }
           )

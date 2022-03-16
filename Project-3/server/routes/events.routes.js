@@ -12,6 +12,7 @@ const fileUploader = require("../config/cloudinary.config");
 
 router.get("/", (req, res) => {
   Event.find()
+  .populate("owner")
     .then((events) => res.json(events))
     .catch((error) => res.json(error));
 });

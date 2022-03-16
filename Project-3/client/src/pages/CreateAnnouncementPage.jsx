@@ -86,33 +86,44 @@ function CreateAnnouncementPage(props) {
 
   return (
     <div>
-      <div className="flex-center">
+      <div className="flex-center mt-2 mb-2">
         <img
           src="../../ios-arrow-back-logo-icon-png-svg (1).png"
           alt="arrow back"
           className="goBackBtn"
         />
-        <Link exact= "true" to="/main">
+        <Link exact="true" to="/main">
           Go back
         </Link>
       </div>
-      <h2>CREATE ANNOUNCEMENT</h2>
+      <h2 className="card-title">CREATE AN ANNOUNCEMENT</h2>
+
       <form onSubmit={handleFormSubmission} className="auth__form">
-        <label htmlFor="input-title">Title</label>
+
+      <div class="form-floating">
+      
         <input
-          id="input-title"
           type="text"
+          id="floatingInput"
+          className="form-control"
           name="title"
           placeholder="Choose your title"
           value={title}
           onChange={handleInputChange}
           required
+          minLength="8"
+          maxLength="20"
         />
+        <label for="floatingInput">Title</label>
+        </div>
 
-        <label htmlFor="input-description">Description</label>
+
+  <div class="form-floating mb-3">
+        
         <input
-          id="input-description"
+          id="inputDescription"
           type="description"
+          className="form-control"
           name="description"
           placeholder="Description"
           value={description}
@@ -120,6 +131,8 @@ function CreateAnnouncementPage(props) {
           required
           minLength="8"
         />
+        <label for="inputDescription">Description</label>
+        </div>
 
         <label>Image:</label>
         {announcement.image ? (
@@ -132,40 +145,56 @@ function CreateAnnouncementPage(props) {
         <label htmlFor="input-date">Date</label>
 
         <label htmlFor="input-announcementDate">Date</label>
+        <div class="form-floating mb-3">
+        
         <input
-          id="input-announcementDate"
+          id="inputAnnouncementDate"
           type="date"
+          className="form-control"
           name="announcementDate"
           value={announcementDate}
           min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
-          minLength="8"
         />
+        <label for="inputAnnouncementDate">Date</label>
 
-        <label htmlFor="input-expirationDate">Expiration Date</label>
+        </div>
+
+        <div class="form-floating mb-3">
+        
         <input
           id="input-expirationDate"
           type="date"
           name="expirationDate"
+          className="form-control"
           value={expirationDate}
           min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
-          minLength="8"
         />
+        <label htmlFor="input-expirationDate">Expiration Date</label>
+        </div>
 
-        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
-        <select onChange={handleInputChange} name="tags" multiple>
+        <div class="form-floating mb-3">
+
+        
+        <select id="input-tags" className="form-control" onChange={handleInputChange} name="tags" multiple>
           {Options.map((e) => (
             <option value={e}>{e}</option>
           ))}
         </select>
+        <label for="input-tags" className="text-end">Select up to 5 tags that define you</label>
 
-        <label htmlFor="input-location">Location</label>
+        </div>
+
+        <div class="form-floating mb-3">
+
+        
         <input
           id="input-location"
           type="location"
+          className="form-control"
           name="location"
           placeholder="Where?"
           value={location}
@@ -173,6 +202,8 @@ function CreateAnnouncementPage(props) {
           required
           minLength="4"
         />
+        <label for="input-location">Location</label>
+        </div>
 
         {error && (
           <div className="error-block">
@@ -181,7 +212,7 @@ function CreateAnnouncementPage(props) {
           </div>
         )}
 
-        <button className="button__submit" type="submit">
+        <button className="btn btn-warning" type="submit">
           Submit
         </button>
       </form>

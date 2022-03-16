@@ -9,15 +9,21 @@ function EventCard(props) {
     }
 
     return (
-        <div className='eventCard'>
-            <div className='card'>
-                <h2>{capitalize(props.event.title)}</h2>
-                <img src={props.event.image} alt='event-pic' className='miAnuncio'></img>
-                <p>{props.event.description}</p>
-                <p>{props.event.owner[0]}</p>
-                <Link exact= "true" to={`/events/${props.event._id}`}>Read More</Link>
+
+        <div className="card m-3 shadow rounded" style={{width: 288, height: 500}}>
+            <Link exact= "true" to={`/events/${props.event._id}`}>
+            <div>
+                <img src={props.event.image} alt='event-pic' className='card-img-top' style={{width: 286, height: 300, backgroundColor:'black'}}></img>
             </div>
+            <div className="card-body text-start">
+                <h2 className='card-title display-6'><b>{capitalize(props.event.title)}</b></h2>
+                <p className='card-text lead'>{props.event.description}</p>
+                <p className='card-text lead'>{new Date(props.event.date).toDateString()}</p>
+                <p className='card-text lead'><b>Hosted by: </b>{props.event.owner[0].username}</p>
+            </div>
+            </Link>
         </div>
+
     );
 }
 
