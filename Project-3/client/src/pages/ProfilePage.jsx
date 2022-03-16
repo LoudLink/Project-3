@@ -109,14 +109,24 @@ function ProfilePage(props) {
 
 
   function deleteVideo(vid) {
+
+    const storedToken = localStorage.getItem("authToken");
+
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
     const deletedvid = vid.target.value;
     axios
       .delete(
         `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
       )
       .then((response) => {
-        setUser(response.data);
-      });
+        console.log("VIDEO RESPONSE", response.data)
+        setUser(response.data)
+      })
+     })
     }
 
   return user._id ? (

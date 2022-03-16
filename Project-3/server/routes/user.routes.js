@@ -54,14 +54,20 @@ router.put("/:userId", (req, res) => {
     return;
   }
 
-    const { username, description, tags, location, videos, image } = req.body
+  
+  const { username, description, tags, location, videos, image } = req.body
+  
+  let usernameToLowerCase = username.toLowerCase();
+  
 
-    let usernameToLowerCase = username.toLowerCase();
 
-  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
+
+  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $addToSet:{videos: videos}}, { new: true })
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
 });
+
+
 //---------------------------------------------------------------------------
 //--------------------------UPLOAD IMAGE FOR USER----------------------------
 //---------------------------------------------------------------------------
@@ -118,6 +124,10 @@ router.delete('/:userId/deletevideo/:videoId', (req, res)=>{
   let userId = req.params.userId
   let videoId = req.params.videoId
   User.findByIdAndUpdate(userId, {$pullAll: {videos: [videoId]}}, {new : true})
+  .populate("ownAnnouncements") 
+  .populate("ownEvents")  
+  .populate("announcements")
+  .populate("acceptedAnnouncements")
   .then((response) => {res.json(response)})
 
   
