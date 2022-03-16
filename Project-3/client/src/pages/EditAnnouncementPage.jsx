@@ -79,7 +79,7 @@ function AnnouncementEditPage(){
           Go back
         </Link>
       </div>
-      <h2>EDIT EVENT</h2>
+      <h2>EDIT ANNOUNCEMENT</h2>
       <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-title">Title</label>
         <input
@@ -116,30 +116,11 @@ function AnnouncementEditPage(){
           id="input-date"
           type="date"
           name="date"
-          value={anno.date}
+          min={new Date().toISOString().slice(0,10)}
+          value={anno.announcementDate && anno.announcementDate.slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
-        />
-
-        <label htmlFor="input-schedule">Schedule</label>
-        <input
-          id="input-schedule"
-          type="time"
-          name="schedule"
-          value={anno.schedule}
-          onChange={handleInputChange}
-          required
-          minLength="8"
-        />
-
-        <label htmlFor="input-price">Price</label>
-        <input
-          id="input-price"
-          type="price"
-          name="price"
-          value={anno.price}
-          onChange={handleInputChange}
         />
 
         <label htmlFor="input-location">Location</label>

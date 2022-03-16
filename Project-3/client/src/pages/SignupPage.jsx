@@ -63,52 +63,76 @@ export default function Signup({ authenticate }) {
 
   return (
     
-    <div className="margin-top">
-    <div className="flex-center">
-      <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-      <Link exact= "true" to="/"> Go back</Link>
-    </div>
-      <h2>SIGN UP</h2>
+    <div>
+      <div className="flex-center mt-2 mb-2">
+        <img
+          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+          alt="arrow back"
+          className="goBackBtn"
+        />
+        <Link exact="true" to="/">
+          Go back
+        </Link>
+      </div>
+
+      <h2 className="card-title">SIGN UP</h2>
+
       <form onSubmit={handleFormSubmission} className="auth__form">
-        <label htmlFor="input-username">Username</label>
+
+      <div class="form-floating">
+
         <input
           id="input-username"
           type="text"
           name="username"
+          className="form-control"
           placeholder="Choose your username"
           value={username}
           onChange={handleInputChange}
           required
         />
+        <label for="input-username">Username</label>
+        </div>
 
-        <label htmlFor="input-password">Password</label>
+        <div class="form-floating">
+
         <input
           id="input-password"
           type="password"
           name="password"
           placeholder="Password"
+          className="form-control"
           value={password}
           onChange={handleInputChange}
           required
           minLength="8"
         />
+        <label for="input-password">Password</label>
+        </div>
 
-        <label htmlFor="input-email">Email</label>
+        <div class="form-floating">
+
         <input
           id="input-email"
           type="email"
           name="email"
           placeholder="email"
+          className="form-control"
           value={email}
           onChange={handleInputChange}
           required
           minLength="8"
         />
+        <label for="input-email">Email</label>
+        </div>
 
-        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
-        <select  onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
+        <div class="form-floating">
+
+        <select className="form-control" size="6" onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
             {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}
         </select>
+        <label for="input-tags">Select up to 5 tags that define you</label>
+        </div>
 
         {error && (
           <div className="error-block">
@@ -117,7 +141,7 @@ export default function Signup({ authenticate }) {
           </div>
         )}
 
-        <button className="button__submit" type="submit">
+        <button className="btn btn-warning mt-5" type="submit">
           Submit
         </button>
       </form>

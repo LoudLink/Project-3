@@ -1,29 +1,23 @@
 .announcementCard{
     display: flex;
     flex-direction: column;
-    width: 299px;
+    width: 299.2px;
     height: 300px;
-    border:1px solid rgb(184, 184, 184);
+    border:1px solid black;
+    border-inline: 2px black solid;
     border-radius:15px;
     background-color: white;
     margin: 7px;
     z-index: 99;
 }
 .announcementCard img{
+    overflow: hidden;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    position: relative;
-    top: 0;
-    width: 300px;
+    width: 100%;
     height: 200px;
 }
-.card{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .announcementCard:hover {
     transform: scale(1.01);

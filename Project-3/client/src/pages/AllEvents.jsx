@@ -6,14 +6,20 @@ import Events from '../components/Events/Events'
 import Navbar from '../components/Navbar/Navbar';
 import ScrollUpBtn from '../components/ScrollUpBtn/ScrollUpBtn';
 import Searchbar from '../components/Searchbar/Searchbar';
+
 import UserCard from '../components/UserCard/UserCard';
+
 import { AuthContext } from '../context/auth.context';
 
 function AllEvents(props) {
     const[events,setEvents]=useState([])
     const[eventsFiltered,setFilteredEvents]=useState([])
+
+    const {isLoggedIn} = useContext(AuthContext);
+
     const{user}=useContext(AuthContext)
     
+
 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/events`)
@@ -45,25 +51,41 @@ function AllEvents(props) {
 
 
     return (
-        
-        <div className='margin-top'>
-            <div className="flex-center">
-                <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-                <Link exact= "true" to="/main" className='goback'> Go back</Link>
-            </div>
+
+        <div>
+            <div className="flex-center mt-2 mb-2">
+        <img
+          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+          alt="arrow back"
+          className="goBackBtn"
+        />
+        {isLoggedIn ?
+        <Link exact="true" to="/main">
+          Go back
+        </Link>
+        :
+        <Link exact="true" to="/">
+          Go back
+        </Link>
+        }
+      </div>
             <h1>Check all the events</h1>
             <ScrollUpBtn />
             <Searchbar filter={search} searchTags={searchTags} />
-
-            {user === null ?(<p></p>):(<Navbar />)}
             
-            <div className='flex-center-justify'>
+            <div className="flex-column">
+            
+
+            
+            
+            
+
                 {eventsFiltered.map((event)=>(
                     <EventCard key={event._id} event={event} />
                 ))}
             </div>
-            <Link to='/events/create-event'><button>Create Event</button></Link>
-            
+            <Link to='/events/create-event'><button className="btn btn-warning">Create Event</button></Link>
+            {user === null ?(<p></p>):(<Navbar />)}
         </div>
     );
 }

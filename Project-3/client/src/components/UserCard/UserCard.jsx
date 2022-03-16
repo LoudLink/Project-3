@@ -9,12 +9,13 @@ function UserCard(props) {
 
     return (
         
-        <div className='UserCard'>
-            <div className='card'>
-                <h2>{capitalize(props.profile.username)}</h2>
-                <img src={props.profile.image} alt='profile-pic' className='miAnuncio'></img>
-                <Link exact= "true" to={`/users/${props.profile._id}`}>Read More</Link>
-            </div>
+        <div style={{width: 130}}>
+        <Link exact= "true" to={`/users/${props.profile._id}`}>
+            
+                <img src={props.profile.image} alt='profile-pic' className='img-thumbnail' style={{width: 100, height: 100, borderRadius: 50, borderColor: 'black'}}></img>
+                <h4 className='lead'>{capitalize(props.profile.username)}</h4>
+            
+            </Link>
         </div>
         
     );
