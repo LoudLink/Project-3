@@ -18,18 +18,17 @@ export default function Signup({ authenticate }) {
   const { username, password, email, tags } = form;
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(undefined);
   
   function check(j) {
     console.log("caca",form.tags.length)
-    
-      
   }
 
   function handleInputChange(event) {
 
-    if(form.tags.length > 2){
+    if(form.tags.length > 5){
       form.tags.pop()
-    alert("Please select only 3")
+    alert("Please select only 5")
   }
 
     const { name, value } = event.target;
@@ -57,6 +56,12 @@ export default function Signup({ authenticate }) {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, credentials)
     .then((response) => {
       navigate("/login")
+      console.log("ERRRRRRRORRRRRR", response.data.error)
+    })
+    .catch((error) => {
+      const errorDescription = error.response.data.message;
+      console.log("ERRRRRRRORRRRRR",error.response.data.message)
+      setErrorMessage(errorDescription);
     })
     
   }
@@ -128,16 +133,16 @@ export default function Signup({ authenticate }) {
 
         <div className="form-floating">
 
-        <select className="form-control" size="6" onChange={handleInputChange} name="tags" multiple id="userRequest_activity">
+        <select className="form-control" size="6" onChange={handleInputChange} name="tags" required multiple min="5" id="userRequest_activity">
             {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}
         </select>
         <label for="input-tags">Select up to 5 tags that define you</label>
         </div>
 
-        {error && (
+        {errorMessage && (
           <div className="error-block">
             <p>There was an error submiting the form:</p>
-            <p>{error.message}</p>
+            <p>{errorMessage}</p>
           </div>
         )}
 
