@@ -10,9 +10,10 @@ const userSchema = new Schema(
     description: {type: String, maxlength: 400, default:"Hi! I'm new in LoudLink and ready to hear from you :)"},
     tags:{type: [String], default: []},
     location: {type: String},
-    videos: {type: [String]},
+    videos: {type: [String], default: []},
     ownAnnouncements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
     announcements: [{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
+    acceptedAnnouncements:[{type: Schema.Types.ObjectId, ref:'Announcement', default: []}],
     ownEvents:[{type: Schema.Types.ObjectId, ref:'Event', default: []}]
   }
 );

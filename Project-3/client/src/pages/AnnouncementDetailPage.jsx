@@ -12,13 +12,6 @@ function AnnouncementDetailPage(props){
     const { id } = useParams()
     const { isLoggedIn, isLoading } = useContext(AuthContext);
     const {user} = useContext(AuthContext);
-    const navigate = useNavigate();
-
-
-
-
-
-
 
     const [announcement, setEvent] = useState({
         title: "",
@@ -31,13 +24,21 @@ function AnnouncementDetailPage(props){
     useEffect(() => {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
-          .then((response) => setEvent(response.data))
-          .catch(setEvent(false));
+          .then((response) => {
+            setEvent(response.data)
+          })
+          .catch(setEvent({
+            title: "",
+            description: "",
+            participants: [],
+            accepted: []
+         }));
       }, [id]);
 
       function apply(){        
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${user._id}/apply/${id}`)
         .then((res) => setEvent(res.data))
+        .catch();
       }
 
       function acceptParticipant(participant){
@@ -48,6 +49,7 @@ function AnnouncementDetailPage(props){
           ).then((response)=>{
             setEvent(response.data)
           })
+          .catch();
       }
 
 
@@ -79,10 +81,10 @@ function AnnouncementDetailPage(props){
         <p>Posted on: {new Date(announcement.announcementDate).toDateString()}</p>
         <p>Apply before: {new Date(announcement.expirationDate).toDateString()}</p>
         <p>PENDING: 
-        { announcement.participants.length === 0 ? 
+        {/* announcement.participants.length === 0 ? 
         <p>Nobody has apply to this announcement yet</p> 
         : <p>Already {announcement.participants.length} 
-        apply to this announcement </p>}
+        apply to this announcement </p>*/}
         <button onClick={apply}>APPLY</button>
         </p>
 
@@ -99,7 +101,13 @@ function AnnouncementDetailPage(props){
 
         <p>CONFIRMED ARTISTS:
           {announcement.accepted.map((artist)=>(
-            <p>{artist.username}</p>
+            <p>
+            <Link exat={true} to={`/users/${artist._id}`}>
+            <button>
+            {artist.username}
+            </button>
+            </Link>
+            </p>
           ))}
         </p>
           

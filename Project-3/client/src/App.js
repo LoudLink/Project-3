@@ -97,7 +97,7 @@ export default function App() {
         <Route exact= "true" path="/main" element={<IsPrivate> <MainPage/> </IsPrivate>}/>
         <Route exact= "true" path="/events" element={<AllEvents/>}/>
         <Route exact= "true" path="/announcements" element={<AllAnnouncements/>}/>
-        <Route exact= "true" path="/announcements/:id" element={<AnnouncementDetailPage/>}/>
+        <Route exact= "true" path="/announcements/:id" element={<AnnouncementDetailPage/> }/>
         <Route exact= "true" path="/announcements/:id/edit" element={<EditAnnouncementPage/>}/>
         <Route exact= "true" path="/users" element={<IsPrivate> <AllUsers/> </IsPrivate>}/>
         <Route exact= "true" path="/" element={<HomePage/>}/>

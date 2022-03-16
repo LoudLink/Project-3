@@ -4,29 +4,30 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { AuthContext } from "../context/auth.context";
 
-function AnnouncementEditPage(){
-    const [anno, setAnno] = useState({});
+import { Options } from "../utils/tags";
+
+function AnnouncementEditPage(props){
+    const [announcement, setAnno] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
     const{
-        title,
-        description,
-        image,
-        announcementDate,
-        expirationDate,
-        active,
-        tags,
-        participants,
-        accepted
-    } = anno
+      title,
+      description,
+      image,
+      announcementDate,
+      expirationDate,
+      location,
+      tags,
+    } = announcement
 
     const { user } = useContext(AuthContext);
 
     const [error, setError] = useState(null);
 
     useEffect(() => {
+      
         axios
-          .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}`)
+          .get(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/edit`)
           .then((response) => setAnno(response.data))
           .catch((error) => console.log(error));
       }, [id]);
@@ -35,9 +36,9 @@ function AnnouncementEditPage(){
         e.preventDefault();
 
         axios
-            .put(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`, anno)
-            .then(console.log("announcemnt updated"))
-            .catch((error) => console.log(error))
+            .put(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/edit`, announcement)
+            .then()
+            .catch(navigate(`/announcements/${id}`))
      }
 
 
@@ -50,7 +51,7 @@ function AnnouncementEditPage(){
     
         axios
           .post(
-            `${process.env.REACT_APP_SERVER_URL}/api/events/${id}/img-upload`,
+            `${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/img-upload`,
             uploadImgForm
           )
           .then((response) => {
@@ -64,8 +65,15 @@ function AnnouncementEditPage(){
      function handleInputChange(e) {
         e.preventDefault();
         const { name, value } = e.target;
-        setAnno((anno) => ({ ...anno, [name]: value }));
+        setAnno((announcement) => ({ ...announcement, [name]: value }));
       }
+
+      function deleteAnnouncement(){
+        console.log(id)
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/edit`)
+        .then(navigate('/announcements'))
+      }
+
 
       return (
         <div>
@@ -86,7 +94,8 @@ function AnnouncementEditPage(){
           id="input-title"
           type="text"
           name="title"
-          value={anno.title}
+          placeholder="Choose your title"
+          value={title}
           onChange={handleInputChange}
           required
         />
@@ -96,77 +105,65 @@ function AnnouncementEditPage(){
           id="input-description"
           type="description"
           name="description"
-          value={anno.description}
+          placeholder="Description"
+          value={description}
           onChange={handleInputChange}
           required
           minLength="8"
         />
 
         <label>Image:</label>
-        {anno.image ? (
-          <img src={anno.image} alt="eventpic" />
+        {announcement.image ? (
+          <img src={announcement.image} alt="eventpic" />
         ) : (
           <p>No image yet</p>
         )}
         <input type="file" name="image" onChange={handleImgUpload}></input>
 
-
         <label htmlFor="input-date">Date</label>
+
+        <label htmlFor="input-announcementDate">Date</label>
         <input
-          id="input-date"
+          id="input-announcementDate"
           type="date"
-          name="date"
-          value={anno.date}
+          name="announcementDate"
+          value={announcementDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
         />
 
-        <label htmlFor="input-schedule">Schedule</label>
+        <label htmlFor="input-expirationDate">Expiration Date</label>
         <input
-          id="input-schedule"
-          type="time"
-          name="schedule"
-          value={anno.schedule}
+          id="input-expirationDate"
+          type="date"
+          name="expirationDate"
+          value={expirationDate}
+          min={new Date().toISOString().slice(0,10)}
           onChange={handleInputChange}
           required
           minLength="8"
         />
 
-        <label htmlFor="input-price">Price</label>
-        <input
-          id="input-price"
-          type="price"
-          name="price"
-          value={anno.price}
-          onChange={handleInputChange}
-        />
+        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
+        <select onChange={handleInputChange} name="tags" multiple>
+          {Options.map((e) => (
+            <option value={e}>{e}</option>
+          ))}
+        </select>
 
         <label htmlFor="input-location">Location</label>
         <input
           id="input-location"
           type="location"
           name="location"
-          value={anno.location}
+          placeholder="Where?"
+          value={location}
           onChange={handleInputChange}
           required
-          minLength="8"
+          minLength="4"
         />
-
-        <label htmlFor="input-tags">
-          Select up to 5 tags to define what you're searching for
-        </label>
-        <select
-          onChange={handleInputChange}
-          value={anno[tags]}
-          name="tags"
-          multiple
-        >
-          <option value="rock">Rock</option>
-          <option value="classical">Classical</option>
-          <option value="band">Band</option>
-          <option value="sound-tech">Sound Tech</option>
-        </select>
 
         {error && (
           <div className="error-block">
@@ -179,6 +176,11 @@ function AnnouncementEditPage(){
           Submit
         </button>
       </form>
+
+
+      <button className="button__submit" onClick={deleteAnnouncement}>
+          Delete this announcement
+        </button>
       <Navbar />
     </div>
       );

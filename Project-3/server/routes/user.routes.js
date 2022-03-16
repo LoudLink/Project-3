@@ -33,8 +33,10 @@ router.get("/:userId", (req, res) => {
   }
 
   User.findById(userId)
-
-    .populate('ownAnnouncements ownEvents announcements')    
+    .populate("ownAnnouncements") 
+    .populate("ownEvents")  
+    .populate("announcements")
+    .populate("acceptedAnnouncements")
     .then((user) => res.status(200).json(user))
     .catch((err) => res.json(err));
 });
@@ -62,7 +64,7 @@ router.put("/:userId", (req, res) => {
 
 
 
-  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:[videos]}}, { new: true })
+  User.findByIdAndUpdate(userId, { username: usernameToLowerCase, image, description, tags, location, $push:{videos:videos}}, { new: true })
     .then((updatedUser) => res.status(200).json(updatedUser))
     .catch((error) => res.json(error));
 });

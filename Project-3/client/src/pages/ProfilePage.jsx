@@ -24,6 +24,7 @@ function ProfilePage(props) {
     videos: [],
     ownAnnouncements: [],
     announcements: [],
+    acceptedAnnouncements: [],
     ownEvents: [],
   });
 
@@ -40,6 +41,7 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
           )
           .then((res) => {
+            console.log("HERE IS THE PROBLEM" , res.data)
             setUser(res.data);
           })
           .catch((err) => console.log(err));
@@ -106,6 +108,7 @@ function ProfilePage(props) {
   }
 
 
+
   function deleteVideo(vid) {
     const deletedvid = vid.target.value;
     axios
@@ -154,9 +157,22 @@ function ProfilePage(props) {
         <h3>Announcements</h3>
         {user.announcements.map((anno)=>
           <div className="anuncio">
-              <p>{anno.title}</p>
+
+          <Link exact={true} to={`/announcements/${anno._id}`}>
+          <button>
+              <p key={anno.id}>{anno.title}</p>
+          </button>
+          </Link>
             </div>
           )}
+        
+        <h3>Accepted announcements</h3>
+        {user.acceptedAnnouncements.map((anno)=>
+        <div>
+          <p>{anno.title}</p>
+        </div>
+        )}
+
         <h3>Your announcements</h3>
         <div className="anuncio-row">
           {user.ownAnnouncements.map((anno) => (
