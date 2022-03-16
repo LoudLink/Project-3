@@ -59,28 +59,8 @@ function EventDetailPage(props) {
             )}
           </div>
 
-      <img src={event.image} alt={event.title} className="img-fluid img-detail"/>
-      <div className="text-start ms-4 mt-4">
-      <h2  className="card-title">{capitalize(event.title)}</h2>
-      <p><b>Hosted by:</b> {event.owner[0].username}</p>
-      <p className="card-text">{event.description}</p>
-
-      <p className="card-text"><b>When:</b> {new Date(event.date).toDateString()}</p>
-
-      <p className="card-text"><b>Time:</b> {event.schedule}</p>
-      <p className="card-text"><b>At:</b> {event.location}</p>
-      <p className="card-text"><b>How much:</b> {event.price}€</p>
+      
       <div>
-        <div className="flex-center">
-          <img
-            src="../../ios-arrow-back-logo-icon-png-svg (1).png"
-            alt="arrow back"
-            className="goBackBtn"
-          />
-            {isLoggedIn ? <Link exact= "true" to="/main">Go back</Link> 
-            : 
-            <Link exact= "true" to="/">Go back</Link> }
-        </div>
           <img src={event.image} alt={event.title} />
           <h3>{event.title}</h3>
             {/*<p>Hosted by: {event.owner[0]}</p>*/}
@@ -94,7 +74,7 @@ function EventDetailPage(props) {
         </div>
         {/*<Mapbox/>*/}
       </div>
-      </div>
+    
       {isLoggedIn && <Navbar />  }
       </div>
       }
