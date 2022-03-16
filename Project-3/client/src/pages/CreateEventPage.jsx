@@ -5,9 +5,15 @@ import { AuthContext } from "../context/auth.context";
 import { Options } from "../utils/tags";
 import Navbar from "../components/Navbar/Navbar";
 
+import { useLocation } from 'react-router-dom'
+
 function CreateEventPage(props) {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const pass = useLocation()
+  const artist  = pass.state
+  console.log(artist)
 
   const [event, setEvent] = useState({
     title: "",

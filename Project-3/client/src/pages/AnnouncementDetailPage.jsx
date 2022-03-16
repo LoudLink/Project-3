@@ -60,6 +60,7 @@ function AnnouncementDetailPage(props){
     return str ? str[0].toUpperCase() + str.slice(1) : "";
   }
 
+
   return (
     <div>
       {!announcement ? (
@@ -180,6 +181,11 @@ function AnnouncementDetailPage(props){
             ) : (
               <p></p>
             )}
+          </p>
+          <p key="lkasjd">
+            <Link exact={true} to="/events/create-event" state ={announcement}>
+              <button>MAKE AN EVENT OUT OF THIS ANNOUNCEMNT</button>
+            </Link>
           </p>
         </div>
       )}
