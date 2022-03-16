@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import Spinner from "../components/Spinner/Spinner";
+import Mapbox from "../components/Mapbox/Mapbox";
 
 
 function EventDetailPage(props) {
@@ -25,11 +26,8 @@ function EventDetailPage(props) {
       .get(`${process.env.REACT_APP_SERVER_URL}/api/events/${id}`)
       .then((response) => setEvent(response.data))
       .catch(setEvent(false));
-  }, []);
+  }, [id, isLoading]);
 
-  
-  console.log('EVENTTTT',event)
-  console.log('USERRRRRRR',user._id);
 
 
   return (
@@ -37,47 +35,35 @@ function EventDetailPage(props) {
     event._id ?
 
     <div>
-    {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
-    <div>
-    <div className="flex-center">
-            <img
-              src="../../ios-arrow-back-logo-icon-png-svg (1).png"
-              alt="arrow back"
-              className="goBackBtn"
-            />
-            {isLoggedIn ? <Link exact= "true" to="/main">
-              Go back
-            </Link> 
-            : 
-            <Link exact= "true" to="/">
-              Go back
-            </Link> }
-            
-          </div>
-
-      <img src={event.image} alt={event.title} />
-      <h3>{event.title}</h3>
-      {/*<p>Hosted by: {event.owner[0]}</p>*/}
-      <p>{event.description}</p>
-
-      <p>When: {new Date(event.date).toDateString()}</p>
-
-      <p>Time: {event.schedule}</p>
-      <p>At: {event.location}</p>
-      <p>How much: {event.price}€</p>
+      {!event  ? <h1>THIS EVENT DOES NOT EXISTS</h1> :
       <div>
-
-          {user._id=== event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
-
+        <div className="flex-center">
+          <img
+            src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+            alt="arrow back"
+            className="goBackBtn"
+          />
+            {isLoggedIn ? <Link exact= "true" to="/main">Go back</Link> 
+            : 
+            <Link exact= "true" to="/">Go back</Link> }
+        </div>
+          <img src={event.image} alt={event.title} />
+          <h3>{event.title}</h3>
+            {/*<p>Hosted by: {event.owner[0]}</p>*/}
+          <p>{event.description}</p>
+          <p>When: {new Date(event.date).toDateString()}</p>
+          <p>Time: {event.schedule}</p>
+          <p>At: {event.location}</p>
+          <p>How much: {event.price}€</p>
+        <div>
+          {user?._id === event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}>Edit this event</Link>):(<p></p>)}
+        </div>
+        <Mapbox/>
       </div>
-
+      }
+      {isLoggedIn && <Navbar />  }
     </div>
-     }
-    {isLoggedIn && <Navbar />  }
-    </div>
-
     :
-
     <Spinner />
   );
 }
