@@ -86,7 +86,7 @@ function AnnouncementDetailPage(props){
             </p>
             <p className="tags card-text">&nbsp;{announcement.tags}&nbsp;</p>
           </div>
-          <hr class="dropdown-divider"></hr>
+          <hr className="dropdown-divider"></hr>
           <p>
             PENDING:
             {announcement.participants.length === 0 ? (
@@ -121,8 +121,9 @@ function AnnouncementDetailPage(props){
               <p>Nobody has apply to this announcement yet</p>
             ) : (
               <p>
-                Already {announcement.participants.length}
+              Already {announcement.participants.length}
                 apply to this announcement{" "}
+
               </p>
             )}
             {user._id === announcement.owner[0] ? (

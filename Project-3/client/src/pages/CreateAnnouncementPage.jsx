@@ -100,7 +100,7 @@ function CreateAnnouncementPage(props) {
 
       <form onSubmit={handleFormSubmission} className="auth__form">
 
-      <div class="form-floating">
+      <div className="form-floating">
       
         <input
           type="text"
@@ -118,7 +118,7 @@ function CreateAnnouncementPage(props) {
         </div>
 
 
-  <div class="form-floating mb-3">
+  <div className="form-floating mb-3">
         
         <input
           id="inputDescription"
@@ -134,6 +134,9 @@ function CreateAnnouncementPage(props) {
         <label for="inputDescription">Description</label>
         </div>
 
+
+        
+
         <label>Image:</label>
         {announcement.image ? (
           <img src={announcement.image} alt="eventpic" />
@@ -146,6 +149,8 @@ function CreateAnnouncementPage(props) {
 
         <label htmlFor="input-announcementDate">Date</label>
         <div class="form-floating mb-3">
+
+          <div className="form-floating mb-3">
         
         <input
           id="inputAnnouncementDate"
@@ -161,7 +166,7 @@ function CreateAnnouncementPage(props) {
 
         </div>
 
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
         
         <input
           id="input-expirationDate"
@@ -176,7 +181,7 @@ function CreateAnnouncementPage(props) {
         <label htmlFor="input-expirationDate">Expiration Date</label>
         </div>
 
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
 
         
         <select id="input-tags" className="form-control" onChange={handleInputChange} name="tags" multiple>
@@ -188,7 +193,7 @@ function CreateAnnouncementPage(props) {
 
         </div>
 
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
 
         
         <input
