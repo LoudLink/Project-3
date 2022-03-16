@@ -176,19 +176,21 @@ function ProfilePage(props) {
           )}
         
         <h3>Accepted announcements</h3>
-        {user.acceptedAnnouncements.map((anno)=>
+        {user.announcements.length!==0 ? (user.acceptedAnnouncements.map((anno)=>
         <div>
           <p>{anno.title}</p>
         </div>
-        )}
+        )) : (<p></p>)}
+        
 
         <h3>Your announcements</h3>
         <div className="anuncio-row">
-          {user.ownAnnouncements.map((anno) => (
+        {user.ownAnnouncements.length!==0 ? (user.ownAnnouncements.map((anno) => (
             <div className="anuncio">
               <p>{anno.title}</p>
             </div>
-          ))}
+          ))) : (<p>You didn't publish any announcements yet..</p>)}
+          
           <h3>Events</h3>
           {user.ownEvents.map((e) => (
             <div>
