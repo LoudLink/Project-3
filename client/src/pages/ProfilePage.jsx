@@ -207,6 +207,7 @@ function ProfilePage(props) {
 
         <div>
           <p className="display-5">
+
             <b>Your LoudLink</b>
           </p>
 

@@ -46,7 +46,7 @@ function MainPage(props) {
       </div>
 
       <div>
-        <div className="dividersMain flex-row">
+        <div>
           <MapMain />
         </div>
       </div>

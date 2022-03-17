@@ -112,34 +112,34 @@ function AnnouncementDetailPage(props){
             <b>Apply before:</b>{" "}
             {new Date(announcement.expirationDate).toDateString()}
           </p>
-        <p>
+        <div>
         {announcement.participants.map((participant)=>(
           <div>
           <p className="display-6">Pending for approval</p>
-          <p>{participant.username}
+          <p><Link exact="true" to={`/users/${participant._id}`} className="link-info">{capitalize(participant.username)}</Link>
           {user._id===announcement.owner[0] ? (<button onClick={acceptParticipant} value={participant._id}>Confirm</button>):(<p></p>)}
           </p>
           </div>
         ))}
-        </p>
-          
+        </div>
+        {user._id === announcement.owner[0] ? (
+              <p></p>
+            ) : (
+              <button onClick={apply} className="btn btn-warning" >APPLY</button>
+            )}
+          <hr></hr>
           <div>
             {announcement.participants.length === 0 ? (
               <p className="lead">Nobody has apply to this announcement yet</p>
             ) : (
               <div>
-            <h3 className="display-6">PENDING:</h3>
+            <h3 className="lead">PENDING:</h3>
               <p className="lead">
-              Already {announcement.participants.length}
-                apply to this announcement.
+              Already {announcement.participants.length} apply to this announcement.
               </p>
               </div>
             )}
-            {user._id === announcement.owner[0] ? (
-              <p></p>
-            ) : (
-              <button onClick={apply} className="btn btn-warning" >APPLY</button>
-            )}
+            
           </div>
 
           <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
