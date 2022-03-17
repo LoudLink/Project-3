@@ -153,7 +153,7 @@ function ProfilePage(props) {
           alt="Your avatar goes here"
         />
 
-        <p className="display-3">Welcome back {user.username}!</p>
+        <p className="display-3">Welcome back {capitalize(user.username)}!</p>
           <p>{user.location}</p>
         <p className="lead">
           You have signed in with this address: {user.email}
