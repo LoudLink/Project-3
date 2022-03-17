@@ -15,7 +15,12 @@ function ProfilePage(props) {
   let { isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [ownerEvent,setOwnerEvent]=useState('')
+  const [ownerEvent,setOwnerEvent]=useState(""
+  )
+  const [ownerEmail,setOwnerEmail]=useState(
+    "[]"
+  )
+
   const [user, setUser] = useState({
     image: "",
     username: "",
@@ -42,7 +47,7 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
           )
           .then((res) => {
-            console.log("AQUI ESTAMOS AHORA",res.data)
+            
             setUser(res.data);
           })
           .catch((err) => console.log(err));
@@ -59,7 +64,9 @@ function ProfilePage(props) {
 
       axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
       .then((res)=>{
+        console.log("hey",ownerEvent.email)
         setOwnerEvent(res.data.username)
+        setOwnerEmail(res.data.email)
       })
     }
   
@@ -100,15 +107,12 @@ function ProfilePage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        //console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
         axios
           .delete(
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,
             { headers: { Authorization: `Bearer ${storedToken}` } }
           )
           .then((deletedUser) => {
-            //console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
-            //console.log("delted user front:", deletedUser)
             removeToken();
             navigate("/");
           });
@@ -355,7 +359,8 @@ function ProfilePage(props) {
                   className="card ms-3 me-3 mb-1 text-center shadow"
                   id="collapseAcceptedAnno"
                 >
-                  <p>{anno.title}</p>
+                  <p className="lead">{capitalize(anno.title)}</p>
+                  <p className="lead">You can now contact {getOwner(anno.owner)} {capitalize(ownerEvent)}: <p className="text-info">{ownerEmail}</p></p>
                 </div>
               ))
             ) : (
