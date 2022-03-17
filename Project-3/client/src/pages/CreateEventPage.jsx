@@ -13,7 +13,7 @@ function CreateEventPage(props) {
 
   const pass = useLocation()
   const artist  = pass.state
-  console.log(artist)
+  //console.log(artist)
 
   const [event, setEvent] = useState({
     title: "",
@@ -86,7 +86,7 @@ function CreateEventPage(props) {
         uploadImgForm
       )
       .then((response) => {
-        console.log("response is: ", response);
+        // console.log("response is: ", response);
 
         setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })

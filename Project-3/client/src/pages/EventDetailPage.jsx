@@ -72,7 +72,7 @@ function EventDetailPage(props) {
           <div className="text-center">
           {user?._id === event.owner[0]._id ? (<Link exact= "true" to={`/events/${id}/edit`}><button className="btn btn-warning">Edit this event</button></Link>):(<p></p>)}
         </div>
-        <Mapbox />
+        <Mapbox eventLocation={event.location} />
       </div>
     
       {isLoggedIn && <Navbar />  }
