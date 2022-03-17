@@ -33,47 +33,165 @@ function ProfileDetailPage(props) {
     getUser();
   }, []);
 
-  return (
+  function capitalize(str) {
+    return str ? str[0].toUpperCase() + str.slice(1) : "";
+  }
 
-    user._id ?
-
+  return user._id ? (
     <div>
       {!user ? (
         <h1>THIS USER DOES NOT EXISTS</h1>
       ) : (
         <div>
-          <div className="flex-center">
-            <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-            <Link exact= "true" to="/main"> Go back</Link>
-          </div>
-          <img width={50} src={user.image} alt="Your avatar goes here" />
-          <p>{user.username}</p>
-          <p>{user.email}</p>
-          <p>{user.description}</p>
-          <p>{user.tags}</p>
+        <div className="flex-center mt-2 mb-2">
+        <img
+          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+          alt="arrow back"
+          className="goBackBtn"
+        />
+        <Link exact="true" to="/main">
+          Go back
+        </Link>
+      </div>
+          <img
+            className="profileImg m-3"
+            src={user.image}
+            alt="Your avatar goes here"
+          />
+          <p className="display-3">{capitalize(user.username)}</p>
           <p>{user.location}</p>
+          <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
+            <p className=" blockquote">{user.description}</p>
+          </div>
           <h3>Videos</h3>
           <p>
-            user videos
             {user.videos.length === 0 ? (
-              <p>no videos to display</p>
+              <p>{capitalize(user.username)} has no videos to display</p>
             ) : (
-              <p>
-                {user.videos.map((vid) => (
-                  <YoutubeEmbed embedId={vid} />
-                ))}
-              </p>
+              <div className="dividersMain flex-row">
+                <div>
+                  <div>
+                    <div>
+                      <p>
+                        {user.videos.map((vid) => (
+                          <div>
+                            <YoutubeEmbed embedId={vid} />
+                          </div>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </p>
-          <h3>Announcements</h3>
-          <h4>Your announcements</h4>
-          <h3>Events</h3>
+
+          <hr></hr>
+
+          <div className="flex-row center gap">
+            {user.tags.map((tag) => (
+              <p key={tag} className="tags">
+                &nbsp; #{tag} &nbsp;
+              </p>
+            ))}
+          </div>
+
+          <div>
+            <p className="display-5">
+              <b>{capitalize(user.username)} LoudLink</b>
+            </p>
+
+            <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
+              <div>
+                <h3
+                  className="display-6 collapsed"
+                  data-bs-toggle="collapse"
+                  href="#collapseYourAnno"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseYourAnno"
+                >
+                  {capitalize(user.username)} announcements
+                </h3>
+                <img
+                  src="../../arrow-down.png"
+                  alt="arrow down"
+                  style={{ width: 10 }}
+                ></img>
+              </div>
+
+              {user.ownAnnouncements.length !== 0 ? (
+                user.ownAnnouncements.map((anno) => (
+                  <div
+                    className="card ms-3 me-3 mb-1 text-center shadow"
+                    id="collapseYourAnno"
+                  >
+                    <p>{capitalize(anno.title)}</p>
+                    <Link
+                      exact="true"
+                      to={`/announcements/${anno._id}`}
+                      className="link-info"
+                    >
+                      See more
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <p>{capitalize(user.username)} has no announcements yet...</p>
+              )}
+
+              <hr></hr>
+
+              <div>
+                <h3
+                  className="display-6 collapsed"
+                  data-bs-toggle="collapse"
+                  href="#collapseYourEvents"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseYourEvents"
+                >
+                  {capitalize(user.username)} events
+                </h3>
+                <img
+                  src="../../arrow-down.png"
+                  alt="arrow down"
+                  style={{ width: 10 }}
+                ></img>
+              </div>
+
+              {user.ownEvents.length !== 0 ? (
+                user.ownEvents.map((e) => (
+                  <div
+                    className="card ms-3 me-3 mb-1 text-center shadow"
+                    id="collapseYourEvents"
+                  >
+                    <p>{capitalize(e.title)}</p>
+                    <p>
+                      <b>Date: </b>
+                      {new Date(e.date).toDateString()}
+                    </p>
+                    <Link
+                      exact="true"
+                      to={`/events/${e._id}`}
+                      className="link-info"
+                    >
+                      See more
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <p>
+                  {capitalize(user.username)} didn't publish any events yet...
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       )}
       <Navbar />
-      
     </div>
-    :
+  ) : (
     <Spinner />
   );
 }

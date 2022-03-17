@@ -25,7 +25,7 @@ function Users(props) {
           </div>)
           : indx === events.length-1 ?
              (<div>
-                <Link to='/events'><img src="../../../flecha-correcta.png" alt='flecha rota'></img></Link>
+                <Link to='/events'><img src="../../../flecha-correcta.png" alt='flecha rota' style={{width: 100}}></img></Link>
              </div>)
              :
              (<p></p>)

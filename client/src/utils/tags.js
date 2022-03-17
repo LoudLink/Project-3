@@ -1,4 +1,4 @@
 
 
-export const Options=['Rock','Bands','Sex','Sports','Learning','Coworking','Literature','Photo','Transports']
+export const Options=['Music','Dancing','Photo','Performance','Design','Architechture','Sound','Lights','Sculpture','Cinema','Poems']
 

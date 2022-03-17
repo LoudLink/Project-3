@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Options } from "../utils/tags";
@@ -10,6 +10,26 @@ import { useLocation } from 'react-router-dom'
 function CreateEventPage(props) {
   const { id } = useParams();
   const navigate = useNavigate();
+  const anno = useLocation().state
+
+  console.log("checking props",props.viaAnno)
+
+
+const initialState = {
+  original: false,
+  title: anno?.title || "",
+  description: anno?.description || "",
+  image: anno?.image || "",
+  date: anno?.announcementDate || null,
+  schedule: null,
+  artists: anno?.participants || [],
+  location: anno?.location || "",
+  price: null,
+  tags: anno?.tags || [],
+}
+
+  const [event, setEvent] = useState(initialState);
+
 
   const pass = useLocation()
   const artist  = pass.state
@@ -26,7 +46,9 @@ function CreateEventPage(props) {
     tags: "",
   });
 
+
   const {
+    active,
     title,
     description,
     date,
@@ -37,6 +59,7 @@ function CreateEventPage(props) {
     price,
     tags,
   } = event;
+
   const [error, setError] = useState(null);
   
   const { user } = useContext(AuthContext);
@@ -46,9 +69,12 @@ function CreateEventPage(props) {
     return setEvent({ ...event, [name]: value });
   }
 
+
+
   function handleFormSubmission(e) {
     e.preventDefault();
     const eventDetails = {
+      active,
       title,
       description,
       image,
@@ -75,6 +101,7 @@ function CreateEventPage(props) {
     const uploadImgForm = new FormData();
 
     uploadImgForm.append("image", e.target.files[0]);
+
 
     axios
       .post(
@@ -104,13 +131,14 @@ function CreateEventPage(props) {
       <form onSubmit={handleFormSubmission} className="auth__form">
 
       <div className="form-floating">
+      
         
         <input
           id="input-title"
           type="text"
           className="form-control"
           name="title"
-          placeholder="Choose your title"
+          value={title}
           onChange={handleInputChange}
           required
           minLength="8"
@@ -127,6 +155,7 @@ function CreateEventPage(props) {
           name="description"
           className="form-control"
           placeholder="What's the event about"
+          value={description}
           onChange={handleInputChange}
           required
           minLength="8"
@@ -183,6 +212,7 @@ function CreateEventPage(props) {
           type="location"
           className="form-control"
           name="location"
+          value={location}
           placeholder="Where's this happening"
           onChange={handleInputChange}
           minLength="4"
