@@ -32,7 +32,7 @@ export default function LogIn({ authenticate }) {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
 
       .then((response) => {   
-        console.log(response.data)     
+       console.log(response.data)     
 
         storeToken(response.data.authToken);
         authenticateUser();
@@ -40,6 +40,7 @@ export default function LogIn({ authenticate }) {
       })
       .catch((error) => {
       	const errorDescription = error.response.data.message;
+        console.log(error.response.data.message)
       	setErrorMessage(errorDescription);
     	})
   };
@@ -67,19 +68,21 @@ export default function LogIn({ authenticate }) {
 
       <div className="form-floating">
 
-        <input id="inputUsername" className="form-control" type="text" name="username" value={username} onChange={handleUsername} />
+        <input id="inputUsername" className="form-control" type="text" name="username" value={username} onChange={handleUsername} required/>
         <label for="inoutUsername">Username:</label>
         </div>
 
         <div className="form-floating">
 
-        <input id="inputPassword" className="form-control" type="password" name="password" value={password} onChange={handlePassword} />
+        <input id="inputPassword" className="form-control" type="password" name="password" value={password} onChange={handlePassword} required/>
         <label for="inputPassword">Password:</label>
         </div>
 
         <button className="btn btn-warning" type="submit">Login</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
+
+      
       <br></br>
       <br></br>
       <br></br>

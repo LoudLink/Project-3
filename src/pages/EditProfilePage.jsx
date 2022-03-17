@@ -7,8 +7,6 @@ import "./auth.css";
 import { Options } from "../utils/tags";
 import "./EditProfilePage.css";
 
-
-
 function EditProfilePage(props) {
   const [user, setUser] = useState({});
   const { id } = useParams();
@@ -40,7 +38,6 @@ function EditProfilePage(props) {
     axios
       .put(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, user)
       .then((response) => {
-
         setUser((user) => ({
           ...user,
           username: "",
@@ -89,62 +86,89 @@ function EditProfilePage(props) {
   return (
     <div>
       <div className="flex-center">
-        <img src="../../ios-arrow-back-logo-icon-png-svg (1).png" alt="arrow back" className="goBackBtn"/>
-        <Link exact= "true" to="/main"> Go back</Link>
+        <img
+          src="../../ios-arrow-back-logo-icon-png-svg (1).png"
+          alt="arrow back"
+          className="goBackBtn"
+        />
+        <Link exact="true" to="/main">
+          {" "}
+          Go back
+        </Link>
       </div>
+
       <form onSubmit={handleSubmit} className="auth__form">
-        <label htmlFor="input-username">Username:</label>
+
+
+      <div className="form-floating">
+        {user.image ? (
+          <img src={user.image} alt="userpic" className="img-thumbnail" />
+        ) : (
+          <p>No image yet</p>
+        )}
+        <input type="file" name="image" onChange={handleImgUpload} className=" form-control-sm"></input>
+        </div>
+
+        <div className="form-floating">
         <input
           id="input-username"
           type="text"
           name="username"
+          className="form-control"
           value={user.username}
           onChange={handleInputChange}
         />
+        <label htmlFor="input-username">Username:</label>
+        </div>
 
-        <label>Image:</label>
-        {user.image ? (
-          <img src={user.image} alt="userpic" />
-        ) : (
-          <p>No image yet</p>
-        )}
-        <input type="file" name="image" onChange={handleImgUpload}></input>
-
-        <label>Description:</label>
+        <div className="form-floating">
         <input
           type="text"
           name="description"
+          className="form-control"
           value={user.description}
           onChange={handleInputChange}
         ></input>
-
-        <label htmlFor="input-tags">Select up to 5 tags that define you</label>
+        <label>Description:</label>
+        </div>
+        
+        
         <select
           onChange={handleInputChange}
           name="tags"
+          className="form-control"
           multiple
           id="userRequest_activity"
+          size="6"
         >
           {Options.map((e) => (
             <option value={e}>{e}</option>
           ))}
         </select>
-        <label>Location:</label>
+            
+
+            <div className="form-floating">
         <input
+        id="locationInput"
           type="text"
           name="location"
+          className="form-control"
           value={user.location}
           onChange={handleInputChange}
         ></input>
+        <label for="locationInput">Location:</label>
+        </div>
 
-        <label>Videos:</label>
-        <input type="text" name="videos" onChange={handleInputChange}></input>
+        <div className="form-floating">
+        <input type="text" name="videos" onChange={handleInputChange} className="form-control"></input>
+        <label>Add your videos here:</label>
+        </div>
 
-        <button type="submit" className="button__submit">
+        <button type="submit" className="btn btn-warning">
           Submit
         </button>
       </form>
-       
+
       <Navbar />
     </div>
   );

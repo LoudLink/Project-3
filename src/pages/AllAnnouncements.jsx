@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import AnnouncementCard from "../components/Announcements/AnnouncementCard";
 import Searchbar from "../components/Searchbar/Searchbar";
 import { Link } from "react-router-dom";
 import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
 import Navbar from "../components/Navbar/Navbar";
+import { AuthContext } from "../context/auth.context";
 
 function AllAnnouncements(props) {
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsFiltered, setFilteredAnnouncements] = useState([]);
+  const {isLoggedIn,user}=useContext(AuthContext)
 
   useEffect(() => {
     axios
@@ -69,10 +71,17 @@ function AllAnnouncements(props) {
           />
         ))}
       </div>
-      <Link exact="true" to="/announcements/create-announcement">
+      {user ? (
+        <Link exact="true" to="/announcements/create-announcement">
         <button className="btn btn-warning">Create an announcement</button>
       </Link>
-      <Navbar />
+      ) : (
+        <Link exact="true" to="/login">
+        <button className="btn btn-warning">Create an announcement</button>
+      </Link>
+      )}
+      {user  ? (<Navbar />) : (<p></p>)}
+      
     </div>
   );
 }
