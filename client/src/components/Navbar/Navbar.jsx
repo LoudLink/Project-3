@@ -47,8 +47,8 @@ function Navbar(props) {
           />
         </button>
 
-        <ul className="dropdown-menu ms-0 mb-1 p-2 dark">
-          <li><Link exact="true" to="/announcements/create-announcement" className="lead text-light">Create an announcement</Link> </li>
+        <ul className="dropdown-menu ms-0 mb-1 p-2 pe-5 dark">
+          <li><Link exact="true" to="/announcements/create-announcement" className="lead text-light mb-2">Create an announcement</Link> </li>
           <li><Link exact="true" to="/events/create-event" className="lead text-light">Create an event</Link> </li>
         </ul>
 
