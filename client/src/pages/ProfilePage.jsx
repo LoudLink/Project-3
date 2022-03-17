@@ -207,6 +207,23 @@ function ProfilePage(props) {
 
         <div>
           <p className="display-5">
+
+          <div className="btn-group dropup">
+        <button
+          type="button"
+          className="btn btn-secondary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Dropup
+        </button>
+        <ul className="dropdown-menu">
+          <li><button className="dropdown-item" type="button">PABLOOOOOO</button></li>
+        </ul>
+      </div>
+
+
+
             <b>Your LoudLink</b>
           </p>
 
