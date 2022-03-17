@@ -28,8 +28,6 @@ export default function Mapbox(props) {
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${props.eventLocation}.json?proximity=-74.70850,40.78375&access_token=${process.env.REACT_APP_MAP_API_TOKEN}`
           )
           .then((response) => {
-            console.log("LA DIRECCION!!!!!", props.eventLocation)
-            console.log("WHAT THE FUCK IS THE RESPONSE DATA", response.data);
             const eventLat = response.data.features[0].center[0];
             const eventLng = response.data.features[0].center[1];
             //const address = response.data.features[0].place_name;
@@ -48,7 +46,6 @@ export default function Mapbox(props) {
 // useEffect(() => {   
 //   if (!map.current) return;      //wait map to initialize ---->for the sidebar
 //      map.current.on('move', () => {
-//        //console.log("MAP >>>>>>>>>>>>>>>", map)
 //         setLng(map.current.getCenter().lng.toFixed(4));
 //         setLat(map.current.getCenter().lat.toFixed(4));
 //         setZoom(map.current.getZoom().toFixed(2));

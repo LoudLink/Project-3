@@ -76,7 +76,6 @@ router.put("/:userId", (req, res) => {
 
 
 router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) => {
-  // console.log("file is: ", req.file)
  
   if (!req.file) {
     next(new Error("No file uploaded!"));

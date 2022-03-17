@@ -13,7 +13,6 @@ function CreateEventPage(props) {
 
   const pass = useLocation()
   const artist  = pass.state
-  //console.log(artist)
 
   const [event, setEvent] = useState({
     title: "",
@@ -72,13 +71,10 @@ function CreateEventPage(props) {
   }
 
   function handleImgUpload(e) {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadImgForm = new FormData();
 
     uploadImgForm.append("image", e.target.files[0]);
-
-    console.log("WHAT IS THIS ID IN THE EVENTS", id)
 
     axios
       .post(
@@ -86,8 +82,6 @@ function CreateEventPage(props) {
         uploadImgForm
       )
       .then((response) => {
-        // console.log("response is: ", response);
-
         setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));

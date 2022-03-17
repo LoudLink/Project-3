@@ -13,7 +13,7 @@ function Users(props) {
       .then((response) => {
         setEvents(response.data);
       })
-      .catch((err) => console.log("CAGADAAAAAAAA", err));
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div>

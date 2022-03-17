@@ -42,7 +42,6 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
           )
           .then((res) => {
-            console.log("AQUI ESTAMOS AHORA",res.data)
             setUser(res.data);
           })
           .catch((err) => console.log(err));
@@ -100,15 +99,12 @@ function ProfilePage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        //console.log("<<<<<<<<<<  GET RESP >>>>>>>>>")
         axios
           .delete(
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`,
             { headers: { Authorization: `Bearer ${storedToken}` } }
           )
           .then((deletedUser) => {
-            //console.log("<<<<<<<<<<  DEL RESP >>>>>>>>>")
-            //console.log("delted user front:", deletedUser)
             removeToken();
             navigate("/");
           });
@@ -130,7 +126,6 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
           )
           .then((response) => {
-            console.log("VIDEO RESPONSE", response.data);
             setUser(response.data);
           });
       });

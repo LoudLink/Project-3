@@ -48,7 +48,6 @@ function AnnouncementDetailPage(props){
       }
 
     function removeArtist(remove){
-      console.log("remove from this ID", id)
       const removedArt = remove.target.value
       axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/delete/${removedArt}`)
       .then(console.log("wwee"))
