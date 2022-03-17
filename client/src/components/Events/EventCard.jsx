@@ -10,7 +10,7 @@ function EventCard(props) {
 
     return (
 
-        <div className="card m-3 shadow rounded" style={{width: 288, height: 500}}>
+        <div className="card m-3 shadow rounded" style={{width: 288, height: 545}}>
             <Link exact= "true" to={`/events/${props.event._id}`}>
             <div>
                 <img src={props.event.image} alt='event-pic' className='card-img-top' style={{width: 286, height: 300, backgroundColor:'black'}}></img>

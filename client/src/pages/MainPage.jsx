@@ -1,6 +1,7 @@
 import Announcements from "../components/Announcements/Announcements";
 import Events from "../components/Events/Events";
 import Users from "../components/Users/Users";
+import MapMain from "../components/Mapbox/MapMain";
 import Navbar from "../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import ScrollUpBtn from "../components/ScrollUpBtn/ScrollUpBtn";
@@ -42,6 +43,12 @@ function MainPage(props) {
         <Events />
       </div>
 
+      </div>
+
+      <div>
+        <div>
+          <MapMain />
+        </div>
       </div>
 
       <Navbar />

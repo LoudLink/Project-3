@@ -129,12 +129,11 @@ export default function Signup({ authenticate }) {
         <label for="input-email">Email</label>
         </div>
 
-        <div className="form-floating">
+        <div>
 
         <select className="form-control" size="6" onChange={handleInputChange} name="tags" required multiple min="5" id="userRequest_activity">
             {Options.map((e)=>(<option value={e} onClick={check}>{e}</option>))}
         </select>
-        <label for="input-tags">Select up to 5 tags that define you</label>
         </div>
 
         {errorMessage && (

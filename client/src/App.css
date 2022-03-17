@@ -234,3 +234,9 @@ a:hover {
 input {
   margin: 10px 0;
 }
+
+.arrow-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

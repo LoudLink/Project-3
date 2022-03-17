@@ -15,7 +15,12 @@ function ProfilePage(props) {
   let { isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [ownerEvent,setOwnerEvent]=useState('')
+  const [ownerEvent,setOwnerEvent]=useState(""
+  )
+  const [ownerEmail,setOwnerEmail]=useState(
+    "[]"
+  )
+
   const [user, setUser] = useState({
     image: "",
     username: "",
@@ -58,7 +63,9 @@ function ProfilePage(props) {
 
       axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
       .then((res)=>{
+        console.log("hey",ownerEvent.email)
         setOwnerEvent(res.data.username)
+        setOwnerEmail(res.data.email)
       })
     }
   
@@ -88,7 +95,7 @@ function ProfilePage(props) {
         */
 
     removeToken();
-    navigate("/");
+    navigate("/#");
   }
 
   function deleteUser() {
@@ -145,11 +152,11 @@ function ProfilePage(props) {
         />
 
         <p className="display-3">Welcome back {user.username}!</p>
+          <p>{user.location}</p>
         <p className="lead">
           You have signed in with this address: {user.email}
         </p>
         <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
-          <p>{user.location}</p>
           <p className="display-6">How do you describe yourself?</p>
           <p className=" blockquote">{user.description}</p>
         </div>
@@ -202,6 +209,7 @@ function ProfilePage(props) {
 
         <div>
           <p className="display-5">
+
             <b>Your LoudLink</b>
           </p>
 
@@ -349,7 +357,8 @@ function ProfilePage(props) {
                   className="card ms-3 me-3 mb-1 text-center shadow"
                   id="collapseAcceptedAnno"
                 >
-                  <p>{anno.title}</p>
+                  <p className="lead">{capitalize(anno.title)}</p>
+                  <p className="lead">You can now contact {getOwner(anno.owner)} {capitalize(ownerEvent)}: <p className="text-info">{ownerEmail}</p></p>
                 </div>
               ))
             ) : (

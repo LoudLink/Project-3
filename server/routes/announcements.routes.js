@@ -34,7 +34,8 @@ router.post("/:id", (req, res) => {
     announcementDate, 
     expirationDate,
     tags,
-    location
+    location,
+    
   })
     .then((newEvent) => {
       return User.findByIdAndUpdate(
@@ -212,6 +213,26 @@ router.put("/:an/confirm/:art", (req, res) =>{
 
 })
 
+//---------------------------------------------------------------------------
+//--------------------------REMOVE ARTISTS-----------------------------------
+//---------------------------------------------------------------------------
 
+router.delete("/:an/delete/:art", (req, res)=>{
+  let announcement = req.params.an
+  let artist = req.params.art
+  console.log("ANNOUNCEMENT", announcement)
+  console.log("ARTIST", artist)
+
+  User.findByIdAndUpdate(artist, {$pullAll: {acceptedAnnouncements : [announcement]}}, {new : true})
+  .then(()=>
+  Announcement.findByIdAndUpdate(announcement, {$pullAll: {accepted: [artist]}}, {new :true})
+    .populate("participants")
+    .populate("accepted")
+    .then(()=>{
+      (response)=>res.json(response)
+    })
+  )
+
+})
 
 module.exports = router;
