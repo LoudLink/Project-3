@@ -47,7 +47,7 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${response.data._id}`
           )
           .then((res) => {
-            
+
             setUser(res.data);
           })
           .catch((err) => console.log(err));
@@ -134,7 +134,6 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
           )
           .then((response) => {
-            console.log("VIDEO RESPONSE", response.data);
             setUser(response.data);
           });
       });

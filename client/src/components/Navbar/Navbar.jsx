@@ -7,6 +7,7 @@ import axios from "axios";
 function Navbar(props) {
   const [users, setUsers] = useState([]);
   const { user, image, userImg } = useContext(AuthContext);
+
   // console.log(users)
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function Navbar(props) {
   }, [user._id, userImg, users]);
 
   let [navbar, setNavbar] = useState("");
+
 
   const popBtn = document.getElementById("popUp");
 

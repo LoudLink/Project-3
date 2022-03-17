@@ -64,7 +64,6 @@ function EditProfilePage(props) {
   }
 
   function handleImgUpload(e) {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadImgForm = new FormData();
 
@@ -76,8 +75,6 @@ function EditProfilePage(props) {
         uploadImgForm
       )
       .then((response) => {
-        console.log("response is: ", response);
-
         setUser((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));

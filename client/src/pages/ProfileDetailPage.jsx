@@ -24,7 +24,6 @@ function ProfileDetailPage(props) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
       .then((res) => {
-        console.log("DATA HERE", typeof res.data);
         setUser(res.data);
       })
       .catch(setUser(false));

@@ -31,6 +31,22 @@ const initialState = {
   const [event, setEvent] = useState(initialState);
 
 
+  const pass = useLocation()
+  const artist  = pass.state
+
+  const [event, setEvent] = useState({
+    title: "",
+    description: "",
+    image: undefined,
+    date: undefined,
+    schedule: undefined,
+    artists: "",
+    location: undefined,
+    price: undefined,
+    tags: "",
+  });
+
+
   const {
     active,
     title,
@@ -81,7 +97,6 @@ const initialState = {
   }
 
   function handleImgUpload(e) {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadImgForm = new FormData();
 
@@ -94,8 +109,6 @@ const initialState = {
         uploadImgForm
       )
       .then((response) => {
-        // console.log("response is: ", response);
-
         setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
