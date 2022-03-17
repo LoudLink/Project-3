@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AnnouncementCard from "./AnnouncementCard";
-import { Link } from 'react-router-dom';
-import './Announcement.css'
+import { Link } from "react-router-dom";
+import "./Announcement.css";
 
 function Announcements() {
   const [announcements, setAnnouncements] = useState([]);
@@ -19,24 +19,35 @@ function Announcements() {
   return (
     <div>
       {announcements.length ? (
-        announcements.map((announcement,indx) => (
-          indx<=4 ?
-          (<div key={announcement._id} className="test">
+        announcements.map((announcement, indx) =>
+          indx <= 4 ? (
+            <div key={announcement._id} className="test">
               <AnnouncementCard announcement={announcement} />
-          </div>)
-          : indx === announcements.length-1 ?
-             (<div className="arrow-flex">
-                <Link to='/announcements'><img src="../../../flecha-correcta.png" alt='flecha rota' style={{width: 100}}></img></Link>
-             </div>)
-             :
-             (<p></p>)
-          
-          
-        ))
+            </div>
+          ) : indx === announcements.length - 1 ? (
+            <div className="arrow-flex">
+              <Link to="/announcements" className="link-info">
+                <img
+                  src="../../../flecha-correcta.png"
+                  alt="flecha rota"
+                  style={{ width: 100 }}
+                ></img>
+              </Link>
+            </div>
+          ) : (
+            <p></p>
+          )
+        )
       ) : (
         <div id="noMoreContent">
           <p>There are no announcements to show!</p>
-          <Link exact= "true" to="/announcements/create-announcement">Create a new announcement</Link>
+          <Link
+            exact="true"
+            to="/announcements/create-announcement"
+            className="link-info"
+          >
+            Create a new announcement
+          </Link>
           {/* <img src="../../images/" alt="pic" width="400" height="240" /> */}
         </div>
       )}
