@@ -92,7 +92,6 @@ const initialState = {
         uploadImgForm
       )
       .then((response) => {
-
         setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));

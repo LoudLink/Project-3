@@ -75,7 +75,6 @@ function EditProfilePage(props) {
         uploadImgForm
       )
       .then((response) => {
-
         setUser((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })
       .catch((err) => console.log("Error while uploading the file: ", err));

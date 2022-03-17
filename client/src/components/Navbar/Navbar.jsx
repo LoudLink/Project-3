@@ -19,6 +19,7 @@ function Navbar(props) {
 
   let [navbar, setNavbar] = useState("");
 
+
   const popBtn = document.getElementById("popUp");
 
   function popUp() {

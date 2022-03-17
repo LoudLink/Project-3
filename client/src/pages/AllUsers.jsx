@@ -19,7 +19,7 @@ function AllProfiles(props) {
         setUsers(response.data)
         setFilteredUsers(response.data.filter((user) => user._id !== currentUser?._id)) 
     })
-    .catch((err)=>console.log('CAGADAAAAAAAA',err))
+    .catch((err)=>console.log(err))
     },[currentUser?._id])
 
     function search(str){
@@ -32,7 +32,6 @@ function AllProfiles(props) {
     function searchTags(tagsArr){
         if(tagsArr.length){
             const newList = users.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
-
         setFilteredUsers(newList)}
         else {
             setFilteredUsers(users)

@@ -40,7 +40,6 @@ function AllEvents(props) {
     function searchTags(tagsArr){
         if(tagsArr.length){
             const newList = events.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
-
         setFilteredEvents(newList)}
         else {
             setFilteredEvents(events)

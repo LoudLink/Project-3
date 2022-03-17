@@ -38,7 +38,6 @@ router.post("/:id", (req, res) => {
     
   })
     .then((newEvent) => {
-
       return User.findByIdAndUpdate(
         req.params.id,
         { $push: { ownAnnouncements: newEvent._id.toString() } },
@@ -179,7 +178,6 @@ router.post("/:id/apply/:an", (req, res) => {
 router.put("/:an/confirm/:art", (req, res) =>{
   let announcement = req.params.an
   let artist = req.params.art
-
 
   /*
   Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})

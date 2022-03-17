@@ -31,8 +31,7 @@ export default function LogIn({ authenticate }) {
 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
 
-      .then((response) => {   
-
+      .then((response) => {       
         storeToken(response.data.authToken);
         authenticateUser();
         navigate("/main");

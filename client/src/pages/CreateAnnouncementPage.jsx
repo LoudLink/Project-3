@@ -63,11 +63,8 @@ function CreateAnnouncementPage(props) {
   }
 
   function handleImgUpload(e) {
-
     const uploadImgForm = new FormData();
-
     uploadImgForm.append("image", e.target.files[0]);
-
 
     axios
       .post(
