@@ -49,7 +49,6 @@ function AnnouncementDetailPage(props){
       }
 
     function removeArtist(remove){
-      console.log("remove from this ID", id)
       const removedArt = remove.target.value
       axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/announcements/${id}/delete/${removedArt}`)
       .then((response)=>{
@@ -125,7 +124,7 @@ function AnnouncementDetailPage(props){
           </div>
         ))}
         </div>
-        {user._id === announcement.owner[0] ? (
+        {user && user._id === announcement.owner[0] ? (
               <p></p>
             ) : (
               <button onClick={apply} className="btn btn-warning" >APPLY</button>

@@ -32,7 +32,6 @@ export default function LogIn({ authenticate }) {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, requestBody)
 
       .then((response) => {   
-       console.log(response.data)     
 
         storeToken(response.data.authToken);
         authenticateUser();
@@ -40,7 +39,6 @@ export default function LogIn({ authenticate }) {
       })
       .catch((error) => {
       	const errorDescription = error.response.data.message;
-        console.log(error.response.data.message)
       	setErrorMessage(errorDescription);
     	})
   };

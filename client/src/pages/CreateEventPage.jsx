@@ -12,7 +12,6 @@ function CreateEventPage(props) {
   const navigate = useNavigate();
   const anno = useLocation().state
 
-  console.log("checking props",props.viaAnno)
 
 
 const initialState = {
@@ -81,7 +80,6 @@ const initialState = {
   }
 
   function handleImgUpload(e) {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadImgForm = new FormData();
 
@@ -94,7 +92,6 @@ const initialState = {
         uploadImgForm
       )
       .then((response) => {
-        // console.log("response is: ", response);
 
         setEvent((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })

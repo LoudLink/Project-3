@@ -38,8 +38,6 @@ function AllAnnouncements(props) {
       const newList = announcements.filter((ann) =>
         ann.tags.some((tag) => tagsArr.includes(tag))
       );
-
-      console.log("newList: ", newList);
       setFilteredAnnouncements(newList);
     } else {
       setFilteredAnnouncements(announcements);

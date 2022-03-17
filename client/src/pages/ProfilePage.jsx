@@ -64,7 +64,6 @@ function ProfilePage(props) {
 
       axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
       .then((res)=>{
-        console.log("hey",ownerEvent.email)
         setOwnerEvent(res.data.username)
         setOwnerEmail(res.data.email)
       })
@@ -134,7 +133,6 @@ function ProfilePage(props) {
             `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}/deletevideo/${deletedvid}`
           )
           .then((response) => {
-            console.log("VIDEO RESPONSE", response.data);
             setUser(response.data);
           });
       });
@@ -334,7 +332,7 @@ function ProfilePage(props) {
                 </Link>
               </div>
             )}
-
+              <hr></hr>
             {user.acceptedAnnouncements.length !== 0 ? (
               <div>
               <h3

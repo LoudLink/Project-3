@@ -38,8 +38,6 @@ router.post("/:id", (req, res) => {
     
   })
     .then((newEvent) => {
-      console.log("announcementId", newEvent._id.toString());
-      console.log("userId", req.params);
 
       return User.findByIdAndUpdate(
         req.params.id,
@@ -68,7 +66,6 @@ router.get("/:announcementId", (req, res) => {
   .populate("participants")
   .populate("accepted")
   .then((announcement) =>{
-    //console.log("HERE COMES THE POP",announcement.participants[0])
     res.status(200).json(announcement)}
   );
 });
@@ -119,7 +116,6 @@ router.post("/:id/img-upload", fileUploader.single("image"), (req, res, next) =>
 
 router.delete("/:announcementId/edit", (req, res) => {
   const {announcementId}  = req.params;
-  console.log("trying to delete", announcementId)
 
   if (!mongoose.Types.ObjectId.isValid(announcementId)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -227,8 +223,6 @@ router.put("/:an/confirm/:art", (req, res) =>{
 router.delete("/:an/delete/:art", (req, res)=>{
   let announcement = req.params.an
   let artist = req.params.art
-  console.log("ANNOUNCEMENT", announcement)
-  console.log("ARTIST", artist)
 
   User.findByIdAndUpdate(artist, {$pullAll: {acceptedAnnouncements : [announcement]}}, {new : true})
   .then(()=>

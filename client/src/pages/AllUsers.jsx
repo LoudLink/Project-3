@@ -33,7 +33,6 @@ function AllProfiles(props) {
         if(tagsArr.length){
             const newList = users.filter(ann => ann.tags.some(tag=>tagsArr.includes(tag)))
 
-        console.log("newList: ", newList)
         setFilteredUsers(newList)}
         else {
             setFilteredUsers(users)

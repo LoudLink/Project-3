@@ -21,7 +21,6 @@ export default function Signup({ authenticate }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   
   function check(j) {
-    console.log("caca",form.tags.length)
   }
 
   function handleInputChange(event) {
@@ -56,11 +55,9 @@ export default function Signup({ authenticate }) {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, credentials)
     .then((response) => {
       navigate("/login")
-      console.log("ERRRRRRRORRRRRR", response.data.error)
     })
     .catch((error) => {
       const errorDescription = error.response.data.message;
-      console.log("ERRRRRRRORRRRRR",error.response.data.message)
       setErrorMessage(errorDescription);
     })
     
