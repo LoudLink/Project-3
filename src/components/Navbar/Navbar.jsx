@@ -7,22 +7,18 @@ import axios from "axios";
 function Navbar(props) {
   const [users, setUsers] = useState([]);
   const { user, image, userImg } = useContext(AuthContext);
-  // console.log(users)
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`)
       .then((response) => {
         userImg(response.data.image);
-        //console.log("RESPONSE!!!",response)
-        // setUsers(response.data.filter((user) => user._id === currentUser._id));
-        //console.log("THE CURRENT USER IN THE DB", users)
-        //console.log("THE IMAGE OF THE CURRENT USER IN THE DB", users.image)
       })
       .catch((err) => console.log("CAGADAAAAAAAA", err));
   }, [user._id, userImg, users]);
 
   let [navbar, setNavbar] = useState("");
+
 
   const popBtn = document.getElementById("popUp");
 

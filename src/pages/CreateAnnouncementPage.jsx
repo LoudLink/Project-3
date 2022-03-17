@@ -63,13 +63,8 @@ function CreateAnnouncementPage(props) {
   }
 
   function handleImgUpload(e) {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
-
     const uploadImgForm = new FormData();
-
     uploadImgForm.append("image", e.target.files[0]);
-
-    console.log("WHAT IS THIS ID", id)
 
     axios
       .post(
@@ -77,7 +72,6 @@ function CreateAnnouncementPage(props) {
         uploadImgForm
       )
       .then((response) => {
-        console.log("response is: ", response);
 
         setAnnouncement((oldUser) => ({ ...oldUser, image: response.data.fileUrl }));
       })

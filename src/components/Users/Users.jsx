@@ -13,7 +13,7 @@ function Users(props) {
       .then((response) => {
         setUsers(response.data.filter((user) => user._id !== currentUser?._id));
       })
-      .catch((err) => console.log("CAGADAAAAAAAA", err));
+      .catch((err) => console.log(err));
   }, [currentUser?._id]);
 
   return (

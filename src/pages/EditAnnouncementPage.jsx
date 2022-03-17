@@ -43,7 +43,6 @@ function AnnouncementEditPage(props){
 
 
      function handleImgUpload(e) {
-        // console.log("The file to be uploaded is: ", e.target.files[0]);
     
         const uploadImgForm = new FormData();
     
@@ -55,7 +54,6 @@ function AnnouncementEditPage(props){
             uploadImgForm
           )
           .then((response) => {
-            console.log("response is: ", response);
     
             setAnno((oldEvent) => ({ ...oldEvent, image: response.data.fileUrl }));
           })
