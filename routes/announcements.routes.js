@@ -34,7 +34,8 @@ router.post("/:id", (req, res) => {
     announcementDate, 
     expirationDate,
     tags,
-    location
+    location,
+    
   })
     .then((newEvent) => {
       console.log("announcementId", newEvent._id.toString());
@@ -156,7 +157,7 @@ router.post("/:id/apply/:an", (req, res) => {
 
     } else {
       user.announcements.map((ano) => {
-        if (ano.toString() === an) flag = false;
+        if (ano.toString() === an) flag = true;
       });
 
       if (flag === false) {
@@ -183,8 +184,7 @@ router.put("/:an/confirm/:art", (req, res) =>{
   let announcement = req.params.an
   let artist = req.params.art
 
-  console.log("ANNOUNCEMENT", announcement)
-  console.log("ARTIST", artist)
+
   /*
   Announcement.findByIdAndUpdate(announcement, {$pullAll: {participants : [artist]}})
   .then(
@@ -220,6 +220,26 @@ router.put("/:an/confirm/:art", (req, res) =>{
 
 })
 
+//---------------------------------------------------------------------------
+//--------------------------REMOVE ARTISTS-----------------------------------
+//---------------------------------------------------------------------------
 
+router.delete("/:an/delete/:art", (req, res)=>{
+  let announcement = req.params.an
+  let artist = req.params.art
+  console.log("ANNOUNCEMENT", announcement)
+  console.log("ARTIST", artist)
+
+  User.findByIdAndUpdate(artist, {$pullAll: {acceptedAnnouncements : [announcement]}}, {new : true})
+  .then(()=>
+  Announcement.findByIdAndUpdate(announcement, {$pullAll: {accepted: [artist]}}, {new :true})
+    .populate("participants")
+    .populate("accepted")
+    .then(()=>{
+      (response)=>res.json(response)
+    })
+  )
+
+})
 
 module.exports = router;
