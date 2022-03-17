@@ -166,7 +166,7 @@ function EventEditPage(props) {
           value={event.location}
           onChange={handleInputChange}
           required
-          minLength="8"
+          minLength="4"
         />
 
         <label htmlFor="input-tags">
