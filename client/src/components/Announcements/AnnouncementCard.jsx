@@ -16,7 +16,7 @@ function AnnouncementCard(props) {
         
         <Link exact= "true" to={`/announcements/${props.announcement._id}`}>
             <div>
-                <img src={props.announcement.image} alt='announcement-pic' className='card-img-top' style={{width: 286, height: 286,backgroundColor: 'black'}}></img>
+                <img src={props.announcement.image} alt='announcement-pic' className='card-img-top' style={{width: 285, height: 286,backgroundColor: 'black'}}></img>
             </div>
             <div className="card-body text-start">
                 <h2 className='card-title display-6' id="annoCard"><b>{capitalize(props.announcement.title)}</b></h2>

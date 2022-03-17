@@ -165,7 +165,7 @@ function AnnouncementDetailPage(props){
           <p key="lkasjd">
           {user._id === announcement.owner[0] ? (
             <Link exact={true} to="/events/create-event" state ={announcement}>
-              <button>MAKE AN EVENT OUT OF THIS ANNOUNCEMNT</button>
+              <button className="btn btn-success">MAKE AN EVENT OUT OF THIS ANNOUNCEMNT</button>
             </Link>
             ):(
               <p></p>

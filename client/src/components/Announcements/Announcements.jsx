@@ -25,8 +25,8 @@ function Announcements() {
               <AnnouncementCard announcement={announcement} />
           </div>)
           : indx === announcements.length-1 ?
-             (<div>
-                <Link to='/announcements'><img src="../../../flecha-correcta.png" alt='flecha rota'></img></Link>
+             (<div className="arrow-flex">
+                <Link to='/announcements'><img src="../../../flecha-correcta.png" alt='flecha rota' style={{width: 100}}></img></Link>
              </div>)
              :
              (<p></p>)
