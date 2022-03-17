@@ -89,7 +89,7 @@ function ProfilePage(props) {
         */
 
     removeToken();
-    navigate("/");
+    navigate("/#");
   }
 
   function deleteUser() {
@@ -150,11 +150,11 @@ function ProfilePage(props) {
         />
 
         <p className="display-3">Welcome back {user.username}!</p>
+          <p>{user.location}</p>
         <p className="lead">
           You have signed in with this address: {user.email}
         </p>
         <div className="card m-3 shadow-lg p-3 mb-5 bg-body rounded">
-          <p>{user.location}</p>
           <p className="display-6">How do you describe yourself?</p>
           <p className=" blockquote">{user.description}</p>
         </div>
@@ -207,23 +207,6 @@ function ProfilePage(props) {
 
         <div>
           <p className="display-5">
-
-          <div className="btn-group dropup">
-        <button
-          type="button"
-          className="btn btn-secondary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropup
-        </button>
-        <ul className="dropdown-menu">
-          <li><button className="dropdown-item" type="button">PABLOOOOOO</button></li>
-        </ul>
-      </div>
-
-
-
             <b>Your LoudLink</b>
           </p>
 
